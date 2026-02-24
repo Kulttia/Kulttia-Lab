@@ -24,9 +24,12 @@ const KULTTIA_CONFIG = {
  * @param {number} limit - Número de posts a mostrar
  * @param {number} page - Página de resultados (para paginación)
  */
-async function loadWordPressPosts(containerId, limit = 6, page = 1) {
+async function loadWordPressPosts(containerId, limit = 6, page = 1, category = null) {
     const container = document.getElementById(containerId);
     if (!container) return;
+
+    // Guardar estado actual global para paginación
+    currentCategory = category;
 
     // Estado de carga
     container.innerHTML = `
@@ -41,10 +44,10 @@ async function loadWordPressPosts(containerId, limit = 6, page = 1) {
         </div>`;
 
     try {
-        const response = await fetch(
-            `${KULTTIA_CONFIG.WP_API_URL}/posts?per_page=${limit}&page=${page}&_embed=true&status=publish`,
-            { headers: { 'Accept': 'application/json' } }
-        );
+        let url = `${KULTTIA_CONFIG.WP_API_URL}/posts?per_page=${limit}&page=${page}&_embed=true&status=publish`;
+        if (category) url += `&categories=${category}`;
+
+        const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
 
         if (!response.ok) throw new Error(`Error ${response.status}`);
 
@@ -297,13 +300,17 @@ function showFormMessage(form, type, message) {
 }
 
 // =============================================
-// MÓDULO: PAGINACIÓN (blog.html)
+// MÓDULO: PAGINACIÓN y FILTROS (blog.html)
 // =============================================
 let currentPage = 1;
+let currentCategory = null;
 
 function updatePagination(page, totalPages) {
     const paginationEl = document.getElementById('blog-pagination');
-    if (!paginationEl || totalPages <= 1) return;
+    if (!paginationEl || totalPages <= 1) {
+        if (paginationEl) paginationEl.innerHTML = '';
+        return;
+    }
 
     currentPage = page;
     paginationEl.innerHTML = `
@@ -319,7 +326,36 @@ function updatePagination(page, totalPages) {
 function changePage(page) {
     if (page < 1) return;
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    loadWordPressPosts('blog-posts-container', KULTTIA_CONFIG.POSTS_PER_PAGE, page);
+    loadWordPressPosts('blog-posts-container', KULTTIA_CONFIG.POSTS_PER_PAGE, page, currentCategory);
+}
+
+function setupCategoryFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    if (!filterBtns.length) return;
+
+    // Map categories names to IDs (update these IDs based on your WP)
+    const categoryMap = {
+        'todos': null,
+        'arte': 34,
+        'ia y machine learning': 15,
+        'cybercultura': 28,
+        'web': 29
+    };
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // Remove active class from all
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active to clicked
+            e.target.classList.add('active');
+
+            const catName = e.target.textContent.trim().toLowerCase();
+            const catId = categoryMap[catName];
+
+            // Load posts for this category
+            loadWordPressPosts('blog-posts-container', KULTTIA_CONFIG.POSTS_PER_PAGE, 1, catId);
+        });
+    });
 }
 
 // =============================================
