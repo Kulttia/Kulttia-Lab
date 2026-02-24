@@ -83,7 +83,7 @@ function renderPostCard(post) {
     const excerpt = stripHTML(post.excerpt.rendered).substring(0, 120) + '...';
     const date = formatDate(post.date);
     const slug = post.slug;
-    const link = `articulo.html?id=${post.id}&slug=${slug}`;
+    const link = `/blog/${slug}`;
 
     // Imagen destacada
     const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
@@ -130,22 +130,41 @@ async function loadFeaturedPosts(containerId) {
  * Carga un artículo completo a partir del ?id= en la URL
  */
 async function loadSinglePost() {
+    // Acepta /blog/mi-slug O ?slug=mi-slug O ?id=123
     const params = new URLSearchParams(window.location.search);
+    const pathParts = window.location.pathname.split('/');
+    const slugFromPath = pathParts[pathParts.length - 1];
+    const slug = params.get('slug') || (slugFromPath && slugFromPath !== 'articulo.html' ? slugFromPath : null);
     const postId = params.get('id');
 
-    if (!postId) return;
+    if (!slug && !postId) return;
 
     try {
-        const response = await fetch(`${KULTTIA_CONFIG.WP_API_URL}/posts/${postId}?_embed=true`);
+        let url;
+        if (slug) {
+            url = `${KULTTIA_CONFIG.WP_API_URL}/posts?slug=${slug}&_embed=true`;
+        } else {
+            url = `${KULTTIA_CONFIG.WP_API_URL}/posts/${postId}?_embed=true`;
+        }
+
+        const response = await fetch(url);
         if (!response.ok) throw new Error('Post no encontrado');
 
-        const post = await response.json();
+        let post = await response.json();
+        if (Array.isArray(post)) post = post[0]; // Por slug devuelve array
+        if (!post) throw new Error('Post no encontrado');
+
         renderSinglePost(post);
 
-        // Actualizar meta SEO dinámicamente
+        // Actualizar meta SEO
         document.title = `${post.title.rendered} | Kulttia Lab`;
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', stripHTML(post.excerpt.rendered));
+
+        // Actualizar la URL a formato limpio sin recargar
+        if (postId && slug) {
+            history.replaceState(null, '', `/blog/${post.slug}`);
+        }
 
     } catch (error) {
         console.error('Error al cargar el artículo:', error);
@@ -180,19 +199,21 @@ function renderSinglePost(post) {
         heroImg.alt = post.title.rendered;
     }
 
-    // Autor
+    // Autor — con fallback a "Kulttia Lab"
     const author = post._embedded?.['author']?.[0];
-    if (author) {
-        const authorBox = document.querySelector('.author-box');
-        if (authorBox) {
-            const avatarEl = authorBox.querySelector('.author-avatar');
-            const nameEl = authorBox.querySelector('h4');
-            const descEl = authorBox.querySelector('p');
+    const authorBox = document.querySelector('.author-box');
+    if (authorBox) {
+        const avatarEl = authorBox.querySelector('.author-avatar');
+        const nameEl = authorBox.querySelector('h4');
+        const descEl = authorBox.querySelector('p');
 
-            if (avatarEl) avatarEl.src = author.avatar_urls?.['96'] || avatarEl.src;
-            if (nameEl) nameEl.textContent = author.name;
-            if (descEl && author.description) descEl.textContent = author.description;
-        }
+        const authorName = author?.name || 'Kulttia Lab';
+        const authorDesc = author?.description || 'Explorando la intersección entre tecnología, cultura e inteligencia artificial.';
+        const authorAvatar = author?.avatar_urls?.['96'] || '';
+
+        if (avatarEl && authorAvatar) avatarEl.src = authorAvatar;
+        if (nameEl) nameEl.textContent = authorName;
+        if (descEl) descEl.textContent = authorDesc;
     }
 }
 
