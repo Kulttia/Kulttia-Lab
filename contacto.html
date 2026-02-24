@@ -223,24 +223,24 @@
             </div>
 
             <!-- Contact Form -->
-            <form class="contact-form" action="#" method="POST"
-                onsubmit="event.preventDefault(); alert('Mensaje enviado. Te responderemos en un instante cuántico.');">
+            <form class="contact-form" id="contact-form" data-wpforms-id="1" onsubmit="sendContactForm(event)">
                 <h2 style="font-size: 1.8rem; margin-bottom: 2.5rem;">Envíanos un mensaje</h2>
 
                 <div class="form-group">
                     <label class="form-label" for="name">Nombre</label>
-                    <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                    <input type="text" id="name" name="nombre" class="form-control" placeholder="John Doe" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="email">Corre Electrónico</label>
-                    <input type="email" id="email" class="form-control" placeholder="tu@email.com" required>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="tu@email.com"
+                        required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="message">Mensaje</label>
-                    <textarea id="message" class="form-control" rows="6" placeholder="¿Cómo podemos colaborar?"
-                        required></textarea>
+                    <textarea id="message" name="mensaje" class="form-control" rows="6"
+                        placeholder="¿Cómo podemos colaborar?" required></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
@@ -320,6 +320,7 @@
         </div>
     </div>
 
+    <script src="js/wordpress-api.js"></script>
     <script src="js/main.js"></script>
 </body>
 

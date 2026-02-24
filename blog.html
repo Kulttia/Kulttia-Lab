@@ -96,110 +96,15 @@
         <button class="filter-btn">Web</button>
     </div>
 
-    <!-- Blog Grid Content -->
+    <!-- Blog Grid Content (Cargado desde WordPress REST API) -->
     <section class="container" style="margin-bottom: 5rem;">
-        <div class="grid articles-grid">
-            <!-- Article 1 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Inteligencia Artificial" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">IA & Análisis</span>
-                        <span class="article-date">24 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title"><a href="articulo.html">Cómo la Inteligencia Artificial está redefiniendo
-                            el diseño de interfaces</a></h3>
-                    <p class="article-excerpt">El impacto de las herramientas generativas en el flujo de trabajo de
-                        diseñadores UX/UI.</p>
-                    <a href="articulo.html" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <!-- Article 2 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Tecnología Cuántica" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">Cybercultura</span>
-                        <span class="article-date">20 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title"><a href="#">La evolución de la cyberescena en la sociedad posmoderna</a>
-                    </h3>
-                    <p class="article-excerpt">Un viaje profundo a través del impacto tecnológico en la estética
-                        contemporánea.</p>
-                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <!-- Article 3 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Web3" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">Web3</span>
-                        <span class="article-date">15 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title"><a href="#">Más allá del hype: Arquitecturas descentralizadas</a></h3>
-                    <p class="article-excerpt">Dejamos de lado la especulación para enfocarnos en los usos prácticos de
-                        la Web3.</p>
-                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <!-- Article 4 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Data" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">Cybercultura</span>
-                        <span class="article-date">10 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title"><a href="#">Privacidad digital en la era de los algoritmos</a></h3>
-                    <p class="article-excerpt">Cómo proteger tu huella mientras navegas y convives con el machine
-                        learning omnipresente.</p>
-                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <!-- Article 5 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="UI" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">Diseño UX/UI</span>
-                        <span class="article-date">05 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title"><a href="#">Dark Mode vs Neomorfismo: Evolución de las UIs</a></h3>
-                    <p class="article-excerpt">Un debate visual sobre qué tendencias realmente mejoran la accesibilidad
-                        y cuáles son solo moda.</p>
-                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <!-- Article 6 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1633409361618-c73427e4e206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Hardware" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">Hardware Alternativo</span>
-                        <span class="article-date">02 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title"><a href="#">Computación sintética y nuevos materiales</a></h3>
-                    <p class="article-excerpt">Cómo la química está redefiniendo la capacidad de procesamiento del
-                        futuro hardware.</p>
-                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
+        <div class="grid articles-grid" id="blog-posts-container">
+            <!-- Los artículos se cargan dinámicamente desde WordPress -->
         </div>
 
-        <div style="text-align: center; margin-top: 4rem;">
-            <button class="btn btn-outline">Cargar más resultados</button>
+        <!-- Paginación dinámica -->
+        <div id="blog-pagination"
+            style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 4rem;">
         </div>
     </section>
 
@@ -241,7 +146,13 @@
         </div>
     </div>
 
+    <script src="js/wordpress-api.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadWordPressPosts('blog-posts-container', 6, 1);
+        });
+    </script>
 </body>
 
 </html>

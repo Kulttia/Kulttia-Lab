@@ -336,7 +336,16 @@
         </div>
     </div>
 
+    <script src="js/wordpress-api.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carga el artículo desde WordPress si hay un ?id= en la URL
+            if (window.location.search.includes('id=')) {
+                loadSinglePost();
+            }
+        });
+    </script>
 </body>
 
 </html>

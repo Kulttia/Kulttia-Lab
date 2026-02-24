@@ -71,69 +71,14 @@
         </div>
     </section>
 
-    <!-- Featured Articles Section -->
+    <!-- Featured Articles (Cargados dinámicamente desde WordPress) -->
     <section class="container" id="destacados" style="margin-top: 4rem;">
         <h2 class="section-title">Destacados</h2>
-
-        <div class="grid articles-grid">
-            <!-- Article 1 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Inteligencia Artificial" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">IA & Análisis</span>
-                        <span class="article-date">24 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title">
-                        <a href="articulo.html">Cómo la Inteligencia Artificial está redefiniendo el diseño de
-                            interfaces</a>
-                    </h3>
-                    <p class="article-excerpt">El impacto de las herramientas generativas en el flujo de trabajo de
-                        diseñadores UX/UI y el futuro de las interfaces adaptativas.</p>
-                    <a href="articulo.html" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <!-- Article 2 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Tecnología Cuántica" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">Cybercultura</span>
-                        <span class="article-date">20 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title">
-                        <a href="#">La evolución de la cyberescena en la sociedad posmoderna</a>
-                    </h3>
-                    <p class="article-excerpt">Un viaje profundo a través del impacto tecnológico en la estética y las
-                        subculturas digitales contemporáneas y su adopción global.</p>
-                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <!-- Article 3 -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Web3" class="article-image">
-                <div class="article-content">
-                    <div class="article-meta">
-                        <span class="article-category">Web3</span>
-                        <span class="article-date">15 Feb, 2026</span>
-                    </div>
-                    <h3 class="article-title">
-                        <a href="#">Más allá del hype: Arquitecturas descentralizadas aplicables</a>
-                    </h3>
-                    <p class="article-excerpt">Dejamos de lado la especulación financiera para enfocarnos en los
-                        verdaderos usos prácticos que la Web3 ofrece a los desarrolladores.</p>
-                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
+        <div class="grid articles-grid" id="home-posts-container">
+            <!-- Cargado dinámicamente desde WordPress REST API -->
         </div>
-
         <div style="text-align: center; margin-top: 3rem;">
-            <a href="blog.html" class="btn btn-outline" style="min-width: 250px;">Ver todos los artículos</a>
+            <a href="blog.html" class="btn btn-outline">Ver todos los artículos</a>
         </div>
     </section>
 
@@ -232,7 +177,14 @@
     </div>
 
     <!-- Main JS -->
+    <script src="js/wordpress-api.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Inicializar carga de posts en Home
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFeaturedPosts('home-posts-container');
+        });
+    </script>
 </body>
 
 </html>
