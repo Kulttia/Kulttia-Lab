@@ -15,6 +15,9 @@
     --border-color-strong: rgba(255, 255, 255, 0.1);
     --border-blue-subtle: rgba(35, 61, 255, 0.2);
 
+    /* Skeleton Loading Color (Dark) */
+    --bg-skeleton: rgba(255, 255, 255, 0.08);
+
     /* Acid Blue Palette */
     --acid-blue: #233dff;
     /* Primary */
@@ -53,6 +56,9 @@
     --border-color: rgba(0, 0, 0, 0.08);
     --border-color-strong: rgba(0, 0, 0, 0.15);
     --border-blue-subtle: rgba(35, 61, 255, 0.3);
+
+    /* Skeleton Loading Color (Light) */
+    --bg-skeleton: rgba(0, 0, 0, 0.08);
 
     --acid-blue: #1868e1;
     /* Slightly darker for contrast on white */
@@ -705,19 +711,22 @@ ul {
    Usada en blog.html y articulo.html
 ============================================ */
 @keyframes skeleton-shimmer {
-    0%   { background-position: -800px 0; }
-    100% { background-position:  800px 0; }
+    0% {
+        background-position: -800px 0;
+    }
+
+    100% {
+        background-position: 800px 0;
+    }
 }
 
 .skeleton {
-    background: linear-gradient(
-        90deg,
-        var(--bg-element) 25%,
-        var(--bg-card)    50%,
-        var(--bg-element) 75%
-    );
+    background: linear-gradient(90deg,
+            var(--bg-skeleton) 25%,
+            var(--bg-card) 50%,
+            var(--bg-skeleton) 75%);
     background-size: 1600px 100%;
-    animation: skeleton-shimmer 1.6s infinite ease-in-out;
+    animation: skeleton-shimmer 1.6s infinite linear;
     border-radius: 6px;
 }
 

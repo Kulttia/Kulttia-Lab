@@ -36,16 +36,57 @@ function cacheSet(key, data) {
 }
 
 /**
- * Wrapper de fetch con caché automática
+ * Fetch con AbortController timeout para no quedarse colgado en mobile.
+ * Mobile tiene timeout más generoso porque la red es más lenta.
+ * @param {string} url
+ * @param {number} [timeoutMs] - ms antes de abortar (default: auto por conexión)
+ */
+async function fetchWithTimeout(url, timeoutMs) {
+    // Detectar tipo de conexión si el API está disponible
+    const isSlow = navigator.connection
+        ? ['2g', 'slow-2g'].includes(navigator.connection.effectiveType)
+        : false;
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+    const timeout = timeoutMs || (isSlow ? 20000 : isMobile ? 12000 : 8000);
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+
+    try {
+        const response = await fetch(url, {
+            signal: controller.signal,
+            headers: { 'Accept': 'application/json' },
+        });
+        clearTimeout(timer);
+        return response;
+    } catch (err) {
+        clearTimeout(timer);
+        if (err.name === 'AbortError') {
+            throw new Error('TIMEOUT: La solicitud tardó demasiado. Verifica tu conexión.');
+        }
+        throw err;
+    }
+}
+
+/**
+ * Wrapper de fetch con caché automática + timeout + 1 reintento
  */
 async function cachedFetch(url) {
     const cached = cacheGet(url);
     if (cached) return cached;
 
-    const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    let response;
+    try {
+        response = await fetchWithTimeout(url);
+    } catch (err) {
+        // 1 reintento automático en caso de fallo de red
+        console.warn('Primer intento fallido, reintentando...', err.message);
+        response = await fetchWithTimeout(url);
+    }
+
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-    // Guardamos también headers relevantes para paginación
     const data = await response.json();
     const totalPages = parseInt(response.headers.get('X-WP-TotalPages') || '1', 10);
     const result = { data, totalPages };
@@ -77,31 +118,19 @@ async function loadWordPressPosts(containerId, limit = 6, page = 1, category = n
 
     // Skeleton loading state
     container.innerHTML = `
-        <div style="grid-column: 1 / -1; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+        <div style="grid-column: 1 / -1; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));">
             ${Array(limit).fill(0).map(() => `
-            <div style="border-radius: var(--border-radius); overflow: hidden; border: 1px solid var(--border-color);">
-                <div style="height: 200px; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out;"></div>
-                <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
-                    <div style="height: 14px; width: 60%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
-                    <div style="height: 20px; width: 90%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
-                    <div style="height: 20px; width: 75%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
-                    <div style="height: 14px; width: 100%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
-                    <div style="height: 14px; width: 85%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
+            <div style="border-radius: var(--border-radius); overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; background: var(--bg-card);">
+                <div class="skeleton" style="height: 200px; border-radius: 0;"></div>
+                <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1;">
+                    <div class="skeleton" style="height: 14px; width: 60%; border-radius: 4px;"></div>
+                    <div class="skeleton" style="height: 20px; width: 90%; border-radius: 4px;"></div>
+                    <div class="skeleton" style="height: 20px; width: 75%; border-radius: 4px; margin-bottom: 1rem;"></div>
+                    <div class="skeleton" style="height: 14px; width: 100%; border-radius: 4px;"></div>
+                    <div class="skeleton" style="height: 14px; width: 85%; border-radius: 4px;"></div>
                 </div>
             </div>`).join('')}
         </div>`;
-
-    // Agregar la animación skeleton si no existe
-    if (!document.getElementById('skeleton-animation')) {
-        const style = document.createElement('style');
-        style.id = 'skeleton-animation';
-        style.textContent = `
-            @keyframes skeleton-shimmer {
-                0% { background-position: -600px 0; }
-                100% { background-position: 600px 0; }
-            }`;
-        document.head.appendChild(style);
-    }
 
     try {
         let url = `${KULTTIA_CONFIG.WP_API_URL}/posts?per_page=${limit}&page=${page}&_embed=true&status=publish&orderby=date&order=desc`;
@@ -228,7 +257,14 @@ async function loadSinglePost() {
             url = `${KULTTIA_CONFIG.WP_API_URL}/posts/${postId}?_embed=true`;
         }
 
-        const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        let response;
+        try {
+            response = await fetchWithTimeout(url);
+        } catch (netErr) {
+            // 1 reintento automático en mobile si falla por red
+            console.warn('Reintentando artículo...', netErr.message);
+            response = await fetchWithTimeout(url);
+        }
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         let post = await response.json();
