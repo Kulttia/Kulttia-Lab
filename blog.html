@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Artículos de Kulttia Lab. Explorando diseño, cultura, tecnología e IA.">
+    <title>Archivo de Artículos | Kulttia Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <style>
+        .archive-header {
+            padding: 10rem 0 3rem;
+            text-align: center;
+        }
+
+        .archive-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-element);
+            border: 1px solid var(--border-color-strong);
+            color: var(--text-muted);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--border-radius-pill);
+            cursor: pointer;
+            font-family: var(--font-primary);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--acid-blue-light);
+            border-color: var(--acid-blue);
+            color: var(--acid-blue);
+            box-shadow: 0 0 10px var(--acid-blue-glow);
+        }
+    </style>
+    <script>
+        // Inject theme to avoid Flash of Dark Theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="index.html" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="blog.html" class="active">Artículos</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container archive-header">
+        <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Archivo de <span>Ideas</span></h1>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Navega por nuestra selección de ensayos,
+            tutoriales y análisis del pulso digital.</p>
+    </div>
+
+    <div class="container archive-filters">
+        <button class="filter-btn active">Todos</button>
+        <button class="filter-btn">Arte</button>
+        <button class="filter-btn">IA y Machine learning</button>
+        <button class="filter-btn">Cybercultura</button>
+        <button class="filter-btn">Web</button>
+    </div>
+
+    <!-- Blog Grid Content -->
+    <section class="container" style="margin-bottom: 5rem;">
+        <div class="grid articles-grid">
+            <!-- Article 1 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Inteligencia Artificial" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-category">IA & Análisis</span>
+                        <span class="article-date">24 Feb, 2026</span>
+                    </div>
+                    <h3 class="article-title"><a href="articulo.html">Cómo la Inteligencia Artificial está redefiniendo
+                            el diseño de interfaces</a></h3>
+                    <p class="article-excerpt">El impacto de las herramientas generativas en el flujo de trabajo de
+                        diseñadores UX/UI.</p>
+                    <a href="articulo.html" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Tecnología Cuántica" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-category">Cybercultura</span>
+                        <span class="article-date">20 Feb, 2026</span>
+                    </div>
+                    <h3 class="article-title"><a href="#">La evolución de la cyberescena en la sociedad posmoderna</a>
+                    </h3>
+                    <p class="article-excerpt">Un viaje profundo a través del impacto tecnológico en la estética
+                        contemporánea.</p>
+                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Web3" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-category">Web3</span>
+                        <span class="article-date">15 Feb, 2026</span>
+                    </div>
+                    <h3 class="article-title"><a href="#">Más allá del hype: Arquitecturas descentralizadas</a></h3>
+                    <p class="article-excerpt">Dejamos de lado la especulación para enfocarnos en los usos prácticos de
+                        la Web3.</p>
+                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Data" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-category">Cybercultura</span>
+                        <span class="article-date">10 Feb, 2026</span>
+                    </div>
+                    <h3 class="article-title"><a href="#">Privacidad digital en la era de los algoritmos</a></h3>
+                    <p class="article-excerpt">Cómo proteger tu huella mientras navegas y convives con el machine
+                        learning omnipresente.</p>
+                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="UI" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-category">Diseño UX/UI</span>
+                        <span class="article-date">05 Feb, 2026</span>
+                    </div>
+                    <h3 class="article-title"><a href="#">Dark Mode vs Neomorfismo: Evolución de las UIs</a></h3>
+                    <p class="article-excerpt">Un debate visual sobre qué tendencias realmente mejoran la accesibilidad
+                        y cuáles son solo moda.</p>
+                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1633409361618-c73427e4e206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Hardware" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-category">Hardware Alternativo</span>
+                        <span class="article-date">02 Feb, 2026</span>
+                    </div>
+                    <h3 class="article-title"><a href="#">Computación sintética y nuevos materiales</a></h3>
+                    <p class="article-excerpt">Cómo la química está redefiniendo la capacidad de procesamiento del
+                        futuro hardware.</p>
+                    <a href="#" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <button class="btn btn-outline">Cargar más resultados</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
+                la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" action="#" method="POST"
+                onsubmit="event.preventDefault(); alert('¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.'); document.getElementById('subscribe-modal').classList.remove('active');">
+                <input type="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="politica-privacidad.html">Política de
+                    Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

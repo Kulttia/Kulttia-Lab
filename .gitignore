@@ -1,0 +1,16 @@
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Scripts de mantenimiento internos
+update.js
+fix-footer.js
+fix-flash.js
+
+# Editor configs
+.vscode/
+*.code-workspace
+
+# Logs
+*.log

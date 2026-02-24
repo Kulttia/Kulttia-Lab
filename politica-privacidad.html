@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Política de Privacidad de Kulttia Lab">
+    <title>Política de Privacidad | Kulttia Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <style>
+        .legal-page {
+            padding-top: 10rem;
+            padding-bottom: 5rem;
+        }
+
+        .legal-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            color: var(--text-main);
+        }
+
+        .legal-date {
+            text-align: center;
+            color: var(--acid-blue);
+            font-weight: 500;
+            margin-bottom: 4rem;
+        }
+
+        .legal-body {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .legal-body h2 {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+        }
+
+        .legal-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-body ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            list-style-type: disc;
+        }
+
+        .legal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-body a {
+            color: var(--acid-blue);
+            text-decoration: underline;
+        }
+
+        .legal-body a:hover {
+            color: var(--acid-blue-secondary);
+        }
+    </style>
+    <script>
+        // Inject theme to avoid Flash of Dark Theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="index.html" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="blog.html">Artículos</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="legal-page container">
+        <h1 class="legal-title">Política de Privacidad</h1>
+        <p class="legal-date">Última actualización: 23 de Febrero, 2026</p>
+
+        <div class="legal-body">
+            <p>En Kulttia Lab, accesible desde kulttia.com, una de nuestras principales prioridades es la privacidad de
+                nuestros visitantes. Este documento de Política de Privacidad contiene los tipos de información que
+                recopilamos y registramos, y cómo la utilizamos.</p>
+
+            <p>Si tiene preguntas adicionales o requiere más información sobre nuestra Política de Privacidad, no dude
+                en contactarnos a través de hola@kulttia.com.</p>
+
+            <h2>1. Información que Recopilamos</h2>
+            <p>La información personal que se le pide que proporcione, y las razones por las que se le pide que la
+                proporcione, se le aclararán en el punto en el que le pidamos que proporcione su información personal.
+            </p>
+            <p>Si se comunica con nosotros de forma directa a través de nuestro formulario de contacto en
+                <code>contacto.html</code>, es posible que recibamos información adicional sobre usted como: su nombre,
+                dirección de correo electrónico, el contenido del mensaje y/o archivos adjuntos que decida enviarnos.
+            </p>
+            <p>Cuando se suscribe a nuestro boletín / newsletter, le pediremos que brinde su correo electrónico con el
+                fin de enviarle actualizaciones tecnológicas, artículos técnicos y los últimos ensayos publicados en
+                nuestro Blog.</p>
+
+            <h2>2. Uso de la Información</h2>
+            <p>Utilizamos la información que recopilamos de varias maneras, incluyendo para:</p>
+            <ul>
+                <li>Proveer, operar y mantener el sitio web Kulttia Lab.</li>
+                <li>Mejorar, personalizar y expandir nuestros contenidos y diseño UX/UI.</li>
+                <li>Comprender y analizar cómo utiliza nuestra web para seguir debatiendo sobre cultura moderna
+                    interactiva.</li>
+                <li>Desarrollar nuevos artículos adaptativos, servicios y características.</li>
+                <li>Comunicarnos con usted para enviarle actualizaciones y fines promocionales a través del newsletter.
+                </li>
+                <li>Encontrar y prevenir el robo de información y asegurar la seguridad digital.</li>
+            </ul>
+
+            <h2>3. Archivos de Registro (Log Files)</h2>
+            <p>Kulttia Lab sigue un procedimiento estándar de uso de archivos de registro. Estos archivos registran a
+                los visitantes cuando visitan sitios web. La información recabada por los archivos de registro incluye
+                las direcciones de protocolo de Internet (IP), tipo de navegador web, proveedor de servicios de Internet
+                (ISP), registros de fecha/hora, páginas de referencia/salida y el número de clics o la interacción del
+                cursor para nuestro análisis de diseño. Esta información no está vinculada a ninguna información que sea
+                personalmente identificable.</p>
+
+            <h2>4. Regulaciones GDPR y CCPA</h2>
+            <p>Nos gustaría asegurarnos de que usted sea plenamente consciente de todos sus derechos de protección de
+                datos sobre su propia huella digital. Todo usuario tiene derecho a la siguiente protección:</p>
+            <ul>
+                <li><strong>Derecho de Acceso:</strong> Usted tiene derecho a solicitar a Kulttia Lab copias de sus
+                    datos personales.</li>
+                <li><strong>Derecho de Rectificación:</strong> Tiene derecho a solicitar que corrijamos cualquier
+                    información que crea que es inexacta y a completar la información en bases de datos si fuera
+                    incompleta.</li>
+                <li><strong>Derecho de Erradicación (Borrado):</strong> Usted tiene derecho a solicitar que borremos sus
+                    datos personales que hayamos guardado fruto del contacto directo, bajo ciertas condiciones
+                    tecnológicas.</li>
+            </ul>
+
+            <h2>5. Limitación de Privacidad de Menores</h2>
+            <p>Nuestra publicación sobre tecnología generativa y diseño está enfocada a curiosos mayores de 13 años.
+                Kulttia Lab no recopila a sabiendas ninguna Información de Identificación Personal de niños. Si usted
+                considera de que su hijo proporcionó este tipo de información en nuestro sitio, contacte hoy mismo con
+                hola@kulttia.com y tomaremos las acciones correspondientes para borrar de forma inmediata esa
+                información.</p>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
+                la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" action="#" method="POST"
+                onsubmit="event.preventDefault(); alert('¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.'); document.getElementById('subscribe-modal').classList.remove('active');">
+                <input type="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="politica-privacidad.html">Política de
+                    Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

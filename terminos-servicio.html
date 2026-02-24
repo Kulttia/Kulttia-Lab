@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Términos de Servicio de Kulttia Lab">
+    <title>Términos de Servicio | Kulttia Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <style>
+        .legal-page {
+            padding-top: 10rem;
+            padding-bottom: 5rem;
+        }
+
+        .legal-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            color: var(--text-main);
+        }
+
+        .legal-date {
+            text-align: center;
+            color: var(--acid-blue);
+            font-weight: 500;
+            margin-bottom: 4rem;
+        }
+
+        .legal-body {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .legal-body h2 {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+        }
+
+        .legal-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-body ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            list-style-type: disc;
+        }
+
+        .legal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-body a {
+            color: var(--acid-blue);
+            text-decoration: underline;
+        }
+
+        .legal-body a:hover {
+            color: var(--acid-blue-secondary);
+        }
+    </style>
+    <script>
+        // Inject theme to avoid Flash of Dark Theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="index.html" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="blog.html">Artículos</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="legal-page container">
+        <h1 class="legal-title">Términos de Servicio</h1>
+        <p class="legal-date">Última actualización: 23 de Febrero, 2026</p>
+
+        <div class="legal-body">
+            <p>¡Bienvenido al futuro de la información bajo la lente de Kulttia Lab!</p>
+
+            <p>Estos términos y condiciones describen las reglas y regulaciones para el uso del Sitio Web de Kulttia
+                Lab, ubicado en kulttia.com. Al acceder a este sitio, asumimos que usted acepta enteramente estos
+                términos de servicio. No continúe interactuando con este laboratorio cibernético ni utilizando nuestras
+                funcionalidades si no está de acuerdo en aceptar todos los términos y condiciones estipulados en esta
+                página.</p>
+
+            <h2>1. Terminología</h2>
+            <p>La siguiente terminología se aplica a estos Términos y Condiciones, a la Declaración de Privacidad, al
+                Aviso de Exención de Responsabilidad y a todos los demás Acuerdos: "Usuario", "Usted" y "Su" se refieren
+                a usted, es decir, a la persona que inicia sesión en este sitio web y cumple las directrices y términos
+                de diseño, arquitectura web o de la empresa. "La Empresa", "Nosotros", "Nos" y "Nuestro" se refieren a
+                Kulttia Lab.</p>
+
+            <h2>2. Licencia de Contenido y Cultura Open Source</h2>
+            <p>A menos que se indique lo contrario por derechos de autores de terceros, Kulttia Lab o sus licenciantes
+                (en materia de ensayos, tutoriales, esquemas algorítmicos generados por nuestro equipo gráfico y
+                narrativas sobre cybercultura) poseen los derechos de propiedad intelectual de todo el contenido
+                intelectual alojado en este sitio. Todos los derechos reservados.</p>
+            <p>Usted puede acceder al contenido del sitio para su propio consumo educativo y debate filosófico, bajo las
+                siguientes restricciones de uso y redistribución:</p>
+            <ul>
+                <li>No republicar material ni los artículos inalterados, sin citar su origen original con el
+                    hipervínculo correspondiente.</li>
+                <li>No comercializar, alquilar o sublicenciar el contenido escrito provisto por Kulttia Lab.</li>
+                <li>No reproducir, duplicar o copiar de manera algorítmica y mediante la técnica de "web scraping" los
+                    análisis UX/UI publicados sin autorización expresa de nuestros redactores y editores de sistema.
+                </li>
+            </ul>
+
+            <h2>3. El Boletín Digital (Newsletter)</h2>
+            <p>El suministro de su dirección de correo encriptada para suscribirse, se adhiere al consentimiento unívoco
+                para el cual nos permite enviarle artículos asíncronos cada semana y otras novedades sobre tecnologías
+                web. El suscriptor/usuario puede dar de baja su registro (opt-out) en cualquier iteración haciendo clic
+                en la URL proporcionada al pie de nuestros correos tecnológicos.</p>
+
+            <h2>4. Comentarios, Crítica y Debates Tecnológicos</h2>
+            <p>Este sitio puede, en cierto momento tecnológico, ofrecer la oportunidad a los usuarios de publicar
+                reseñas, críticas estéticas, intercambiar opiniones sobre Web3 y emitir debates sobre IA en áreas
+                determinadas (Comentarios en artículos).</p>
+            <p>Kulttia Lab se reserva el derecho exclusivo de filtrar y de manera inmediata remover todos y cada uno de
+                los Comentarios e intervenciones de usuarios que puedan ser considerados difamatorios, ataques directos
+                y no construcciones académicas o contrarias de estos Términos Generales.</p>
+
+            <h2>5. Disclaimer General</h2>
+            <p>En la medida máxima de lo posible que determine la ley y los estándares éticos, excluimos todas las
+                representaciones y garantías asociadas a la naturaleza interpretativa de la cybercultura y la
+                Inteligencia Artificial analizada de forma especulativa o actual en esta web.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
+                la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" action="#" method="POST"
+                onsubmit="event.preventDefault(); alert('¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.'); document.getElementById('subscribe-modal').classList.remove('active');">
+                <input type="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="politica-privacidad.html">Política de
+                    Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

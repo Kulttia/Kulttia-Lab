@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quiénes somos - Kulttia Lab">
+    <title>Nosotros | Kulttia Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <style>
+        .about-hero {
+            padding: 12rem 0 6rem;
+            position: relative;
+        }
+
+        .about-hero .title-accent {
+            color: var(--acid-blue);
+            text-shadow: 0 0 15px var(--acid-blue-glow);
+        }
+
+        .pillar-card {
+            background: linear-gradient(to bottom, var(--bg-card), var(--bg-main));
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--acid-blue);
+            transition: all 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover), inset 0 0 20px var(--acid-blue-light);
+            border-color: var(--border-blue-subtle);
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            color: var(--acid-blue);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px var(--acid-blue-glow);
+        }
+
+        .mission-section {
+            padding: 8rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .wireframe-visual {
+            width: 100%;
+            height: 400px;
+            background: var(--bg-element);
+            border: 1px solid var(--border-blue-subtle);
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 50px var(--acid-blue-light);
+        }
+
+        .wireframe-cube {
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--acid-blue);
+            box-shadow: 0 0 20px var(--acid-blue-glow), inset 0 0 20px var(--acid-blue-glow);
+            transform: rotateX(45deg) rotateY(45deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: rotateX(45deg) rotateY(45deg) translateY(0);
+            }
+
+            50% {
+                transform: rotateX(55deg) rotateY(55deg) translateY(-20px);
+            }
+
+            100% {
+                transform: rotateX(45deg) rotateY(45deg) translateY(0);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .mission-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        // Inject theme to avoid Flash of Dark Theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="index.html" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="blog.html">Artículos</a>
+                <a href="nosotros.html" class="active">Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="about-hero container">
+        <span class="tag-pill">Manifiesto</span>
+        <h1 style="font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 2rem; max-width: 900px;">
+            Decodificando el <span class="title-accent">mañana</span>, diseñando para el presente.
+        </h1>
+        <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 700px; line-height: 1.8;">
+            En Kulttia Lab no solo reportamos sobre tecnología; la disecamos, entendemos su impacto cultural y
+            visualizamos su lugar en el diseño humano. Somos un puente entre la teoría cyberpunk y la realidad digital.
+        </p>
+    </section>
+
+    <!-- Pillars Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+            <div class="pillar-card">
+                <i class="fa-solid fa-microchip pillar-icon"></i>
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Investigación</h3>
+                <p style="color: var(--text-muted); line-height: 1.7;">
+                    Analizamos las herramientas que cambiarán paradigmas. Desde IA generativa hasta infraestructuras
+                    descentralizadas, desmitificamos la complejidad.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <i class="fa-solid fa-graduation-cap pillar-icon"></i>
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Educación</h3>
+                <p style="color: var(--text-muted); line-height: 1.7;">
+                    La estética importa cuando el código se convierte en interfaz. Exploramos tendencias UX/UI bajo la
+                    lupa de la accesibilidad y la elegancia.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <i class="fa-solid fa-rocket pillar-icon"></i>
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Transformación</h3>
+                <p style="color: var(--text-muted); line-height: 1.7;">
+                    El software moldea a la sociedad y viceversa. Escribimos sobre cybercultura, hábitos digitales y el
+                    futuro del comportamiento conectado.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="container mission-section">
+        <div>
+            <h2 class="section-title">El Algoritmo Humano</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8;">
+                Kulttia Lab nació en 2023 como una respuesta a la necesidad urgente de entender la intersección entre
+                tecnología y cultura.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.1rem; line-height: 1.8;">
+                En un mundo saturado de información, nos dedicamos a filtrar el ruido y explorar cómo la Inteligencia
+                Artificial y las nuevas herramientas digitales están moldeando fundamentalmente nuestro futuro humano.
+                Nuestro enfoque es siempre crítico, accesible y profundamente educativo.
+            </p>
+            <a href="contacto.html" class="btn btn-primary">Habla con nosotros</a>
+        </div>
+
+        <div class="wireframe-visual">
+            <div class="wireframe-cube"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
+                la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" action="#" method="POST"
+                onsubmit="event.preventDefault(); alert('¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.'); document.getElementById('subscribe-modal').classList.remove('active');">
+                <input type="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="politica-privacidad.html">Política de
+                    Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

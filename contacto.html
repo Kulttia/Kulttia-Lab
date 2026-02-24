@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contacto - Comienza una conversación con Kulttia Lab">
+    <title>Contacto | Kulttia Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <style>
+        .contact-hero {
+            padding: 10rem 0 5rem;
+        }
+
+        .contact-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .info-card {
+            background: var(--bg-element);
+            border: 1px solid var(--border-blue-subtle);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            box-shadow: 0 0 20px var(--acid-blue-light);
+            border-color: var(--acid-blue);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-card);
+            border: 2px solid var(--acid-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--acid-blue);
+            box-shadow: inset 0 0 10px var(--acid-blue-glow);
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color-strong);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--acid-blue);
+            box-shadow: 0 0 15px var(--acid-blue-light);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 8rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(35, 61, 255, 0.4);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .faq-question i {
+            color: var(--acid-blue);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(45deg);
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        // Inject theme to avoid Flash of Dark Theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="index.html" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="blog.html">Artículos</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="contacto.html" class="active">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact section -->
+    <section class="contact-hero container">
+        <div class="grid contact-grid">
+
+            <div class="contact-info">
+                <div>
+                    <span class="tag-pill">Conecta</span>
+                    <h1 style="font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.1;">Iniciemos la <span
+                            style="color: var(--acid-blue); text-shadow: 0 0 15px var(--acid-blue-glow);">conversación.</span>
+                    </h1>
+                    <p
+                        style="color: var(--text-muted); max-width: 500px; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+                        ¿Tienes un proyecto, sugerencias para el blog o quieres debatir sobre tecnología? Estamos a un
+                        ping de distancia.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.3rem;">Correo Oficial</h3>
+                        <p style="color: var(--text-muted);">hola@kulttia.com</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.3rem;">Redes Sociales</h3>
+                        <p style="color: var(--text-muted);">Busca @KulttiaLab en TikTok, IG y LinkedIn</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <form class="contact-form" action="#" method="POST"
+                onsubmit="event.preventDefault(); alert('Mensaje enviado. Te responderemos en un instante cuántico.');">
+                <h2 style="font-size: 1.8rem; margin-bottom: 2.5rem;">Envíanos un mensaje</h2>
+
+                <div class="form-group">
+                    <label class="form-label" for="name">Nombre</label>
+                    <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Corre Electrónico</label>
+                    <input type="email" id="email" class="form-control" placeholder="tu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="message">Mensaje</label>
+                    <textarea id="message" class="form-control" rows="6" placeholder="¿Cómo podemos colaborar?"
+                        required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="container faq-section">
+        <h2 class="section-title" style="justify-content: center;">Preguntas Frecuentes</h2>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                <span>¿Con qué frecuencia publican nuevos análisis?</span>
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="faq-answer">Publicamos ensayos y artículos técnicos semanalmente, generalmente los jueves. Para
+                noticias rápidas, publicamos casi todos los días laborables.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                <span>¿Aceptan artículos de invitados (Guest Posts)?</span>
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="faq-answer">Sí. Si tienes un análisis interesante sobre diseño, cultura cibernética o nuevas
+                tecnologías, envíanos un correo con tu propuesta o borrador inicial.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                <span>¿Sus tutoriales son para principiantes o avanzados?</span>
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="faq-answer">Tenemos ambos. Intentamos desglosar arquitecturas complejas (como Web3 y modelos
+                fundacionales de IA) para ser accesibles, pero sin perder la profundidad técnica para los
+                experimentados.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
+                la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" action="#" method="POST"
+                onsubmit="event.preventDefault(); alert('¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.'); document.getElementById('subscribe-modal').classList.remove('active');">
+                <input type="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="politica-privacidad.html">Política de
+                    Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
