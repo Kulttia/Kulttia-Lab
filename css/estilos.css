@@ -699,3 +699,36 @@ ul {
 .modal-disclaimer a:hover {
     color: var(--acid-blue-secondary);
 }
+
+/* ============================================
+   Skeleton Loader — animación global
+   Usada en blog.html y articulo.html
+============================================ */
+@keyframes skeleton-shimmer {
+    0%   { background-position: -800px 0; }
+    100% { background-position:  800px 0; }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-element) 25%,
+        var(--bg-card)    50%,
+        var(--bg-element) 75%
+    );
+    background-size: 1600px 100%;
+    animation: skeleton-shimmer 1.6s infinite ease-in-out;
+    border-radius: 6px;
+}
+
+/* Corrección: el wrapper <a> de imagen en tarjetas no debe subrayarse */
+.article-img-wrapper {
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+
+/* Asegurar que las tarjetas de artículo tengan altura uniforme en grid */
+.articles-grid .article-card {
+    height: 100%;
+}

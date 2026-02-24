@@ -4,17 +4,57 @@
  */
 
 // =============================================
-// CONFIGURACIÓN GLOBAL — Cambia esta URL
-// cuando el subdomain esté activo en Hostinger
+// CONFIGURACIÓN GLOBAL
 // =============================================
 const KULTTIA_CONFIG = {
     WP_API_URL: 'https://cms.kulttia.com/wp-json/wp/v2',
     WPFORMS_URL: 'https://cms.kulttia.com/wp-json/wpforms/v1',
     POSTS_PER_PAGE: 6,
     FEATURED_POSTS: 3,
+    SITE_URL: 'https://kulttia.com',
+    // Tiempo de caché en milisegundos (5 minutos)
+    CACHE_TTL: 5 * 60 * 1000,
 };
 
-// Estado global de paginación y filtros
+// =============================================
+// CACHÉ EN MEMORIA
+// =============================================
+const _cache = new Map();
+
+function cacheGet(key) {
+    const item = _cache.get(key);
+    if (!item) return null;
+    if (Date.now() - item.ts > KULTTIA_CONFIG.CACHE_TTL) {
+        _cache.delete(key);
+        return null;
+    }
+    return item.data;
+}
+
+function cacheSet(key, data) {
+    _cache.set(key, { data, ts: Date.now() });
+}
+
+/**
+ * Wrapper de fetch con caché automática
+ */
+async function cachedFetch(url) {
+    const cached = cacheGet(url);
+    if (cached) return cached;
+
+    const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    // Guardamos también headers relevantes para paginación
+    const data = await response.json();
+    const totalPages = parseInt(response.headers.get('X-WP-TotalPages') || '1', 10);
+    const result = { data, totalPages };
+
+    cacheSet(url, result);
+    return result;
+}
+
+// Estado global
 let currentPage = 1;
 let currentCategory = null;
 
@@ -26,37 +66,48 @@ let currentCategory = null;
  * Obtiene los posts de WordPress y los renderiza
  * @param {string} containerId - ID del contenedor donde se renderizan
  * @param {number} limit - Número de posts a mostrar
- * @param {number} page - Página de resultados (para paginación)
+ * @param {number} page - Página de resultados
+ * @param {number|null} category - ID de categoría (null = todos)
  */
 async function loadWordPressPosts(containerId, limit = 6, page = 1, category = null) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Guardar estado actual global para paginación
     currentCategory = category;
 
-    // Estado de carga
+    // Skeleton loading state
     container.innerHTML = `
-        <div class="wp-loading" style="
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem 0;
-            color: var(--text-muted);
-        ">
-            <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--acid-blue); margin-bottom: 1rem; display: block;"></i>
-            Cargando artículos...
+        <div style="grid-column: 1 / -1; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+            ${Array(limit).fill(0).map(() => `
+            <div style="border-radius: var(--border-radius); overflow: hidden; border: 1px solid var(--border-color);">
+                <div style="height: 200px; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out;"></div>
+                <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div style="height: 14px; width: 60%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
+                    <div style="height: 20px; width: 90%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
+                    <div style="height: 20px; width: 75%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
+                    <div style="height: 14px; width: 100%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
+                    <div style="height: 14px; width: 85%; background: linear-gradient(90deg, var(--bg-element) 25%, var(--bg-card) 50%, var(--bg-element) 75%); background-size: 1200px 100%; animation: skeleton-shimmer 1.6s infinite ease-in-out; border-radius: 4px;"></div>
+                </div>
+            </div>`).join('')}
         </div>`;
 
+    // Agregar la animación skeleton si no existe
+    if (!document.getElementById('skeleton-animation')) {
+        const style = document.createElement('style');
+        style.id = 'skeleton-animation';
+        style.textContent = `
+            @keyframes skeleton-shimmer {
+                0% { background-position: -600px 0; }
+                100% { background-position: 600px 0; }
+            }`;
+        document.head.appendChild(style);
+    }
+
     try {
-        let url = `${KULTTIA_CONFIG.WP_API_URL}/posts?per_page=${limit}&page=${page}&_embed=true&status=publish`;
+        let url = `${KULTTIA_CONFIG.WP_API_URL}/posts?per_page=${limit}&page=${page}&_embed=true&status=publish&orderby=date&order=desc`;
         if (category) url += `&categories=${category}`;
 
-        const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
-
-        if (!response.ok) throw new Error(`Error ${response.status}`);
-
-        const posts = await response.json();
-        const totalPages = parseInt(response.headers.get('X-WP-TotalPages') || 1);
+        const { data: posts, totalPages } = await cachedFetch(url);
 
         if (posts.length === 0) {
             container.innerHTML = `
@@ -68,8 +119,6 @@ async function loadWordPressPosts(containerId, limit = 6, page = 1, category = n
         }
 
         container.innerHTML = posts.map(post => renderPostCard(post)).join('');
-
-        // Actualizar paginación si existe
         updatePagination(page, totalPages);
 
     } catch (error) {
@@ -77,39 +126,46 @@ async function loadWordPressPosts(containerId, limit = 6, page = 1, category = n
         container.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--text-muted);">
                 <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; color: var(--acid-blue); margin-bottom: 1rem; display: block;"></i>
-                No se pudieron cargar los artículos en este momento.
+                No se pudieron cargar los artículos. Por favor intenta de nuevo en unos momentos.
             </div>`;
     }
 }
 
 /**
- * Genera el HTML de una tarjeta de artículo desde datos de WordPress
+ * Genera el HTML de una tarjeta de artículo
  */
 function renderPostCard(post) {
     const title = post.title.rendered;
-    const excerpt = stripHTML(post.excerpt.rendered).substring(0, 120) + '...';
+    const plainExcerpt = stripHTML(post.excerpt.rendered);
+    const excerpt = plainExcerpt.length > 120 ? plainExcerpt.substring(0, 120) + '...' : plainExcerpt;
     const date = formatDate(post.date);
     const slug = post.slug;
     const link = `/blog/${slug}`;
 
-    // Imagen destacada
+    // Imagen destacada — prioriza medium_large para velocidad, fallback a source_url
     const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
     const imageUrl = featuredMedia?.media_details?.sizes?.medium_large?.source_url
+        || featuredMedia?.media_details?.sizes?.large?.source_url
         || featuredMedia?.source_url
-        || 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=600&q=80';
+        || `https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=800&q=80&auto=format&fit=crop`;
 
     // Categoría
     const categories = post._embedded?.['wp:term']?.[0];
     const category = categories?.[0]?.name || 'Artículo';
 
+    // Tiempo de lectura estimado
+    const wordCount = stripHTML(post.content?.rendered || '').split(/\s+/).length;
+    const readTime = Math.max(1, Math.round(wordCount / 200));
+
     return `
         <article class="article-card">
-            <div class="article-img-wrapper" style="height: 200px; overflow: hidden; border-radius: var(--border-radius) var(--border-radius) 0 0; border-bottom: 1px solid var(--border-color);">
-                <img src="${imageUrl}" alt="${title}" loading="lazy"
+            <a href="${link}" class="article-img-wrapper" style="display:block; height: 200px; overflow: hidden; border-radius: var(--border-radius) var(--border-radius) 0 0; border-bottom: 1px solid var(--border-color);">
+                <img src="${imageUrl}" alt="${stripHTML(title)}" loading="lazy"
+                    width="800" height="450"
                     style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
                     onmouseover="this.style.transform='scale(1.05)'"
                     onmouseout="this.style.transform='scale(1)'">
-            </div>
+            </a>
             <div class="article-content">
                 <div class="article-meta">
                     <span class="article-category">${category}</span>
@@ -117,135 +173,243 @@ function renderPostCard(post) {
                 </div>
                 <h3 class="article-title"><a href="${link}">${title}</a></h3>
                 <p class="article-excerpt">${excerpt}</p>
-                <a href="${link}" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-top: auto;">
+                    <a href="${link}" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+                    <span style="font-size: 0.82rem; color: var(--text-muted);"><i class="fa-regular fa-clock" style="margin-right:4px;"></i>${readTime} min</span>
+                </div>
             </div>
         </article>`;
 }
 
 /**
- * Carga los posts destacados para la sección del home (máximo 3)
+ * Carga los posts destacados para la sección del home
  */
 async function loadFeaturedPosts(containerId) {
     await loadWordPressPosts(containerId, KULTTIA_CONFIG.FEATURED_POSTS);
 }
 
 // =============================================
-// MÓDULO: ARTÍCULO INDIVIDUAL (articulo.html)
+// MÓDULO: ARTÍCULO INDIVIDUAL
 // =============================================
 
 /**
- * Carga un artículo completo a partir del ?id= en la URL
+ * Carga un artículo completo a partir del slug o ID en la URL.
+ * Compatible con:
+ *   - /blog/mi-slug  (via .htaccess rewrite → ?slug=mi-slug)
+ *   - ?slug=mi-slug
+ *   - ?id=123
  */
 async function loadSinglePost() {
-    // Acepta /blog/mi-slug O ?slug=mi-slug O ?id=123
     const params = new URLSearchParams(window.location.search);
-    const pathParts = window.location.pathname.split('/');
+
+    // El .htaccess mapea /blog/mi-slug → articulo.html?slug=mi-slug
+    // Pero también soportamos el path directo por si el servidor lo sirve así
+    const pathParts = window.location.pathname.replace(/\/$/, '').split('/');
     const slugFromPath = pathParts[pathParts.length - 1];
-    const slug = params.get('slug') || (slugFromPath && slugFromPath !== 'articulo.html' ? slugFromPath : null);
+
+    const INVALID_SLUGS = new Set(['articulo', 'articulo.html', 'blog', '']);
+    const slug = params.get('slug')
+        || (!INVALID_SLUGS.has(slugFromPath) ? slugFromPath : null);
     const postId = params.get('id');
 
-    if (!slug && !postId) return;
+    const skeleton = document.getElementById('article-skeleton');
+    const contentEl = document.getElementById('article-content');
+
+    if (!slug && !postId) {
+        _showArticleError('not-found');
+        return;
+    }
 
     try {
         let url;
         if (slug) {
-            url = `${KULTTIA_CONFIG.WP_API_URL}/posts?slug=${slug}&_embed=true`;
+            url = `${KULTTIA_CONFIG.WP_API_URL}/posts?slug=${encodeURIComponent(slug)}&_embed=true&status=publish`;
         } else {
             url = `${KULTTIA_CONFIG.WP_API_URL}/posts/${postId}?_embed=true`;
         }
 
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Post no encontrado');
+        const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         let post = await response.json();
-        if (Array.isArray(post)) post = post[0]; // Por slug devuelve array
-        if (!post) throw new Error('Post no encontrado');
+        if (Array.isArray(post)) post = post[0]; // por slug devuelve array
+        if (!post || !post.id) throw new Error('Post vacío o no encontrado');
 
-        renderSinglePost(post);
+        // Actualizar la URL canónica sin recargar (para llegar siempre desde /blog/slug)
+        const canonicalSlug = post.slug;
+        if (window.location.pathname !== `/blog/${canonicalSlug}`) {
+            history.replaceState(null, '', `/blog/${canonicalSlug}`);
+        }
 
-        // Actualizar meta SEO
-        document.title = `${post.title.rendered} | Kulttia Lab`;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) metaDesc.setAttribute('content', stripHTML(post.excerpt.rendered));
+        // Renderizar el artículo
+        _renderSinglePost(post);
 
-        // Actualizar la URL a formato limpio sin recargar
-        if (postId && slug) {
-            history.replaceState(null, '', `/blog/${post.slug}`);
+        // Mostrar contenido y ocultar skeleton con transición suave
+        if (skeleton) {
+            skeleton.style.transition = 'opacity 0.3s ease';
+            skeleton.style.opacity = '0';
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                if (contentEl) {
+                    contentEl.style.display = 'block';
+                    contentEl.style.animation = 'fadeInUp 0.4s ease forwards';
+                }
+            }, 300);
+        } else if (contentEl) {
+            contentEl.style.display = 'block';
+        }
+
+        // Agregar animación fadeInUp global si no existe
+        if (!document.getElementById('article-fade-anim')) {
+            const s = document.createElement('style');
+            s.id = 'article-fade-anim';
+            s.textContent = `
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }`;
+            document.head.appendChild(s);
         }
 
     } catch (error) {
         console.error('Error al cargar el artículo:', error);
-        const main = document.querySelector('main');
-        if (main) main.innerHTML = `
-            <div style="padding: 10rem 0 5rem; text-align: center; color: var(--text-muted);">
-                <i class="fa-solid fa-triangle-exclamation" style="font-size: 3rem; color: var(--acid-blue); margin-bottom: 1.5rem; display: block;"></i>
-                <h2 style="color: var(--text-main);">Artículo no encontrado</h2>
-                <p style="margin-top: 1rem; margin-bottom: 2rem;">Es posible que este artículo haya sido movido o eliminado.</p>
-                <a href="blog.html" class="btn btn-primary">Volver al blog</a>
-            </div>`;
+        _showArticleError('load-error');
     }
 }
 
 /**
- * Renderiza el HTML del artículo individual en la página
+ * Renderiza el HTML del artículo individual usando los elementos del DOM
  */
-function renderSinglePost(post) {
-    const titleEl = document.querySelector('.article-main-title');
-    const bodyEl = document.querySelector('.article-body');
-    const heroImg = document.querySelector('.article-hero-img');
-    const dateEl = document.querySelector('.article-date');
-
+function _renderSinglePost(post) {
+    // Título
+    const titleEl = document.getElementById('article-title');
     if (titleEl) titleEl.innerHTML = post.title.rendered;
+
+    // Cuerpo
+    const bodyEl = document.getElementById('article-body');
     if (bodyEl) bodyEl.innerHTML = post.content.rendered;
-    if (dateEl) dateEl.innerHTML = `<i class="fa-regular fa-calendar" style="margin-right: 5px;"></i> ${formatDate(post.date)}`;
+
+    // Fecha
+    const dateEl = document.getElementById('article-date');
+    if (dateEl) dateEl.innerHTML = `<i class="fa-regular fa-calendar" style="margin-right:5px;"></i> ${formatDate(post.date)}`;
+
+    // Categoría
+    const catEl = document.getElementById('article-category');
+    const categories = post._embedded?.['wp:term']?.[0];
+    const categoryName = categories?.[0]?.name || 'Artículo';
+    if (catEl) catEl.textContent = categoryName;
+
+    // Tiempo de lectura
+    const wordCount = stripHTML(post.content?.rendered || '').split(/\s+/).length;
+    const readTime = Math.max(1, Math.round(wordCount / 200));
+    const readTimeEl = document.getElementById('article-read-time');
+    if (readTimeEl) readTimeEl.innerHTML = `<i class="fa-regular fa-clock" style="margin-right:5px;"></i> ${readTime} min de lectura`;
 
     // Imagen principal
+    const heroImg = document.getElementById('article-hero-img');
     const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
-    if (heroImg && featuredMedia?.source_url) {
-        heroImg.src = featuredMedia.source_url;
-        heroImg.alt = post.title.rendered;
+    if (heroImg) {
+        const imgUrl = featuredMedia?.media_details?.sizes?.large?.source_url
+            || featuredMedia?.source_url
+            || '';
+        if (imgUrl) {
+            heroImg.src = imgUrl;
+            heroImg.alt = stripHTML(post.title.rendered);
+        } else {
+            // Sin imagen destacada: ocultar para no mostrar imagen rota
+            heroImg.style.display = 'none';
+        }
     }
 
-    // Autor — con fallback a "Kulttia Lab"
+    // Autor
     const author = post._embedded?.['author']?.[0];
-    const authorBox = document.querySelector('.author-box');
-    if (authorBox) {
-        const avatarEl = authorBox.querySelector('.author-avatar');
-        const nameEl = authorBox.querySelector('h4');
-        const descEl = authorBox.querySelector('p');
+    const authorNameEl = document.getElementById('author-name');
+    const authorDescEl = document.getElementById('author-desc');
+    const authorAvatarEl = document.getElementById('author-avatar');
 
-        const authorName = author?.name || 'Kulttia Lab';
-        const authorDesc = author?.description || 'Explorando la intersección entre tecnología, cultura e inteligencia artificial.';
-        const authorAvatar = author?.avatar_urls?.['96'] || '';
+    const authorName = author?.name || 'Kulttia Lab';
+    const authorDesc = author?.description || 'Explorando la intersección entre tecnología, cultura e inteligencia artificial.';
+    const authorAvatar = author?.avatar_urls?.['96'] || '';
 
-        if (avatarEl && authorAvatar) avatarEl.src = authorAvatar;
-        if (nameEl) nameEl.textContent = authorName;
-        if (descEl) descEl.textContent = authorDesc;
+    if (authorNameEl) authorNameEl.textContent = authorName;
+    if (authorDescEl) authorDescEl.textContent = authorDesc;
+    if (authorAvatarEl) {
+        if (authorAvatar) {
+            authorAvatarEl.src = authorAvatar;
+        } else {
+            // Avatar genérico si no tiene foto
+            authorAvatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=0066ff&color=fff&size=96`;
+        }
+        authorAvatarEl.alt = authorName;
+    }
+
+    // ---- Actualizar SEO dinámicamente ----
+    document.title = `${stripHTML(post.title.rendered)} | Kulttia Lab`;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', stripHTML(post.excerpt.rendered).substring(0, 160));
+
+    // Quitar noindex ahora que tenemos artículo real
+    const robotsMeta = document.querySelector('meta[name="robots"]');
+    if (robotsMeta) robotsMeta.setAttribute('content', 'index, follow');
+
+    // Actualizar canonical
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', `${KULTTIA_CONFIG.SITE_URL}/blog/${post.slug}`);
+
+    // Open Graph
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const ogImg = document.querySelector('meta[property="og:image"]');
+    if (ogTitle) ogTitle.setAttribute('content', stripHTML(post.title.rendered));
+    if (ogDesc) ogDesc.setAttribute('content', stripHTML(post.excerpt.rendered).substring(0, 160));
+    if (ogImg && featuredMedia?.source_url) ogImg.setAttribute('content', featuredMedia.source_url);
+}
+
+/**
+ * Muestra un mensaje de error en la página de artículo
+ */
+function _showArticleError(type) {
+    const skeleton = document.getElementById('article-skeleton');
+    const articleMain = document.getElementById('article-main');
+    if (skeleton) skeleton.style.display = 'none';
+
+    const msg = type === 'not-found'
+        ? 'No encontramos el artículo que buscas. Puede haber sido movido o eliminado.'
+        : 'Tuvimos un problema al cargar este artículo. Por favor intenta de nuevo.';
+
+    if (articleMain) {
+        // Preservar el botón back-to-blog
+        const backBtn = articleMain.querySelector('.back-to-blog');
+        articleMain.innerHTML = '';
+        if (backBtn) articleMain.appendChild(backBtn);
+
+        const errDiv = document.createElement('div');
+        errDiv.className = 'article-not-found';
+        errDiv.innerHTML = `
+            <i class="fa-solid fa-${type === 'not-found' ? 'file-circle-question' : 'triangle-exclamation'}"></i>
+            <h2>${type === 'not-found' ? 'Artículo no encontrado' : 'Error al cargar'}</h2>
+            <p>${msg}</p>
+            <a href="/blog" class="btn btn-primary">Ver todos los artículos</a>`;
+        articleMain.appendChild(errDiv);
     }
 }
 
 // =============================================
-// MÓDULO: FORMULARIO DE CONTACTO → WORDPRESS
+// MÓDULO: FORMULARIO DE CONTACTO
 // =============================================
 
-/**
- * Maneja el envío del formulario de contacto hacia WPForms REST API
- * Requiere el plugin WPForms + WPForms REST API en WordPress
- * FORM_ID debe reemplazarse con el ID real del formulario en WPForms
- */
 async function sendContactForm(event) {
     event.preventDefault();
 
     const form = event.target;
     const btn = form.querySelector('[type="submit"]');
-    const FORM_ID = form.dataset.wpformsId || '1'; // Configurable desde el HTML
+    const FORM_ID = form.dataset.wpformsId || '1';
 
-    // Recolectar datos
     const formData = new FormData(form);
     const data = {};
     formData.forEach((value, key) => { data[key] = value; });
 
-    // Estado de carga en el botón
     const originalBtnText = btn.innerHTML;
     btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...';
     btn.disabled = true;
@@ -256,9 +420,6 @@ async function sendContactForm(event) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-
-        // También intentamos con la ruta de WPForms directamente
-        let result = await response.json();
 
         showFormMessage(form, 'success', '¡Mensaje enviado! Nos pondremos en contacto contigo pronto.');
         form.reset();
@@ -272,9 +433,6 @@ async function sendContactForm(event) {
     }
 }
 
-/**
- * Muestra un mensaje de feedback en el formulario
- */
 function showFormMessage(form, type, message) {
     let msgEl = form.querySelector('.form-message');
     if (!msgEl) {
@@ -304,7 +462,7 @@ function showFormMessage(form, type, message) {
 }
 
 // =============================================
-// MÓDULO: PAGINACIÓN y FILTROS (blog.html)
+// MÓDULO: PAGINACIÓN Y FILTROS
 // =============================================
 
 function updatePagination(page, totalPages) {
@@ -315,14 +473,27 @@ function updatePagination(page, totalPages) {
     }
 
     currentPage = page;
-    paginationEl.innerHTML = `
-        <button class="btn btn-outline" onclick="changePage(${page - 1})" ${page <= 1 ? 'disabled style="opacity:0.4;cursor:not-allowed"' : ''}>
-            <i class="fa-solid fa-arrow-left"></i> Anteriores
-        </button>
-        <span style="color: var(--text-muted); font-size: 0.9rem;">Página ${page} de ${totalPages}</span>
-        <button class="btn btn-outline" onclick="changePage(${page + 1})" ${page >= totalPages ? 'disabled style="opacity:0.4;cursor:not-allowed"' : ''}>
-            Siguientes <i class="fa-solid fa-arrow-right"></i>
-        </button>`;
+
+    // Generar números de página
+    const pages = [];
+    const delta = 2;
+    for (let i = Math.max(1, page - delta); i <= Math.min(totalPages, page + delta); i++) {
+        pages.push(i);
+    }
+
+    const prevBtn = page > 1
+        ? `<button class="btn btn-outline" onclick="changePage(${page - 1})"><i class="fa-solid fa-arrow-left"></i> Anteriores</button>`
+        : `<button class="btn btn-outline" disabled style="opacity:0.4;cursor:not-allowed"><i class="fa-solid fa-arrow-left"></i> Anteriores</button>`;
+
+    const nextBtn = page < totalPages
+        ? `<button class="btn btn-outline" onclick="changePage(${page + 1})">Siguientes <i class="fa-solid fa-arrow-right"></i></button>`
+        : `<button class="btn btn-outline" disabled style="opacity:0.4;cursor:not-allowed">Siguientes <i class="fa-solid fa-arrow-right"></i></button>`;
+
+    const pageNums = pages.map(p =>
+        `<button class="btn ${p === page ? 'btn-primary' : 'btn-outline'}" onclick="changePage(${p})" ${p === page ? 'disabled' : ''}>${p}</button>`
+    ).join('');
+
+    paginationEl.innerHTML = `${prevBtn} ${pageNums} ${nextBtn}`;
 }
 
 function changePage(page) {
@@ -335,7 +506,8 @@ function setupCategoryFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     if (!filterBtns.length) return;
 
-    // Map categories names to IDs (update these IDs based on your WP)
+    // Map de nombres de categoría a IDs de WordPress
+    // IMPORTANTE: actualiza estos IDs según los que tengas en tu WordPress
     const categoryMap = {
         'todos': null,
         'arte': 34,
@@ -346,15 +518,12 @@ function setupCategoryFilters() {
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // Remove active class from all
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active to clicked
             e.target.classList.add('active');
 
             const catName = e.target.textContent.trim().toLowerCase();
-            const catId = categoryMap[catName];
+            const catId = categoryMap[catName] !== undefined ? categoryMap[catName] : null;
 
-            // Load posts for this category
             loadWordPressPosts('blog-posts-container', KULTTIA_CONFIG.POSTS_PER_PAGE, 1, catId);
         });
     });
@@ -363,13 +532,16 @@ function setupCategoryFilters() {
 // =============================================
 // UTILIDADES
 // =============================================
+
 function stripHTML(html) {
+    if (!html) return '';
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || '';
 }
 
 function formatDate(dateString) {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 }
