@@ -14,6 +14,10 @@ const KULTTIA_CONFIG = {
     FEATURED_POSTS: 3,
 };
 
+// Estado global de paginación y filtros
+let currentPage = 1;
+let currentCategory = null;
+
 // =============================================
 // MÓDULO: CARGAR ARTÍCULOS DEL BLOG
 // =============================================
@@ -302,8 +306,6 @@ function showFormMessage(form, type, message) {
 // =============================================
 // MÓDULO: PAGINACIÓN y FILTROS (blog.html)
 // =============================================
-let currentPage = 1;
-let currentCategory = null;
 
 function updatePagination(page, totalPages) {
     const paginationEl = document.getElementById('blog-pagination');

@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Artículos de Kulttia Lab. Explorando diseño, cultura, tecnología e IA.">
-    <title>Archivo de Artículos | Kulttia Lab</title>
+    <meta name="description" content="ArtÃ­culos de Kulttia Lab. Explorando diseÃ±o, cultura, tecnologÃ­a e IA.">
+    <title>Archivo de ArtÃ­culos | Kulttia Lab</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,12 +62,12 @@
 
     <header class="header">
         <div class="container flex-between">
-            <a href="index.html" class="logo">Kulttia Lab<span>.</span></a>
+            <a href="/" class="logo">Kulttia Lab<span>.</span></a>
             <nav class="nav-links" id="main-nav">
-                <a href="index.html">Inicio</a>
-                <a href="blog.html" class="active">Artículos</a>
-                <a href="nosotros.html">Nosotros</a>
-                <a href="contacto.html">Contacto</a>
+                <a href="/">Inicio</a>
+                <a href="/blog" class="active">ArtÃ­culos</a>
+                <a href="/nosotros">Nosotros</a>
+                <a href="/contacto">Contacto</a>
                 <button class="btn btn-primary btn-subscribe"
                     style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
                 <button id="theme-toggle" class="btn"
@@ -84,8 +84,8 @@
 
     <div class="container archive-header">
         <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Archivo de <span>Ideas</span></h1>
-        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Navega por nuestra selección de ensayos,
-            tutoriales y análisis del pulso digital.</p>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Navega por nuestra selecciÃ³n de ensayos,
+            tutoriales y anÃ¡lisis del pulso digital.</p>
     </div>
 
     <div class="container archive-filters">
@@ -99,10 +99,10 @@
     <!-- Blog Grid Content (Cargado desde WordPress REST API) -->
     <section class="container" style="margin-bottom: 5rem;">
         <div class="grid articles-grid" id="blog-posts-container">
-            <!-- Los artículos se cargan dinámicamente desde WordPress -->
+            <!-- Los artÃ­culos se cargan dinÃ¡micamente desde WordPress -->
         </div>
 
-        <!-- Paginación dinámica -->
+        <!-- PaginaciÃ³n dinÃ¡mica -->
         <div id="blog-pagination"
             style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 4rem;">
         </div>
@@ -132,17 +132,17 @@
         <div class="modal-content">
             <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
             <i class="fa-solid fa-envelope-open-text modal-icon"></i>
-            <h2>Descifra el Mañana. Hoy.</h2>
-            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
+            <h2>Descifra el MaÃ±ana. Hoy.</h2>
+            <p>Ãšnete a nuestra comunidad selecta. RecibirÃ¡s ensayos exclusivos sobre cÃ³mo la inteligencia artificial y
                 la cultura moderna re-escriben las reglas del juego.</p>
             <form class="modal-form" action="#" method="POST"
-                onsubmit="event.preventDefault(); alert('¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.'); document.getElementById('subscribe-modal').classList.remove('active');">
+                onsubmit="event.preventDefault(); alert('Â¡Bienvenido al circuito! Te hemos enviado un correo de confirmaciÃ³n.'); document.getElementById('subscribe-modal').classList.remove('active');">
                 <input type="email" class="form-control" placeholder="tu@email.com" required
                     style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
             </form>
-            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="politica-privacidad.html">Política de
-                    Privacidad</a> y confirmas que no eres un bot🤖.</p>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="/politica-privacidad">PolÃ­tica de
+                    Privacidad</a> y confirmas que no eres un botðŸ¤–.</p>
         </div>
     </div>
 
