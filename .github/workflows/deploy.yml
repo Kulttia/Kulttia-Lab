@@ -9,6 +9,7 @@ jobs:
   deploy:
     name: Deploy via FTP
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: ✅ Checkout código
@@ -25,11 +26,16 @@ jobs:
           server-dir: /public_html/
           local-dir: ./
           security: loose
+          timeout: 60000
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             fix-footer.js
             fix-flash.js
+            fix-hrefs.ps1
             update.js
             README.md
+            test.json
+            *.log
+            *.tmp

@@ -13,5 +13,7 @@ fix-hrefs.ps1
 .vscode/
 *.code-workspace
 
-# Logs
+# Logs y temporales
 *.log
+*.tmp
+test.json
