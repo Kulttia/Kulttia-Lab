@@ -53,14 +53,14 @@ RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$  articulo.html?slug=$1 [L,QSA]
 # Remover extensiones .html de las URLs
 # ============================================
 
-# Si alguien accede a /pagina.html → redirige a /pagina (301)
+# Si alguien accede a /pagina.html -> redirige a /pagina (301) excluyendo query params
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.]+)\.html\ HTTP
-RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
+RewriteRule ^([^.]+)\.html$ /$1 [R=301,L,QSA]
 
 # Internamente sirve el .html cuando llega la URL limpia
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^([^/]+)/?$ $1.html [L]
+RewriteRule ^([^/]+)/?$ $1.html [L,QSA]
 
 # ============================================
 # Página de inicio

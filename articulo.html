@@ -24,7 +24,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="/css/estilos.css">
 
     <style>
         /* =============================================
@@ -274,9 +274,9 @@
             border-radius: 4px;
         }
 
-        /* Estado de error 404 */
+        /* Estado de error 404 y de carga fallida */
         .article-not-found {
-            padding: 10rem 0 5rem;
+            padding: 3rem 0;
             text-align: center;
             color: var(--text-muted);
         }
@@ -451,8 +451,8 @@
         </div>
     </div>
 
-    <script src="js/wordpress-api.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/wordpress-api.js"></script>
+    <script src="/js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Extraer slug de la URL: soporta /blog/mi-slug o ?slug=mi-slug o ?id=123

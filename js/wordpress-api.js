@@ -164,8 +164,8 @@ async function loadWordPressPosts(containerId, limit = 6, page = 1, category = n
  * Genera el HTML de una tarjeta de artículo
  */
 function renderPostCard(post) {
-    const title = post.title.rendered;
-    const plainExcerpt = stripHTML(post.excerpt.rendered);
+    const title = post.title?.rendered || 'Sin título';
+    const plainExcerpt = stripHTML(post.excerpt?.rendered);
     const excerpt = plainExcerpt.length > 120 ? plainExcerpt.substring(0, 120) + '...' : plainExcerpt;
     const date = formatDate(post.date);
     const slug = post.slug;
@@ -237,8 +237,10 @@ async function loadSinglePost() {
     const slugFromPath = pathParts[pathParts.length - 1];
 
     const INVALID_SLUGS = new Set(['articulo', 'articulo.html', 'blog', '']);
-    const slug = params.get('slug')
-        || (!INVALID_SLUGS.has(slugFromPath) ? slugFromPath : null);
+    let slug = params.get('slug');
+    if (!slug && !INVALID_SLUGS.has(slugFromPath)) {
+        slug = slugFromPath;
+    }
     const postId = params.get('id');
 
     const skeleton = document.getElementById('article-skeleton');
@@ -273,8 +275,12 @@ async function loadSinglePost() {
 
         // Actualizar la URL canónica sin recargar (para llegar siempre desde /blog/slug)
         const canonicalSlug = post.slug;
-        if (window.location.pathname !== `/blog/${canonicalSlug}`) {
-            history.replaceState(null, '', `/blog/${canonicalSlug}`);
+        try {
+            if (window.location.pathname !== `/blog/${canonicalSlug}`) {
+                history.replaceState(null, '', `/blog/${canonicalSlug}`);
+            }
+        } catch (e) {
+            console.warn('history.replaceState bloqueado por restricciones de origen local (file://) o del navegador.', e);
         }
 
         // Renderizar el artículo
@@ -319,11 +325,11 @@ async function loadSinglePost() {
 function _renderSinglePost(post) {
     // Título
     const titleEl = document.getElementById('article-title');
-    if (titleEl) titleEl.innerHTML = post.title.rendered;
+    if (titleEl) titleEl.innerHTML = post.title?.rendered || 'Sin título';
 
     // Cuerpo
     const bodyEl = document.getElementById('article-body');
-    if (bodyEl) bodyEl.innerHTML = post.content.rendered;
+    if (bodyEl) bodyEl.innerHTML = post.content?.rendered || '';
 
     // Fecha
     const dateEl = document.getElementById('article-date');
@@ -350,7 +356,7 @@ function _renderSinglePost(post) {
             || '';
         if (imgUrl) {
             heroImg.src = imgUrl;
-            heroImg.alt = stripHTML(post.title.rendered);
+            heroImg.alt = stripHTML(post.title?.rendered || 'Artículo');
         } else {
             // Sin imagen destacada: ocultar para no mostrar imagen rota
             heroImg.style.display = 'none';
@@ -380,10 +386,10 @@ function _renderSinglePost(post) {
     }
 
     // ---- Actualizar SEO dinámicamente ----
-    document.title = `${stripHTML(post.title.rendered)} | Kulttia Lab`;
+    document.title = `${stripHTML(post.title?.rendered || 'Artículo')} | Kulttia Lab`;
 
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', stripHTML(post.excerpt.rendered).substring(0, 160));
+    if (metaDesc) metaDesc.setAttribute('content', stripHTML(post.excerpt?.rendered).substring(0, 160));
 
     // Quitar noindex ahora que tenemos artículo real
     const robotsMeta = document.querySelector('meta[name="robots"]');
@@ -397,8 +403,8 @@ function _renderSinglePost(post) {
     const ogTitle = document.querySelector('meta[property="og:title"]');
     const ogDesc = document.querySelector('meta[property="og:description"]');
     const ogImg = document.querySelector('meta[property="og:image"]');
-    if (ogTitle) ogTitle.setAttribute('content', stripHTML(post.title.rendered));
-    if (ogDesc) ogDesc.setAttribute('content', stripHTML(post.excerpt.rendered).substring(0, 160));
+    if (ogTitle) ogTitle.setAttribute('content', stripHTML(post.title?.rendered || 'Artículo'));
+    if (ogDesc) ogDesc.setAttribute('content', stripHTML(post.excerpt?.rendered).substring(0, 160));
     if (ogImg && featuredMedia?.source_url) ogImg.setAttribute('content', featuredMedia.source_url);
 }
 
