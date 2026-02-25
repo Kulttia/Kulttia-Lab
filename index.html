@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="/css/estilos.css">
 
     <script>
         // Inject theme variable before body renders to avoid Flash of Dark Theme
@@ -177,14 +177,16 @@
     </div>
 
     <!-- Main JS -->
-    <script src="js/wordpress-api.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/wordpress-api.js"></script>
+    <script src="/js/main.js"></script>
     <script>
         // Inicializar carga de posts en Home
         document.addEventListener('DOMContentLoaded', () => {
             loadFeaturedPosts('home-posts-container');
         });
-    </script> <!-- WhatsApp Chat Bubble -->
+    </script>
+
+    <!-- WhatsApp Chat Bubble -->
     <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
         <span class="wa-tooltip">💬 ¡Hablemos por WhatsApp!</span>
         <a href="https://wa.me/573182057306" class="wa-btn" target="_blank" rel="noopener noreferrer"
