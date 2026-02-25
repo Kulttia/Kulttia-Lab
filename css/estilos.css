@@ -875,7 +875,7 @@ ul {
     }
 
     .wa-tooltip {
-        font-size: 0.82rem;
-        padding: 0.5rem 0.9rem;
+        display: none;
+        /* Mejor ocultarlo en mobile para evitar que se atasque al tocar */
     }
 }
