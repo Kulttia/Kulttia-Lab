@@ -169,7 +169,7 @@ function renderPostCard(post) {
     const excerpt = plainExcerpt.length > 120 ? plainExcerpt.substring(0, 120) + '...' : plainExcerpt;
     const date = formatDate(post.date);
     const slug = post.slug;
-    const link = `/blog/${slug}`;
+    const link = `/articulo?slug=${encodeURIComponent(slug)}`;
 
     // Imagen destacada — prioriza medium_large para velocidad, fallback a source_url
     const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
@@ -272,16 +272,6 @@ async function loadSinglePost() {
         let post = await response.json();
         if (Array.isArray(post)) post = post[0]; // por slug devuelve array
         if (!post || !post.id) throw new Error('Post vacío o no encontrado');
-
-        // Actualizar la URL canónica sin recargar (para llegar siempre desde /blog/slug)
-        const canonicalSlug = post.slug;
-        try {
-            if (window.location.pathname !== `/blog/${canonicalSlug}`) {
-                history.replaceState(null, '', `/blog/${canonicalSlug}`);
-            }
-        } catch (e) {
-            console.warn('history.replaceState bloqueado por restricciones de origen local (file://) o del navegador.', e);
-        }
 
         // Renderizar el artículo
         _renderSinglePost(post);
