@@ -741,3 +741,141 @@ ul {
 .articles-grid .article-card {
     height: 100%;
 }
+
+/* ============================================
+   WhatsApp Chat Bubble — Widget flotante
+   Posición fija bottom-right, no invasivo
+============================================ */
+.wa-bubble {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+}
+
+/* Tooltip de mensaje que aparece al hover */
+.wa-tooltip {
+    background: var(--bg-card);
+    border: 1px solid var(--border-blue-subtle);
+    color: var(--text-main);
+    font-family: var(--font-primary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    border-radius: 12px 12px 0 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    user-select: none;
+}
+
+.wa-bubble:hover .wa-tooltip,
+.wa-bubble:focus-within .wa-tooltip {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Botón circular principal */
+.wa-btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #233dff, #1868e1);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(35, 61, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.wa-btn:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 8px 28px rgba(35, 61, 255, 0.65);
+    color: #fff;
+}
+
+.wa-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    transition: transform 0.3s ease;
+}
+
+.wa-btn:hover svg {
+    transform: scale(1.1);
+}
+
+/* Animación pulse — anillo exterior que pulsa */
+.wa-btn::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(35, 61, 255, 0.6);
+    animation: wa-pulse 2.5s ease-out infinite;
+}
+
+@keyframes wa-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    70% {
+        transform: scale(1.35);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.35);
+        opacity: 0;
+    }
+}
+
+/* Punto verde de "en línea" */
+.wa-online {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 12px;
+    height: 12px;
+    background: #25d366;
+    border-radius: 50%;
+    border: 2px solid var(--bg-main);
+}
+
+/* Responsive: más pequeño en mobile */
+@media (max-width: 768px) {
+    .wa-bubble {
+        bottom: 1.25rem;
+        right: 1.25rem;
+    }
+
+    .wa-btn {
+        width: 52px;
+        height: 52px;
+    }
+
+    .wa-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .wa-tooltip {
+        font-size: 0.82rem;
+        padding: 0.5rem 0.9rem;
+    }
+}
