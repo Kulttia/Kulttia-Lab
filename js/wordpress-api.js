@@ -428,37 +428,90 @@ function _showArticleError(type) {
 }
 
 // =============================================
-// MÓDULO: FORMULARIO DE CONTACTO
+// MÓDULO: FORMULARIOS (CONTACTO Y SUSCRIPCIÓN)
 // =============================================
 
+/**
+ * Función para el Formulario de Contacto
+ */
 async function sendContactForm(event) {
     event.preventDefault();
 
     const form = event.target;
     const btn = form.querySelector('[type="submit"]');
-    const FORM_ID = form.dataset.wpformsId || '1';
+    const FORM_ID = form.dataset.wpformsId || '1'; // Reemplazar con el ID de tu formulario de contacto en WPForms
 
-    const formData = new FormData(form);
-    const data = {};
-    formData.forEach((value, key) => { data[key] = value; });
+    const data = {
+        form_id: FORM_ID,
+        tipo: 'contacto',
+        nombre: form.querySelector('[name="nombre"]')?.value || '',
+        email: form.querySelector('[name="email"]')?.value || '',
+        mensaje: form.querySelector('[name="mensaje"]')?.value || ''
+    };
 
+    await _submitForm(form, btn, data, '¡Mensaje enviado! Nos pondremos en contacto contigo pronto.');
+}
+
+/**
+ * Función para los Formularios de Suscripción (Popup y Newsletter)
+ */
+async function sendSubscribeForm(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const btn = form.querySelector('[type="submit"]');
+    const FORM_ID = form.dataset.wpformsId || '2'; // Reemplazar con el ID de tu formulario de suscripción en WPForms
+
+    const data = {
+        form_id: FORM_ID,
+        tipo: 'suscripcion',
+        email: form.querySelector('[name="email"]')?.value || ''
+    };
+
+    await _submitForm(form, btn, data, '¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.');
+    
+    // Si es el modal, cerrarlo después de unos segundos
+    if(form.closest('#subscribe-modal')) {
+        setTimeout(() => {
+            document.getElementById('subscribe-modal').classList.remove('active');
+            form.reset();
+        }, 3000);
+    }
+}
+
+/**
+ * Lógica base compartida para enviar datos al backend Headless de WordPress
+ */
+async function _submitForm(form, btn, data, successMsg) {
     const originalBtnText = btn.innerHTML;
     btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...';
     btn.disabled = true;
 
     try {
-        const response = await fetch(`${KULTTIA_CONFIG.WP_API_URL}/contact-form/${FORM_ID}`, {
+        // En un entorno Headless puro, la mejor forma de conectar WPForms es creando 
+        // un pequeño endpoint REST en WordPress. Nosotros enviaremos a ese endpoint.
+        const response = await fetch(`${KULTTIA_CONFIG.WP_API_URL}/kulttia/v1/submit-form`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
 
-        showFormMessage(form, 'success', '¡Mensaje enviado! Nos pondremos en contacto contigo pronto.');
-        form.reset();
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const result = await response.json();
+        
+        if (result.success) {
+            showFormMessage(form, 'success', successMsg);
+            form.reset();
+        } else {
+            throw new Error(result.message || 'Error en el servidor');
+        }
 
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
-        showFormMessage(form, 'error', 'Hubo un problema al enviar tu mensaje. Por favor escríbenos directamente a hola@kulttia.com');
+        showFormMessage(form, 'error', 'Hubo un problema al enviar tu mensaje. Por favor intenta nuevamente.');
     } finally {
         btn.innerHTML = originalBtnText;
         btn.disabled = false;

@@ -440,9 +440,8 @@
             <h2>Descifra el Mañana. Hoy.</h2>
             <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
                 la cultura moderna re-escriben las reglas del juego.</p>
-            <form class="modal-form" action="#" method="POST"
-                onsubmit="event.preventDefault(); alert('¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.'); document.getElementById('subscribe-modal').classList.remove('active');">
-                <input type="email" class="form-control" placeholder="tu@email.com" required
+            <form class="modal-form" data-wpforms-id="2" action="#" method="POST" onsubmit="sendSubscribeForm(event)">
+                <input type="email" name="email" class="form-control" placeholder="tu@email.com" required
                     style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
             </form>
