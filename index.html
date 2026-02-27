@@ -27,6 +27,7 @@
             document.documentElement.setAttribute('data-theme', 'light');
         }
     </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 
 <body>
@@ -88,7 +89,8 @@
             <h2>Únete al circuito.</h2>
             <p>Suscríbete a nuestra newsletter para recibir análisis profundos sobre tecnología, diseño y cultura
                 digital directamente en tu bandeja de entrada.</p>
-            <form class="newsletter-form" data-wpforms-id="2" action="#" method="POST" onsubmit="sendSubscribeForm(event)">
+            <form class="newsletter-form" data-wpforms-id="2" action="#" method="POST"
+                onsubmit="sendSubscribeForm(event)">
                 <input type="email" name="email" class="newsletter-input" placeholder="tu@email.com" required>
                 <button type="submit" class="btn btn-primary">Suscribirme</button>
             </form>
@@ -175,7 +177,7 @@
     </div>
 
     <!-- Main JS -->
-    <script src="/js/wordpress-api.js"></script>
+    <script src="/js/wordpress-api.js?v=3"></script>
     <script src="/js/main.js"></script>
     <script>
         // Inicializar carga de posts en Home

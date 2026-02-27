@@ -469,9 +469,9 @@ async function sendSubscribeForm(event) {
     };
 
     await _submitForm(form, btn, data, '¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.');
-    
+
     // Si es el modal, cerrarlo después de unos segundos
-    if(form.closest('#subscribe-modal')) {
+    if (form.closest('#subscribe-modal')) {
         setTimeout(() => {
             document.getElementById('subscribe-modal').classList.remove('active');
             form.reset();
@@ -490,7 +490,8 @@ async function _submitForm(form, btn, data, successMsg) {
     try {
         // En un entorno Headless puro, la mejor forma de conectar WPForms es creando 
         // un pequeño endpoint REST en WordPress. Nosotros enviaremos a ese endpoint.
-        const response = await fetch(`${KULTTIA_CONFIG.WP_API_URL}/kulttia/v1/submit-form`, {
+        const baseUrl = KULTTIA_CONFIG.WP_API_URL.replace('/wp/v2', '');
+        const response = await fetch(`${baseUrl}/kulttia/v1/submit-form`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -501,7 +502,7 @@ async function _submitForm(form, btn, data, successMsg) {
         }
 
         const result = await response.json();
-        
+
         if (result.success) {
             showFormMessage(form, 'success', successMsg);
             form.reset();
@@ -595,10 +596,10 @@ function setupCategoryFilters() {
     // IMPORTANTE: actualiza estos IDs según los que tengas en tu WordPress
     const categoryMap = {
         'todos': null,
-        'arte': 34,
-        'ia y machine learning': 15,
-        'cybercultura': 28,
-        'web': 29
+        'arte': 1,
+        'ia y machine learning': 2,
+        'cybercultura': 4,
+        'web': 5
     };
 
     filterBtns.forEach(btn => {
