@@ -381,13 +381,23 @@ function _renderSinglePost(post) {
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', stripHTML(post.excerpt?.rendered).substring(0, 160));
 
-    // Quitar noindex ahora que tenemos artículo real
-    const robotsMeta = document.querySelector('meta[name="robots"]');
-    if (robotsMeta) robotsMeta.setAttribute('content', 'index, follow');
+    // Asegurar que se indexe el artículo real
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute('content', 'index, follow');
 
-    // Actualizar canonical
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', `${KULTTIA_CONFIG.SITE_URL}/blog/${post.slug}`);
+    // Actualizar o crear canonical dinamico
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', `${KULTTIA_CONFIG.SITE_URL}/blog/${post.slug}`);
 
     // Open Graph
     const ogTitle = document.querySelector('meta[property="og:title"]');
@@ -402,6 +412,15 @@ function _renderSinglePost(post) {
  * Muestra un mensaje de error en la página de artículo
  */
 function _showArticleError(type) {
+    // Si hay error (como 404), pedirle a Google que no indexe esta URL
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute('content', 'noindex, follow');
+
     const skeleton = document.getElementById('article-skeleton');
     const articleMain = document.getElementById('article-main');
     if (skeleton) skeleton.style.display = 'none';
