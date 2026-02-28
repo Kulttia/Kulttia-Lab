@@ -150,8 +150,27 @@
     <script src="/js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            loadWordPressPosts('blog-posts-container', 6, 1);
             setupCategoryFilters();
+
+            const params = new URLSearchParams(window.location.search);
+            const categoryParam = params.get('category');
+
+            if (categoryParam) {
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                let found = false;
+                filterBtns.forEach(btn => {
+                    if (btn.textContent.trim().toLowerCase() === categoryParam.toLowerCase()) {
+                        btn.click();
+                        found = true;
+                    }
+                });
+
+                if (!found) {
+                    loadWordPressPosts('blog-posts-container', 6, 1);
+                }
+            } else {
+                loadWordPressPosts('blog-posts-container', 6, 1);
+            }
         });
     </script>
     <!-- WhatsApp Chat Bubble -->
