@@ -98,7 +98,7 @@ ul {
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 5%;
+    padding: 0 max(1.5rem, 5%);
 }
 
 .flex-between {
@@ -865,7 +865,8 @@ ul {
 @media (max-width: 768px) {
     .wa-bubble {
         bottom: 1.25rem;
-        right: 1.25rem;
+        right: auto;
+        left: 1.25rem;
     }
 
     .wa-btn {
