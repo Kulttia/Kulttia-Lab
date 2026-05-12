@@ -82,6 +82,7 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
 }
 
 a {
@@ -98,7 +99,7 @@ ul {
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 max(1.5rem, 5%);
+    padding: 0 clamp(1.5rem, 5vw, 3rem);
 }
 
 .flex-between {
@@ -520,6 +521,7 @@ ul {
     justify-content: space-between;
     align-items: center;
     padding-top: 2rem;
+    padding-right: 5rem;
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
     font-size: 0.9rem;
