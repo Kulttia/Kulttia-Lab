@@ -2,6 +2,11 @@
 # Kulttia Lab — .htaccess para frontend estático
 # ============================================
 
+# Deshabilitar LiteSpeed Cache (Hostinger) para HTML
+<IfModule LiteSpeed>
+    CacheLookup off
+</IfModule>
+
 RewriteEngine On
 
 # ============================================
