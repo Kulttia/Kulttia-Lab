@@ -143,12 +143,19 @@
     function openSearch() {
         const overlay = document.getElementById('search-overlay');
         if (!overlay) return;
+        // Re-trigger slide-in animation
+        const box = overlay.querySelector('.search-box');
+        if (box) {
+            box.style.animation = 'none';
+            box.offsetHeight; // reflow
+            box.style.animation = '';
+        }
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
         setTimeout(() => {
             const input = document.getElementById('search-input');
             if (input) input.focus();
-        }, 80);
+        }, 60);
     }
 
     function closeSearch() {
