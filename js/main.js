@@ -32,11 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Handle Active Nav links based on current URL path
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
     const navItems = document.querySelectorAll('.nav-links a');
 
     navItems.forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const normalizedHref = href.replace(/\/$/, '') || '/';
+        if (normalizedHref === currentPath) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
