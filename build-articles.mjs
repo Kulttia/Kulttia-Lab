@@ -308,9 +308,11 @@ async function main() {
 
   for (const post of posts) {
     const html = generateHTML(post);
-    const outPath = join(BLOG_DIR, `${post.slug}.html`);
+    const slugDir = join(BLOG_DIR, post.slug);
+    mkdirSync(slugDir, { recursive: true });
+    const outPath = join(slugDir, 'index.html');
     writeFileSync(outPath, html, 'utf8');
-    console.log(`  ✓ blog/${post.slug}.html`);
+    console.log(`  ✓ blog/${post.slug}/index.html`);
   }
 
   updateSitemap(posts);
