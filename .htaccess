@@ -52,8 +52,15 @@ RewriteRule ^/?$ https://%{HTTP_HOST}/blog? [R=301,L]
 
 # ============================================
 # Clean URLs para artículos del blog
-# /blog/mi-articulo → articulo.html?slug=mi-articulo
+# Si existe blog/slug/ (SSG estático) → servir directo
+# Si no existe → articulo.html?slug=slug (JS fallback)
 # ============================================
+
+# SSG: si existe el directorio blog/slug/, servir su index.html
+RewriteCond %{DOCUMENT_ROOT}/blog/$1 -d
+RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ /blog/$1/index.html [L]
+
+# JS fallback: sin directorio estático → articulo.html con JS
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$  articulo.html?slug=$1 [L,QSA]
