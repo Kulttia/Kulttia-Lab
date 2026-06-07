@@ -56,8 +56,11 @@ RewriteRule ^/?$ https://%{HTTP_HOST}/blog? [R=301,L]
 # Si no existe → articulo.html?slug=slug (JS fallback)
 # ============================================
 
-# /blog y /blog/ → blog.html (ANTES que las reglas de artículos)
-RewriteRule ^blog/?$ blog.html [L]
+# /blog/ con trailing slash → redirect 301 a /blog (sin slash)
+RewriteRule ^blog/$ /blog [R=301,L]
+
+# /blog → blog.html
+RewriteRule ^blog$ blog.html [L]
 
 # SSG: si existe el directorio blog/slug/, servir su index.html
 RewriteCond %{DOCUMENT_ROOT}/blog/$1 -d
