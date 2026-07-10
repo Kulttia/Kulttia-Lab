@@ -11,6 +11,11 @@
     <changefreq>daily</changefreq>
   </url>
   <url>
+    <loc>https://kulttia.com/boveda</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://kulttia.com/nosotros</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>

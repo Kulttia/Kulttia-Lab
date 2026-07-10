@@ -87,6 +87,7 @@
             <nav class="nav-links" id="main-nav">
                 <a href="/" class="active">Inicio</a>
                 <a href="/blog">Artículos</a>
+                <a href="/boveda">Bóveda</a>
                 <a href="/nosotros">Nosotros</a>
                 <a href="/servicios">Servicios</a>
                 <a href="/contacto">Contacto</a>
@@ -106,6 +107,8 @@
             </div>
         </div>
     </header>
+
+    <main>
 
     <!-- Hero Section -->
     <section class="hero container">
@@ -145,6 +148,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -160,10 +165,11 @@
                 <div>
                     <h4 class="footer-title">Explorar</h4>
                     <div class="footer-links">
-                        <a href="/">Inicio</a>
-                        <a href="/blog">Artículos</a>
-                        <a href="/nosotros">Sobre Nosotros</a>
-                        <a href="/contacto">Contacto</a>
+                        <a href="/" aria-label="Inicio — pie de página">Inicio</a>
+                        <a href="/blog" aria-label="Artículos — pie de página">Artículos</a>
+                        <a href="/boveda" aria-label="Bóveda de recursos — pie de página">Bóveda</a>
+                        <a href="/nosotros" aria-label="Sobre Nosotros — pie de página">Sobre Nosotros</a>
+                        <a href="/contacto" aria-label="Contacto — pie de página">Contacto</a>
                     </div>
                 </div>
 
@@ -225,9 +231,9 @@
     </div>
 
     <!-- Main JS -->
-    <script src="js/wordpress-api.js?v=3"></script>
-    <script src="js/main.js"></script>
-    <script src="js/search.js"></script>
+    <script src="js/wordpress-api.js?v=3" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/search.js" defer></script>
     <script>
         // Inicializar carga de posts en Home
         document.addEventListener('DOMContentLoaded', () => {

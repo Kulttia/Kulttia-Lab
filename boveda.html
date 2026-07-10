@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Bóveda de Kulttia Lab: repos open-source, skills y herramientas de IA verificadas, curadas por nivel para aprender construyendo.">
+    <title>La Bóveda | Kulttia Lab</title>
+    <link rel="canonical" href="https://kulttia.com/boveda">
+    <meta property="og:title" content="La Bóveda | Kulttia Lab">
+    <meta property="og:description" content="Repos open-source, skills y herramientas de IA verificadas. Curadas por nivel: principiante, intermedio, avanzado.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kulttia.com/boveda">
+    <meta property="og:image" content="https://kulttia.com/og-default.png">
+    <meta property="og:site_name" content="Kulttia Lab">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="La Bóveda | Kulttia Lab">
+    <meta name="twitter:image" content="https://kulttia.com/og-default.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <link rel="stylesheet" href="css/estilos.css?v=2">
+
+    <style>
+        .vault-header {
+            padding: 10rem 0 2.5rem;
+            text-align: center;
+        }
+
+        .vault-label {
+            font-family: monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--acid-blue);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .vault-search {
+            max-width: 560px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .vault-search input {
+            width: 100%;
+            padding: 1rem 1.2rem 1rem 3rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color-strong);
+            border-radius: var(--border-radius-pill);
+            color: var(--text-main);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+        }
+
+        .vault-search input:focus {
+            outline: none;
+            border-color: var(--acid-blue);
+            box-shadow: 0 0 10px var(--acid-blue-glow);
+        }
+
+        .vault-search i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .vault-filters {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-element);
+            border: 1px solid var(--border-color-strong);
+            color: var(--text-muted);
+            padding: 0.5rem 1.3rem;
+            border-radius: var(--border-radius-pill);
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--acid-blue-light);
+            border-color: var(--acid-blue);
+            color: var(--acid-blue);
+            box-shadow: 0 0 10px var(--acid-blue-glow);
+        }
+
+        .vault-count {
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .vault-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .vault-card:hover {
+            border-color: var(--acid-blue);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .vault-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vault-cat {
+            font-family: monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--acid-blue);
+        }
+
+        .vault-level {
+            font-family: monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+            border-radius: var(--border-radius-pill);
+            border: 1px solid var(--border-color-strong);
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .vault-level.principiante {
+            border-color: var(--acid-blue);
+            color: var(--acid-blue);
+        }
+
+        .vault-level.avanzado {
+            background: var(--acid-blue-light);
+            border-color: var(--acid-blue);
+            color: var(--acid-blue);
+        }
+
+        .vault-card h3 {
+            font-size: 1.15rem;
+            margin: 0;
+            word-break: break-word;
+        }
+
+        .vault-card h3 a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .vault-card h3 a:hover {
+            color: var(--acid-blue);
+        }
+
+        .vault-desc {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.65;
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        .vault-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.9rem;
+        }
+
+        .vault-meta .repo-link {
+            margin-left: auto;
+            color: var(--acid-blue);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .vault-meta .repo-link:hover {
+            text-shadow: 0 0 8px var(--acid-blue-glow);
+        }
+
+        .vault-empty {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 4rem 0;
+            display: none;
+        }
+
+        .vault-credit {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin: 4rem auto 0;
+            max-width: 640px;
+        }
+
+        .vault-credit a {
+            color: var(--acid-blue);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .vault-header {
+                padding-top: 8rem;
+            }
+
+            .vault-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        // Inject theme to avoid Flash of Dark Theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="/" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="/">Inicio</a>
+                <a href="/blog">Artículos</a>
+                <a href="/boveda" class="active">Bóveda</a>
+                <a href="/nosotros">Nosotros</a>
+                <a href="/servicios">Servicios</a>
+                <a href="/contacto">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="container vault-header">
+            <span class="vault-label">// LA BÓVEDA — RECURSOS VERIFICADOS</span>
+            <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Poderes que se <span>comparten</span></h1>
+            <p style="color: var(--text-muted); max-width: 640px; margin: 0 auto;">
+                Repos open-source, skills y herramientas de IA — verificados uno a uno, curados por nivel y explicados
+                sin humo. El arsenal para nuestras clases y para cualquiera que quiera aprender construyendo.
+            </p>
+        </div>
+
+        <div class="container vault-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="vault-search-input" placeholder="Busca por nombre, herramienta o tema…"
+                aria-label="Buscar recursos">
+        </div>
+
+        <div class="container vault-filters" id="vault-levels" role="group" aria-label="Filtrar por nivel">
+            <button class="filter-btn active" data-level="todos">Todos los niveles</button>
+            <button class="filter-btn" data-level="principiante">Principiante</button>
+            <button class="filter-btn" data-level="intermedio">Intermedio</button>
+            <button class="filter-btn" data-level="avanzado">Avanzado</button>
+        </div>
+
+        <div class="container vault-filters" id="vault-cats" role="group" aria-label="Filtrar por categoría">
+            <button class="filter-btn active" data-cat="todas">Todas</button>
+            <button class="filter-btn" data-cat="skills">Skills</button>
+            <button class="filter-btn" data-cat="agentes">Agentes</button>
+            <button class="filter-btn" data-cat="mcp">MCP</button>
+            <button class="filter-btn" data-cat="herramientas">Herramientas</button>
+            <button class="filter-btn" data-cat="creatividad">Creatividad</button>
+            <button class="filter-btn" data-cat="aprende">Aprende</button>
+            <button class="filter-btn" data-cat="datos">Datos</button>
+            <button class="filter-btn" data-cat="negocio">Negocio</button>
+        </div>
+
+        <p class="vault-count container" id="vault-count"></p>
+
+        <section class="container" style="margin-bottom: 5rem;">
+            <div class="vault-grid" id="vault-grid"></div>
+            <p class="vault-empty" id="vault-empty">Nada por aquí con esos filtros. Prueba otra combinación.</p>
+
+            <p class="vault-credit">
+                Cada repo enlaza a su fuente original y pertenece a sus autores. Curaduría y descripciones por Kulttia
+                Lab; selección inspirada en la bóveda comunitaria de
+                <a href="https://www.tododeia.com/community" target="_blank" rel="noopener">tododeia</a>.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y
+                la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" data-wpforms-id="2" action="#" method="POST" onsubmit="sendSubscribeForm(event)">
+                <input type="email" name="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="/politica-privacidad">Política de
+                    Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/boveda-data.js?v=1" defer></script>
+    <script src="js/boveda.js?v=1" defer></script>
+    <script src="js/main.js" defer></script>
+
+    <!-- WhatsApp Chat Bubble -->
+    <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
+        <span class="wa-tooltip">💬 ¡Hablemos por WhatsApp!</span>
+        <a href="https://wa.me/573182057306" class="wa-btn" target="_blank" rel="noopener noreferrer"
+            aria-label="Abrir WhatsApp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M20.5 3.5A12 12 0 0 0 3.5 20.5L2 22l1.5-1.5A12 12 0 1 0 20.5 3.5zm-8.5 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm5.2-7.8c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.4-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.6.1-.9.4c-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.2-1.3 0-.2-.2-.3-.5-.4z" />
+            </svg>
+            <span class="wa-online"></span>
+        </a>
+    </div>
+</body>
+
+</html>
