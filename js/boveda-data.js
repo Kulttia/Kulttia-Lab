@@ -21,6 +21,11 @@ const BOVEDA_RESOURCES = [
     "/plugin install superpowers@claude-plugins-official"
    ],
    "uso": "Reinicia Claude Code y pide la tarea en lenguaje natural — la skill se activa sola cuando el contexto la pide. También puedes invocarla directo con /nombre-de-la-skill."
+  },
+  "narr": {
+   "gancho": "Deja de explicarle a Claude cómo trabajar cada vez",
+   "cuerpo": "Cada sesión arrancas de cero: le repites tus mañas, qué revisar antes de dar algo por bueno, cómo te gusta que estructure las cosas. Superpowers agarra todo eso y lo vuelve skills que Claude carga solo, sin que se lo pidas. Deja de ser un asistente que adivina y pasa a trabajar con tu método — el mismo truco que usan los que sacan trabajo real de un agente y no solo demos bonitas para Twitter.",
+   "regla": "Si te descubres repitiéndole lo mismo a Claude, eso es una skill esperando a existir."
   }
  },
  {
@@ -218,6 +223,11 @@ const BOVEDA_RESOURCES = [
     "brew install --cask claude-code"
    ],
    "uso": "Corre el comando de ayuda (--help) para ver qué ofrece, y prueba el caso de uso más simple antes de integrarlo a tu flujo."
+  },
+  "narr": {
+   "gancho": "El agente que no vive en un chat, vive en tu terminal",
+   "cuerpo": "La diferencia entre pedirle código a un chat y trabajar con Claude Code es la misma que entre dictarle a alguien por teléfono y sentarlo frente a tu máquina. Code lee tu proyecto entero, edita archivos, corre comandos y ve los errores para arreglarlos solo. Es la herramienta sobre la que se construye casi todo lo demás de esta bóveda: si vas a instalar una sola cosa, que sea esta.",
+   "regla": "Todo lo demás aquí pega más fuerte con Claude Code debajo."
   }
  },
  {
@@ -348,6 +358,11 @@ const BOVEDA_RESOURCES = [
     "npm install -g ui-ux-pro-max-cli@latest\nuipro uninstall"
    ],
    "uso": "Empieza con un ejemplo pequeño: un prompt, una imagen, un video corto. Itera desde ahí — el gusto se entrena iterando."
+  },
+  "narr": {
+   "gancho": "Para que Claude deje de diseñar como plantilla de 2015",
+   "cuerpo": "El agente escribe código de sobra, pero déjalo diseñar solo y te saca un formulario gris con botón azul que parece de otra década. Esta skill le mete criterio: estilos, paletas, tipografías y layouts que de verdad combinan, para varias plataformas. Le pides una interfaz y en vez de improvisar, elige con gusto. Es la distancia entre «funciona» y «se ve hecho por alguien que sabe».",
+   "regla": "El código lo saca cualquiera; el gusto hay que instalárselo."
   }
  },
  {
@@ -653,6 +668,11 @@ const BOVEDA_RESOURCES = [
     "npx ctx7 setup"
    ],
    "uso": "Verifica la conexión con `claude mcp list` (o en la config de Claude Desktop). Después solo pide la tarea: Claude decide cuándo llamar la herramienta."
+  },
+  "narr": {
+   "gancho": "El fin de las APIs que Claude se inventa",
+   "cuerpo": "Te ha pasado: le pides código con una librería, te lo entrega precioso… y usa una función que no existe o que cambió hace tres versiones. Normal — el modelo aprendió de una foto vieja de internet. Context7 le pasa la documentación real y actualizada de la librería justo cuando la necesita, no la que recuerda de memoria. El resultado es código que compila a la primera, sin que tengas que ir a buscar el doc tú mismo.",
+   "regla": "Si Claude alucina APIs, no le bajes expectativas: dale contexto fresco."
   }
  },
  {
@@ -675,6 +695,11 @@ const BOVEDA_RESOURCES = [
     "uv pip install 'crewai[tools]'"
    ],
    "uso": "Arranca con el ejemplo mínimo del README antes de personalizar. Los frameworks de agentes premian entender el flujo base primero."
+  },
+  "narr": {
+   "gancho": "Un agente solo se atasca; un equipo se reparte el trabajo",
+   "cuerpo": "Cuando la tarea es grande —investigar, escribir, revisar, decidir— pedírsela toda a un solo agente es como pedirle a una persona que sea a la vez quien investiga, quien redacta y quien critica. Se enreda. CrewAI te deja armar varios agentes con roles claros que se pasan el trabajo entre ellos, como un equipo de verdad: tú defines quién hace qué y en qué orden, ellos colaboran. Es de los frameworks más usados para esto, y no por moda.",
+   "regla": "Si tu prompt tiene tres «y luego» adentro, probablemente son tres agentes, no uno."
   }
  },
  {
@@ -1590,6 +1615,11 @@ const BOVEDA_RESOURCES = [
     "git clone --depth 1 https://github.com/AgriciDaniel/claude-seo.git\nbash claude-seo/install.sh"
    ],
    "uso": "Corre la primera auditoría o análisis sobre un proyecto real tuyo. Los resultados genéricos no enseñan nada; los tuyos sí."
+  },
+  "narr": {
+   "gancho": "Una auditoría de SEO sin pagarle a una agencia",
+   "cuerpo": "El SEO técnico se siente como una caja negra: sabes que importa pero no dónde están las fugas. Esta skill le da a Claude 25 sub-skills y 18 sub-agentes que revisan lo que revisaría un consultor —lo técnico, el E-E-A-T, el schema, el GEO para que te citen las IAs— y te devuelve qué arreglar y por qué. Córrela sobre un proyecto tuyo real: los informes genéricos no enseñan nada, el tuyo sí.",
+   "regla": "No adivines por qué no rankeas: audítalo, y arréglalo."
   }
  },
  {

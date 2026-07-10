@@ -53,13 +53,22 @@
                     <i class="fa-regular fa-copy"></i>
                 </button>
             </div>`).join('');
+        const n = r.narr;
+        const narrativa = n ? `
+        <p class="ficha-gancho">${escapeHtml(n.gancho)}</p>
+        <p class="ficha-cuerpo">${escapeHtml(n.cuerpo)}</p>
+        <div class="ficha-regla">
+            <span class="ficha-regla-label">La regla</span>
+            <p>${escapeHtml(n.regla)}</p>
+        </div>` : `
+        <p class="ficha-desc">${escapeHtml(r.desc)}</p>`;
         return `
         <div class="ficha-head">
             <span class="vault-cat">${CAT_LABELS[r.cat] || '// RECURSO'}</span>
             <span class="vault-level ${r.level}">${r.level}</span>
         </div>
         <h2 class="ficha-title">${escapeHtml(r.name)}</h2>
-        <p class="ficha-desc">${escapeHtml(r.desc)}</p>
+        ${narrativa}
         <div class="ficha-stats">
             <span><i class="fa-regular fa-star"></i> ${formatStars(r.stars)} estrellas</span>
             ${r.lang ? `<span><i class="fa-solid fa-code"></i> ${escapeHtml(r.lang)}</span>` : ''}
