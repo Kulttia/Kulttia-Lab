@@ -236,6 +236,174 @@
             text-decoration: none;
         }
 
+        .vault-card {
+            cursor: pointer;
+        }
+
+        /* ---------- Ficha (modal) ---------- */
+        .ficha-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 4rem 1rem 2rem;
+            z-index: 1200;
+            overflow-y: auto;
+        }
+
+        .ficha-overlay.open {
+            display: flex;
+        }
+
+        .ficha-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color-strong);
+            border-radius: var(--border-radius);
+            max-width: 640px;
+            width: 100%;
+            padding: 2.2rem;
+            position: relative;
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+            box-shadow: 0 0 40px rgba(9, 101, 225, 0.15);
+        }
+
+        .ficha-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: var(--bg-element);
+            border: 1px solid var(--border-color-strong);
+            color: var(--text-muted);
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 2;
+        }
+
+        .ficha-close:hover {
+            color: var(--acid-blue);
+            border-color: var(--acid-blue);
+        }
+
+        .ficha-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-right: 3rem;
+        }
+
+        .ficha-title {
+            font-size: 1.8rem;
+            margin: 0 0 0.8rem;
+            word-break: break-word;
+        }
+
+        .ficha-desc {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin: 0 0 1.2rem;
+        }
+
+        .ficha-stats {
+            display: flex;
+            gap: 1.4rem;
+            flex-wrap: wrap;
+            font-family: monospace;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.9rem 0;
+            margin-bottom: 1.6rem;
+        }
+
+        .ficha-step {
+            font-family: monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin: 1.6rem 0 0.7rem;
+        }
+
+        .ficha-step span {
+            color: var(--acid-blue);
+            margin-right: 0.5rem;
+        }
+
+        .ficha-reqs {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+
+        .ficha-cmd {
+            position: relative;
+            margin-bottom: 0.8rem;
+        }
+
+        .ficha-cmd pre {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.9rem 3rem 0.9rem 1rem;
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        .ficha-cmd code {
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: var(--text-main);
+            white-space: pre;
+        }
+
+        .ficha-copy {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.6rem;
+            background: var(--bg-element);
+            border: 1px solid var(--border-color-strong);
+            color: var(--text-muted);
+            border-radius: 6px;
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+        }
+
+        .ficha-copy:hover {
+            color: var(--acid-blue);
+            border-color: var(--acid-blue);
+        }
+
+        .ficha-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 0.2rem 0 0;
+        }
+
+        .ficha-uso {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .ficha-repo-btn {
+            display: inline-block;
+            margin-top: 1.8rem;
+        }
+
         @media (max-width: 600px) {
             .vault-header {
                 padding-top: 8rem;
@@ -243,6 +411,15 @@
 
             .vault-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .ficha-overlay {
+                padding: 1rem 0.5rem;
+            }
+
+            .ficha-content {
+                padding: 1.4rem;
+                max-height: calc(100vh - 2rem);
             }
         }
     </style>
@@ -353,6 +530,14 @@
         </div>
     </footer>
 
+    <!-- Ficha Modal -->
+    <div id="ficha-modal" class="ficha-overlay" role="dialog" aria-modal="true" aria-label="Ficha del recurso">
+        <div class="ficha-content">
+            <button class="ficha-close" aria-label="Cerrar ficha"><i class="fa-solid fa-xmark"></i></button>
+            <div id="ficha-body"></div>
+        </div>
+    </div>
+
     <!-- Subscribe Modal -->
     <div id="subscribe-modal" class="modal-overlay">
         <div class="modal-content">
@@ -371,8 +556,8 @@
         </div>
     </div>
 
-    <script src="js/boveda-data.js?v=1" defer></script>
-    <script src="js/boveda.js?v=1" defer></script>
+    <script src="js/boveda-data.js?v=2" defer></script>
+    <script src="js/boveda.js?v=2" defer></script>
     <script src="js/main.js" defer></script>
 
     <!-- WhatsApp Chat Bubble -->
