@@ -1,0 +1,481 @@
+/* =============================================
+   KULTTIA LAB — CAPA DE ANIMACIÓN
+   Solo movimiento. No define colores nuevos ni
+   tipografías: reutiliza las variables de marca
+   (--acid-blue, --acid-blue-glow, --font-primary).
+   ============================================= */
+
+/* ---------------------------------------------
+   1. CUBO DEL LOGO (header, todas las páginas)
+   Sustituye el punto del logotipo por un cubo 3D
+   que rota y se desplaza al pasar el cursor.
+   --------------------------------------------- */
+.logo,
+.footer-logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+}
+
+/* --- Logo colapsado: solo el cubo; el nombre se despliega al clic --- */
+.logo.is-collapsible {
+    gap: 0;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    /* zona de hover cómoda sin alterar el layout del header */
+    padding: 0.5rem 0.7rem;
+    margin: -0.5rem -0.7rem;
+}
+
+.logo.is-collapsible .logo-cube {
+    --lc: 0.75em;
+    /* holgura para la diagonal del cubo al rotar (hasta √2 · lado) */
+    margin: 0 calc(var(--lc) * 0.35);
+}
+
+.logo .logo-name {
+    display: inline-block;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    padding-left: 0;
+    transform: translateX(-10px);
+    transition:
+        max-width 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.4s ease,
+        padding-left 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.logo.is-collapsible:hover .logo-name,
+.logo.is-collapsible:focus-visible .logo-name,
+.logo.is-open .logo-name {
+    max-width: 14ch;
+    opacity: 1;
+    padding-left: 0.5rem;
+    transform: translateX(0);
+}
+
+.logo.is-collapsible:hover .logo-cube {
+    scale: 1.12;
+}
+
+.logo.is-collapsible .logo-cube {
+    transition: scale 0.3s ease;
+}
+
+.logo-cube {
+    --lc: 0.52em;
+    position: relative;
+    display: inline-block;
+    width: var(--lc);
+    height: var(--lc);
+    transform-style: preserve-3d;
+    animation: logoCubeSpin 9s linear infinite, logoCubeDrift 6s ease-in-out infinite;
+    will-change: transform;
+}
+
+.logo-cube i {
+    position: absolute;
+    inset: 0;
+    background: var(--acid-blue);
+    border: 1px solid var(--acid-blue);
+    opacity: 0.9;
+    box-shadow: 0 0 10px var(--acid-blue-glow);
+}
+
+.logo-cube i:nth-child(1) { transform: translateZ(calc(var(--lc) / 2)); }
+.logo-cube i:nth-child(2) { transform: rotateY(180deg) translateZ(calc(var(--lc) / 2)); }
+.logo-cube i:nth-child(3) { transform: rotateY(90deg)  translateZ(calc(var(--lc) / 2)); opacity: 0.75; }
+.logo-cube i:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--lc) / 2)); opacity: 0.75; }
+.logo-cube i:nth-child(5) { transform: rotateX(90deg)  translateZ(calc(var(--lc) / 2)); opacity: 0.6; }
+.logo-cube i:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--lc) / 2)); opacity: 0.6; }
+
+@keyframes logoCubeSpin {
+    from { transform: rotateX(-20deg) rotateY(0deg); }
+    to   { transform: rotateX(-20deg) rotateY(360deg); }
+}
+
+/* El "desplazamiento": flota en vertical para no invadir el nombre */
+@keyframes logoCubeDrift {
+    0%, 100% { translate: 0 2px; }
+    50%      { translate: 0 -3px; }
+}
+
+.logo:hover .logo-cube {
+    animation: logoCubeSpin 1.6s linear infinite, logoCubeDrift 2.4s ease-in-out infinite;
+}
+
+/* ---------------------------------------------
+   2. ESCENA DE CUBOS DEL HERO
+   Cubo grande en wireframe + cubos satélite.
+   --------------------------------------------- */
+.hero {
+    isolation: isolate;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+.cube-scene {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    z-index: 0;
+    perspective: 1200px;
+    pointer-events: none;
+    transform: translate(-50%, -50%)
+               rotateX(var(--tilt-x, 0deg))
+               rotateY(var(--tilt-y, 0deg));
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity: 0;
+    animation: sceneIn 1.4s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes sceneIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.cube-stage {
+    --s: clamp(150px, 22vw, 280px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--s);
+    height: var(--s);
+    margin: calc(var(--s) / -2);
+    transform-style: preserve-3d;
+    animation: stageFloat 7s ease-in-out infinite;
+}
+
+@keyframes stageFloat {
+    0%, 100% { translate: 0 -10px; }
+    50%      { translate: 0 10px; }
+}
+
+/* --- Cubo principal (wireframe) --- */
+.cube {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: cubeSpin 26s linear infinite;
+    will-change: transform;
+}
+
+.cube-face {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--acid-blue);
+    background: var(--acid-blue-light);
+    box-shadow: inset 0 0 40px var(--acid-blue-glow);
+    opacity: 0.55;
+}
+
+.cube-face::after {
+    /* retícula tecnológica sobre cada cara */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, var(--border-blue-subtle) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-blue-subtle) 1px, transparent 1px);
+    background-size: 25% 25%;
+    opacity: 0.8;
+}
+
+.cube-face.front  { transform: translateZ(calc(var(--s) / 2)); }
+.cube-face.back   { transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
+.cube-face.right  { transform: rotateY(90deg)  translateZ(calc(var(--s) / 2)); }
+.cube-face.left   { transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); }
+.cube-face.top    { transform: rotateX(90deg)  translateZ(calc(var(--s) / 2)); }
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); }
+
+@keyframes cubeSpin {
+    from { transform: rotateX(-24deg) rotateY(0deg)   rotateZ(0deg); }
+    to   { transform: rotateX(-24deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+/* --- Núcleo luminoso --- */
+.cube-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--s) / 4);
+    height: calc(var(--s) / 4);
+    margin: calc(var(--s) / -8);
+    background: var(--acid-blue);
+    filter: blur(18px);
+    opacity: 0.5;
+    animation: corePulse 3.4s ease-in-out infinite;
+}
+
+@keyframes corePulse {
+    0%, 100% { opacity: 0.35; scale: 0.9; }
+    50%      { opacity: 0.7;  scale: 1.15; }
+}
+
+/* --- Órbitas con cubos pequeños --- */
+.orbit-tilt {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+}
+
+.orbit-tilt.a { transform: rotateX(72deg) rotateZ(8deg); }
+.orbit-tilt.b { transform: rotateX(64deg) rotateY(52deg); }
+.orbit-tilt.c { transform: rotateY(74deg) rotateZ(20deg); }
+
+.orbit {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: orbitSpin linear infinite;
+    will-change: transform;
+}
+
+.orbit-tilt.a .orbit { animation-duration: 14s; }
+.orbit-tilt.b .orbit { animation-duration: 20s; animation-direction: reverse; }
+.orbit-tilt.c .orbit { animation-duration: 27s; }
+
+@keyframes orbitSpin {
+    from { transform: rotateZ(0deg); }
+    to   { transform: rotateZ(360deg); }
+}
+
+.sat {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+}
+
+.orbit-tilt.a .sat { transform: translateX(calc(var(--s) * 0.85)); }
+.orbit-tilt.b .sat { transform: translateX(calc(var(--s) * -1.05)); }
+.orbit-tilt.c .sat { transform: translateX(calc(var(--s) * 0.72)); }
+
+.mini-cube {
+    --m: calc(var(--s) / 7);
+    position: absolute;
+    width: var(--m);
+    height: var(--m);
+    margin: calc(var(--m) / -2);
+    transform-style: preserve-3d;
+    animation: miniSpin 6s linear infinite;
+}
+
+.orbit-tilt.b .mini-cube { --m: calc(var(--s) / 9);  animation-duration: 4.5s; }
+.orbit-tilt.c .mini-cube { --m: calc(var(--s) / 11); animation-duration: 8s; }
+
+.mini-cube i {
+    position: absolute;
+    inset: 0;
+    background: var(--acid-blue);
+    border: 1px solid var(--acid-blue);
+    opacity: 0.75;
+    box-shadow: 0 0 14px var(--acid-blue-glow);
+}
+
+.mini-cube i:nth-child(1) { transform: translateZ(calc(var(--m) / 2)); }
+.mini-cube i:nth-child(2) { transform: rotateY(180deg) translateZ(calc(var(--m) / 2)); }
+.mini-cube i:nth-child(3) { transform: rotateY(90deg)  translateZ(calc(var(--m) / 2)); opacity: 0.55; }
+.mini-cube i:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--m) / 2)); opacity: 0.55; }
+.mini-cube i:nth-child(5) { transform: rotateX(90deg)  translateZ(calc(var(--m) / 2)); opacity: 0.4; }
+.mini-cube i:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--m) / 2)); opacity: 0.4; }
+
+@keyframes miniSpin {
+    from { transform: rotateX(0deg)   rotateY(0deg); }
+    to   { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* ---------------------------------------------
+   3. ENTRADA ESCALONADA DEL HERO
+   --------------------------------------------- */
+.anim-in .hero .tag-pill,
+.anim-in .hero h1,
+.anim-in .hero p,
+.anim-in .hero-actions {
+    opacity: 0;
+    animation: heroRise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.anim-in .hero .tag-pill  { animation-delay: 0.05s; }
+.anim-in .hero h1         { animation-delay: 0.18s; }
+.anim-in .hero p          { animation-delay: 0.31s; }
+.anim-in .hero-actions    { animation-delay: 0.44s; }
+
+@keyframes heroRise {
+    from { opacity: 0; transform: translateY(26px); filter: blur(6px); }
+    to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* La palabra "tech" respira con el mismo azul de marca */
+.hero h1 span {
+    animation: techGlow 4.5s ease-in-out infinite;
+}
+
+@keyframes techGlow {
+    0%, 100% { text-shadow: 0 0 20px var(--acid-blue-glow); }
+    50%      { text-shadow: 0 0 34px var(--acid-blue-glow), 0 0 6px var(--acid-blue-glow); }
+}
+
+/* ---------------------------------------------
+   4. REVELADO AL HACER SCROLL
+   --------------------------------------------- */
+.anim-in [data-reveal] {
+    opacity: 0;
+    transform: translateY(34px);
+    transition:
+        opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0s);
+}
+
+.anim-in [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* La línea del título de sección se dibuja al entrar */
+.anim-in .section-title[data-reveal]::before {
+    width: 0;
+    transition: width 0.7s 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.anim-in .section-title[data-reveal].is-visible::before {
+    width: 40px;
+}
+
+/* ---------------------------------------------
+   5. MICRO-INTERACCIONES
+   --------------------------------------------- */
+.btn-primary,
+.btn-outline {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barrido de luz al pasar el cursor */
+.btn-primary::after,
+.btn-outline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.6s ease;
+}
+
+.btn-outline::after {
+    background: linear-gradient(100deg, transparent, var(--acid-blue-light), transparent);
+}
+
+.btn-primary:hover::after,
+.btn-outline:hover::after {
+    left: 130%;
+}
+
+/* Tarjetas: elevación 3D suave */
+.article-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.article-card:hover {
+    transform: translateY(-6px) scale(1.01);
+}
+
+/* Enlaces de nav: el subrayado ya existe; añadimos rebote sutil */
+.nav-links a {
+    display: inline-block;
+}
+
+.nav-links a:hover {
+    transform: translateY(-1px);
+}
+
+/* Newsletter: borde vivo */
+.newsletter {
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 45%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, var(--acid-blue-glow) 0%, transparent 65%);
+    filter: blur(30px);
+    opacity: 0.5;
+    pointer-events: none;
+    animation: newsletterSweep 12s ease-in-out infinite alternate;
+}
+
+@keyframes newsletterSweep {
+    from { transform: translateX(0); }
+    to   { transform: translateX(220%); }
+}
+
+/* ---------------------------------------------
+   6. RESPONSIVE
+   --------------------------------------------- */
+@media (max-width: 768px) {
+    .cube-stage {
+        --s: clamp(120px, 34vw, 190px);
+        opacity: 0.75;
+    }
+
+    .orbit-tilt.c {
+        display: none;
+    }
+}
+
+/* ---------------------------------------------
+   7. ACCESIBILIDAD — movimiento reducido
+   --------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .logo-cube,
+    .cube,
+    .cube-core,
+    .orbit,
+    .mini-cube,
+    .cube-stage,
+    .cube-scene,
+    .hero h1 span,
+    .newsletter::after,
+    .anim-in .hero .tag-pill,
+    .anim-in .hero h1,
+    .anim-in .hero p,
+    .anim-in .hero-actions {
+        animation: none !important;
+        opacity: 1;
+    }
+
+    .cube-scene { opacity: 1; }
+
+    .anim-in [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .anim-in .section-title[data-reveal]::before {
+        width: 40px;
+        transition: none;
+    }
+}

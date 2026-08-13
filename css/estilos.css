@@ -265,7 +265,7 @@ ul {
     border-radius: var(--border-radius-pill);
     background: var(--acid-blue-light);
     border: 1px solid rgba(35, 61, 255, 0.4);
-    color: var(--acid-blue);
+    color: var(--text-main);
     font-size: 0.85rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
