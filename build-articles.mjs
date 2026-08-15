@@ -31,6 +31,16 @@ function formatDate(dateStr) {
   });
 }
 
+// El CMS todavía tiene categorías con nombre en inglés; se muestran en español.
+const CATEGORY_LABELS = {
+  'ia y machine learning': 'IA y aprendizaje automático'
+};
+
+function localizeCategory(name) {
+  if (!name) return name;
+  return CATEGORY_LABELS[name.trim().toLowerCase()] || name;
+}
+
 function readTime(html = '') {
   return Math.max(1, Math.round(stripHTML(html).split(/\s+/).length / 200));
 }
@@ -74,7 +84,7 @@ function generateHTML(post) {
   const ogImage         = heroImg || `${SITE_URL}/og-default.png`;
 
   const categories      = embedded['wp:term']?.[0] || [];
-  const categoryName    = categories[0]?.name || 'Artículo';
+  const categoryName    = localizeCategory(categories[0]?.name) || 'Artículo';
 
   const author          = embedded['author']?.[0];
   const authorName      = author?.name || 'Kulttia Lab';
@@ -192,7 +202,7 @@ function generateHTML(post) {
         <a href="/servicios">Servicios</a>
         <a href="/contacto">Contacto</a>
         <button class="btn btn-primary btn-subscribe" style="padding:.5rem 1.2rem;font-size:.85rem;margin-left:1rem;">Suscribirse</button>
-        <button id="theme-toggle" class="btn" style="padding:.5rem;background:transparent;color:var(--text-main);font-size:1.2rem;margin-left:.5rem;" aria-label="Toggle Dark/Light Mode">
+        <button id="theme-toggle" class="btn" style="padding:.5rem;background:transparent;color:var(--text-main);font-size:1.2rem;margin-left:.5rem;" aria-label="Alternar modo claro y oscuro">
           <i class="fa-solid fa-moon"></i>
         </button>
       </nav>
@@ -258,7 +268,7 @@ function generateHTML(post) {
     </div>
   </div>
 
-  <script src="/js/wordpress-api.js?v=3"></script>
+  <script src="/js/wordpress-api.js?v=4"></script>
   <script src="/js/main.js"></script>
   <script src="/js/animaciones.js?v=1" defer></script>
   <script src="/js/search.js"></script>

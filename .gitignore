@@ -17,3 +17,7 @@ fix-hrefs.ps1
 *.log
 *.tmp
 test.json
+
+# Herramientas locales
+.claude/
+graphify-out/

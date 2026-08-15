@@ -12,7 +12,7 @@
     };
 
     const CAT_NAMES = {
-        skills: 'Skills',
+        skills: 'Habilidades',
         agentes: 'Agentes',
         mcp: 'MCP',
         herramientas: 'Herramientas',

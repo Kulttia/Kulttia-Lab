@@ -1,5 +1,5 @@
 // Bóveda Kulttia — dataset curado y verificado (2026-07-10)
-// 116 repos open-source verificados vivos vía GitHub API. Comandos de instalación extraídos de cada README.
+// 116 repos de código abierto verificados vivos vía GitHub API. Comandos de instalación extraídos de cada README.
 // Curaduría y descripciones: Kulttia Lab. Inspirado en la bóveda comunitaria de tododeia.com.
 const BOVEDA_RESOURCES = [
  {
@@ -61,7 +61,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/NousResearch/hermes-agent",
   "level": "intermedio",
   "cat": "agentes",
-  "desc": "Agente open-source que crece contigo: aprende de tus sesiones y se adapta a tu forma de trabajar.",
+  "desc": "Agente de código abierto que crece contigo: aprende de tus sesiones y se adapta a tu forma de trabajar.",
   "stars": 212238,
   "lang": null,
   "license": "MIT",
@@ -115,7 +115,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/ollama/ollama",
   "level": "avanzado",
   "cat": "herramientas",
-  "desc": "Corre modelos open-source (DeepSeek, Qwen, Gemma y más) en tu propia máquina. La puerta de entrada a la IA local.",
+  "desc": "Corre modelos de código abierto (DeepSeek, Qwen, Gemma y más) en tu propia máquina. La puerta de entrada a la IA local.",
   "stars": 175836,
   "lang": null,
   "license": "MIT",
@@ -131,7 +131,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "IA en tu máquina, sin pedirle permiso a nadie",
-   "cuerpo": "Todo lo que le escribes a una IA en la nube pasa por un servidor ajeno. Ollama le da la vuelta: corre modelos open-source como DeepSeek, Qwen o Gemma directo en tu computadora, sin internet y sin que tus datos salgan de ahí. Ideal para privacidad, para experimentar sin gastar en API, o para entender qué es realmente un modelo cuando lo tienes enfrente. Es la puerta de entrada a la IA local.",
+   "cuerpo": "Todo lo que le escribes a una IA en la nube pasa por un servidor ajeno. Ollama le da la vuelta: corre modelos de código abierto como DeepSeek, Qwen o Gemma directo en tu computadora, sin internet y sin que tus datos salgan de ahí. Ideal para privacidad, para experimentar sin gastar en API, o para entender qué es realmente un modelo cuando lo tienes enfrente. Es la puerta de entrada a la IA local.",
    "regla": "Si tus datos son sensibles, el mejor servidor es el que tienes debajo del escritorio."
   }
  },
@@ -600,7 +600,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/nexu-io/open-design",
   "level": "intermedio",
   "cat": "creatividad",
-  "desc": "App de escritorio local-first y open-source para que tu agente de código sea también tu diseñador.",
+  "desc": "App de escritorio local primero y de código abierto para que tu agente de código sea también tu diseñador.",
   "stars": 76832,
   "lang": null,
   "license": "Apache-2.0",
@@ -615,7 +615,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Tu agente de código, ahora también diseñando",
-   "cuerpo": "Programar y diseñar suelen ser dos mundos y dos herramientas. Open-design los junta: una app de escritorio open-source y local-first donde tu agente de código también hace el diseño. Todo en tu máquina, sin subir nada a la nube. Es la alternativa abierta a las herramientas de diseño con IA que cobran suscripción.",
+   "cuerpo": "Programar y diseñar suelen ser dos mundos y dos herramientas. Open-design los junta: una app de escritorio de código abierto y local primero donde tu agente de código también hace el diseño. Todo en tu máquina, sin subir nada a la nube. Es la alternativa abierta a las herramientas de diseño con IA que cobran suscripción.",
    "regla": "Local-first no es nostalgia: es que tu trabajo no depende del servidor de otro."
   }
  },
@@ -919,7 +919,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/microsoft/VibeVoice",
   "level": "principiante",
   "cat": "creatividad",
-  "desc": "IA de voz open-source de frontera, desarrollada por Microsoft.",
+  "desc": "IA de voz de código abierto de frontera, desarrollada por Microsoft.",
   "stars": 50009,
   "lang": null,
   "license": "MIT",
@@ -934,8 +934,8 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Voz IA de frontera, gratis y de Microsoft",
-   "cuerpo": "La voz sintética buena solía ser cara y cerrada. VibeVoice es open-source, de Microsoft, y está en la frontera de lo que se puede hacer hoy. Buen punto de partida si quieres experimentar con narración, doblaje o voces para tus proyectos sin abrir la cartera. Descárgalo y juega antes de pagar por alternativas.",
-   "regla": "Antes de pagar por voz IA, prueba la que un gigante regaló open-source."
+   "cuerpo": "La voz sintética buena solía ser cara y cerrada. VibeVoice es de código abierto, de Microsoft, y está en la frontera de lo que se puede hacer hoy. Buen punto de partida si quieres experimentar con narración, doblaje o voces para tus proyectos sin abrir la cartera. Descárgalo y juega antes de pagar por alternativas.",
+   "regla": "Antes de pagar por voz IA, prueba la que un gigante regaló de código abierto."
   }
  },
  {
@@ -1025,7 +1025,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/jamiepine/voicebox",
   "level": "intermedio",
   "cat": "creatividad",
-  "desc": "El estudio de voz IA open-source: clona, dicta, crea.",
+  "desc": "El estudio de voz IA de código abierto: clona, dicta, crea.",
   "stars": 40043,
   "lang": null,
   "license": "MIT",
@@ -1040,8 +1040,8 @@ const BOVEDA_RESOURCES = [
    "uso": "Empieza con un ejemplo pequeño: un prompt, una imagen, un video corto. Itera desde ahí — el gusto se entrena iterando."
   },
   "narr": {
-   "gancho": "Un estudio de voz IA entero, open-source",
-   "cuerpo": "Clonar tu voz, dictar, crear audio: antes eran tres servicios distintos con suscripción. Voicebox los junta en un estudio de voz IA open-source y gratis. Ideal para narrar contenido, prototipar o simplemente entender qué se puede hacer hoy con la voz. Todo en un solo lugar, sin cuota mensual.",
+   "gancho": "Un estudio de voz IA entero, de código abierto",
+   "cuerpo": "Clonar tu voz, dictar, crear audio: antes eran tres servicios distintos con suscripción. Voicebox los junta en un estudio de voz IA de código abierto y gratis. Ideal para narrar contenido, prototipar o simplemente entender qué se puede hacer hoy con la voz. Todo en un solo lugar, sin cuota mensual.",
    "regla": "Antes de suscribirte a tres apps de voz, prueba la que las junta gratis."
   }
  },
@@ -1052,7 +1052,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/multica-ai/multica",
   "level": "intermedio",
   "cat": "agentes",
-  "desc": "Plataforma open-source de agentes gestionados: asigna tareas y da seguimiento como si fueran compañeros de equipo.",
+  "desc": "Plataforma de código abierto de agentes gestionados: asigna tareas y da seguimiento como si fueran compañeros de equipo.",
   "stars": 39661,
   "lang": null,
   "license": null,
@@ -1067,7 +1067,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Trata a tus agentes como compañeros, no como comandos",
-   "cuerpo": "Lanzar un agente y perderle la pista no escala. Multica es una plataforma open-source de agentes gestionados: les asignas tareas, sigues su avance y los coordinas como si fueran gente de tu equipo. En vez de una orden suelta, tienes un tablero de trabajo. El salto de \"usar un agente\" a \"manejar varios sin volverte loco\".",
+   "cuerpo": "Lanzar un agente y perderle la pista no escala. Multica es una plataforma de código abierto de agentes gestionados: les asignas tareas, sigues su avance y los coordinas como si fueran gente de tu equipo. En vez de una orden suelta, tienes un tablero de trabajo. El salto de \"usar un agente\" a \"manejar varios sin volverte loco\".",
    "regla": "Un agente es una herramienta; varios sin gestión son un caos."
   }
  },
@@ -1212,7 +1212,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/OpenBMB/VoxCPM",
   "level": "intermedio",
   "cat": "creatividad",
-  "desc": "Texto a voz multilingüe sin tokenizer: clonación de voz realista y open-source.",
+  "desc": "Texto a voz multilingüe sin tokenizer: clonación de voz realista y de código abierto.",
   "stars": 32937,
   "lang": null,
   "license": "Apache-2.0",
@@ -1229,8 +1229,8 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Voz multilingüe realista, sin cadenas",
-   "cuerpo": "La clonación de voz buena suele venir amarrada a un servicio de pago. VoxCPM es texto-a-voz multilingüe, sin tokenizer, con clonación realista y open-source. Lo tienes tú, en tu máquina, para experimentar con voces en varios idiomas sin cuota. Buena base para proyectos de audio donde la privacidad y el control importan.",
-   "regla": "Voz realista y open-source: ya no tienes que elegir entre calidad y control."
+   "cuerpo": "La clonación de voz buena suele venir amarrada a un servicio de pago. VoxCPM es texto-a-voz multilingüe, sin tokenizer, con clonación realista y de código abierto. Lo tienes tú, en tu máquina, para experimentar con voces en varios idiomas sin cuota. Buena base para proyectos de audio donde la privacidad y el control importan.",
+   "regla": "Voz realista y de código abierto: ya no tienes que elegir entre calidad y control."
   }
  },
  {
@@ -1552,7 +1552,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Imagen y video con 200+ modelos, sin pagar",
-   "cuerpo": "Las plataformas de generación de imagen y video cobran, y limitan. Este estudio open-source junta más de 200 modelos, gratis, en un solo lugar. Puedes experimentar sin gastar y comparar modelos que normalmente están detrás de suscripciones distintas. La alternativa abierta para crear sin que la factura decida por ti.",
+   "cuerpo": "Las plataformas de generación de imagen y video cobran, y limitan. Este estudio de código abierto junta más de 200 modelos, gratis, en un solo lugar. Puedes experimentar sin gastar y comparar modelos que normalmente están detrás de suscripciones distintas. La alternativa abierta para crear sin que la factura decida por ti.",
    "regla": "Antes de pagar por generar, prueba los 200 modelos que alguien juntó gratis."
   }
  },
@@ -1563,7 +1563,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/coleam00/Archon",
   "level": "intermedio",
   "cat": "agentes",
-  "desc": "Constructor de harness open-source: vuelve el desarrollo con IA determinista y repetible.",
+  "desc": "Constructor de harness de código abierto: vuelve el desarrollo con IA determinista y repetible.",
   "stars": 22819,
   "lang": null,
   "license": "MIT",
@@ -1579,7 +1579,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Programar con IA sin que sea una lotería",
-   "cuerpo": "El problema del código con IA es que a veces sale y a veces no, sin saber por qué. Archon es un constructor de harness open-source que busca justo eso: hacerlo determinista y repetible. Menos \"salió de milagro\", más proceso que puedes confiar y volver a correr. Para cuando quieres resultados consistentes, no suerte.",
+   "cuerpo": "El problema del código con IA es que a veces sale y a veces no, sin saber por qué. Archon es un constructor de harness de código abierto que busca justo eso: hacerlo determinista y repetible. Menos \"salió de milagro\", más proceso que puedes confiar y volver a correr. Para cuando quieres resultados consistentes, no suerte.",
    "regla": "Si tu código con IA depende de la suerte, te falta proceso, no talento."
   }
  },
@@ -1910,7 +1910,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/rmyndharis/OpenWA",
   "level": "avanzado",
   "cat": "herramientas",
-  "desc": "Gateway de WhatsApp API gratuito, open-source y self-hosted.",
+  "desc": "Gateway de WhatsApp API gratuito, de código abierto y autoalojado.",
   "stars": 10958,
   "lang": null,
   "license": "MIT",
@@ -1925,7 +1925,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Tu propio gateway de WhatsApp, sin pagar API",
-   "cuerpo": "Conectar apps a WhatsApp por la vía oficial cuesta y tiene trabas. OpenWA es un gateway gratuito, open-source y self-hosted: lo montas tú y controlas todo. Ideal para automatizar mensajes, notificaciones o bots sin depender de un proveedor caro. Es avanzado de montar, pero te da autonomía total sobre el canal donde de verdad está tu gente.",
+   "cuerpo": "Conectar apps a WhatsApp por la vía oficial cuesta y tiene trabas. OpenWA es un gateway gratuito, de código abierto y autoalojado: lo montas tú y controlas todo. Ideal para automatizar mensajes, notificaciones o bots sin depender de un proveedor caro. Es avanzado de montar, pero te da autonomía total sobre el canal donde de verdad está tu gente.",
    "regla": "El canal donde vive tu gente no debería depender de la factura de un tercero."
   }
  },
@@ -2121,7 +2121,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/dlt-hub/dlt",
   "level": "avanzado",
   "cat": "datos",
-  "desc": "Librería Python open-source que vuelve trivial cargar datos desde cualquier fuente hacia cualquier destino.",
+  "desc": "Librería Python de código abierto que vuelve trivial cargar datos desde cualquier fuente hacia cualquier destino.",
   "stars": 5584,
   "lang": null,
   "license": "Apache-2.0",
@@ -2136,7 +2136,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Mueve datos de A a B sin escribir el pegamento",
-   "cuerpo": "Cargar datos de una API o base a tu almacén suele ser código-pegamento frágil que se rompe solo. dlt es una librería Python open-source que vuelve trivial ese movimiento, de casi cualquier fuente a casi cualquier destino. Menos scripts que reparar, más datos donde los necesitas. La plomería aburrida pero crítica, resuelta.",
+   "cuerpo": "Cargar datos de una API o base a tu almacén suele ser código-pegamento frágil que se rompe solo. dlt es una librería Python de código abierto que vuelve trivial ese movimiento, de casi cualquier fuente a casi cualquier destino. Menos scripts que reparar, más datos donde los necesitas. La plomería aburrida pero crítica, resuelta.",
    "regla": "El pegamento de datos que escribes a mano es justo lo que se rompe a las 3am."
   }
  },
@@ -2682,7 +2682,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/Hainrixz/cyber-neo",
   "level": "intermedio",
   "cat": "herramientas",
-  "desc": "Agente de ciberseguridad open-source: escanea tu proyecto contra el OWASP Top 10.",
+  "desc": "Agente de ciberseguridad de código abierto: escanea tu proyecto contra el OWASP Top 10.",
   "stars": 167,
   "lang": null,
   "license": "MIT",
@@ -2697,7 +2697,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Escanea tu proyecto contra los fallos que todos cometen",
-   "cuerpo": "Los mismos huecos de seguridad —el OWASP Top 10— hunden proyecto tras proyecto porque nadie los revisa a tiempo. Cyber-neo es un agente de ciberseguridad open-source que escanea el tuyo justo contra esos. Te dice qué está mal antes de que sea un incidente. Higiene de seguridad accesible, sin contratar a un pentester para lo básico.",
+   "cuerpo": "Los mismos huecos de seguridad —el OWASP Top 10— hunden proyecto tras proyecto porque nadie los revisa a tiempo. Cyber-neo es un agente de ciberseguridad de código abierto que escanea el tuyo justo contra esos. Te dice qué está mal antes de que sea un incidente. Higiene de seguridad accesible, sin contratar a un pentester para lo básico.",
    "regla": "Los mismos diez fallos hunden mil proyectos; revisa que no sean el tuyo."
   }
  },
@@ -2791,7 +2791,7 @@ const BOVEDA_RESOURCES = [
   "url": "https://github.com/Hainrixz/auto-crm",
   "level": "intermedio",
   "cat": "negocio",
-  "desc": "CRM local con IA que se personaliza a tu negocio. 100% local, open-source.",
+  "desc": "CRM local con IA que se personaliza a tu negocio. 100% local, de código abierto.",
   "stars": 58,
   "lang": null,
   "license": "MIT",
@@ -2809,7 +2809,7 @@ const BOVEDA_RESOURCES = [
   },
   "narr": {
    "gancho": "Un CRM que se amolda a tu negocio, en tu máquina",
-   "cuerpo": "Los CRM grandes te obligan a trabajar a su manera y a subir tus datos a su nube. Auto-crm es un CRM local con IA que se personaliza a tu negocio: 100% en tu máquina, open-source. Tus clientes y tu información no salen de ahí. Para quien quiere organizar sus relaciones sin pagar suscripción ni ceder el control de sus datos.",
+   "cuerpo": "Los CRM grandes te obligan a trabajar a su manera y a subir tus datos a su nube. Auto-crm es un CRM local con IA que se personaliza a tu negocio: 100% en tu máquina, de código abierto. Tus clientes y tu información no salen de ahí. Para quien quiere organizar sus relaciones sin pagar suscripción ni ceder el control de sus datos.",
    "regla": "Tus clientes son tu activo; no los guardes en el servidor de otro."
   }
  },

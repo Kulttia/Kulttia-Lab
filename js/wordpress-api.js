@@ -99,6 +99,17 @@ async function cachedFetch(url) {
 let currentPage = 1;
 let currentCategory = null;
 
+// Nombres de categoría de WordPress traducidos para mostrar en la web.
+// Mientras el CMS conserve nombres en inglés, aquí se muestran en español.
+const CATEGORY_LABELS = {
+    'ia y machine learning': 'IA y aprendizaje automático'
+};
+
+function localizeCategory(name) {
+    if (!name) return name;
+    return CATEGORY_LABELS[name.trim().toLowerCase()] || name;
+}
+
 // =============================================
 // MÓDULO: CARGAR ARTÍCULOS DEL BLOG
 // =============================================
@@ -180,7 +191,7 @@ function renderPostCard(post) {
 
     // Categoría
     const categories = post._embedded?.['wp:term']?.[0];
-    const category = categories?.[0]?.name || 'Artículo';
+    const category = localizeCategory(categories?.[0]?.name) || 'Artículo';
 
     // Tiempo de lectura estimado
     const wordCount = stripHTML(post.content?.rendered || '').split(/\s+/).length;
@@ -328,7 +339,7 @@ function _renderSinglePost(post) {
     // Categoría
     const catEl = document.getElementById('article-category');
     const categories = post._embedded?.['wp:term']?.[0];
-    const categoryName = categories?.[0]?.name || 'Artículo';
+    const categoryName = localizeCategory(categories?.[0]?.name) || 'Artículo';
     if (catEl) catEl.textContent = categoryName;
 
     // Tiempo de lectura
@@ -616,7 +627,7 @@ function setupCategoryFilters() {
     const categoryMap = {
         'todos': null,
         'arte': 1,
-        'ia y machine learning': 2,
+        'ia y aprendizaje automático': 2,
         'cybercultura': 4,
         'web': 5
     };
