@@ -479,7 +479,15 @@ async function sendContactForm(event) {
         mensaje: form.querySelector('[name="mensaje"]')?.value || ''
     };
 
-    await _submitForm(form, btn, data, '¡Mensaje enviado! Nos pondremos en contacto contigo pronto.');
+    const nodux = {
+        kind: 'contacto',
+        email: data.email,
+        name: data.nombre,
+        message: data.mensaje,
+        source: 'kulttia.com/contacto'
+    };
+
+    await _submitForm(form, btn, data, '¡Mensaje enviado! Nos pondremos en contacto contigo pronto.', nodux);
 }
 
 /**
@@ -498,7 +506,17 @@ async function sendSubscribeForm(event) {
         email: form.querySelector('[name="email"]')?.value || ''
     };
 
-    await _submitForm(form, btn, data, '¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.');
+    const isModal = !!form.closest('#subscribe-modal');
+    const consentLine = form.parentElement?.querySelector('.modal-disclaimer')?.textContent?.replace(/\s+/g, ' ').trim();
+    const nodux = {
+        kind: 'suscripcion',
+        email: data.email,
+        source: isModal ? 'kulttia.com/modal' : 'kulttia.com/newsletter',
+        consent: true,
+        consentText: consentLine || 'Acepta recibir el boletín y la Política de Privacidad'
+    };
+
+    await _submitForm(form, btn, data, '¡Bienvenido al circuito! Te hemos enviado un correo de confirmación.', nodux);
 
     // Si es el modal, cerrarlo después de unos segundos
     if (form.closest('#subscribe-modal')) {
@@ -512,32 +530,36 @@ async function sendSubscribeForm(event) {
 /**
  * Lógica base compartida para enviar datos al backend Headless de WordPress
  */
-async function _submitForm(form, btn, data, successMsg) {
+async function _submitForm(form, btn, data, successMsg, noduxData) {
     const originalBtnText = btn.innerHTML;
     btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...';
     btn.disabled = true;
 
+    // Honeypot: un campo oculto que una persona no llena
+    const hp = form.querySelector('[name="hp"]')?.value || '';
+
+    // Un bot llenó el campo oculto: se simula el éxito y no se envía nada
+    if (hp) {
+        showFormMessage(form, 'success', successMsg);
+        form.reset();
+        btn.innerHTML = originalBtnText;
+        btn.disabled = false;
+        return;
+    }
+
     try {
-        // En un entorno Headless puro, la mejor forma de conectar WPForms es creando 
-        // un pequeño endpoint REST en WordPress. Nosotros enviaremos a ese endpoint.
-        const baseUrl = KULTTIA_CONFIG.WP_API_URL.replace('/wp/v2', '');
-        const response = await fetch(`${baseUrl}/kulttia/v1/submit-form`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
+        // Dos destinos en paralelo: Nodux guarda al suscriptor/mensaje (principal)
+        // y WordPress le avisa por correo al dueño. Basta con que uno funcione.
+        const [noduxOk, wpOk] = await Promise.all([
+            noduxData ? _postToNodux(noduxData, hp) : Promise.resolve(false),
+            _postToWordPress(data)
+        ]);
 
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const result = await response.json();
-
-        if (result.success) {
+        if (noduxOk || wpOk) {
             showFormMessage(form, 'success', successMsg);
             form.reset();
         } else {
-            throw new Error(result.message || 'Error en el servidor');
+            throw new Error('Ni Nodux ni WordPress aceptaron el envío');
         }
 
     } catch (error) {
@@ -546,6 +568,49 @@ async function _submitForm(form, btn, data, successMsg) {
     } finally {
         btn.innerHTML = originalBtnText;
         btn.disabled = false;
+    }
+}
+
+/** Nodux: guarda suscriptores y mensajes de contacto (función pública, sin token). */
+const NODUX_SUBSCRIBE_URL = 'https://omhrqewzxdftglpvuqfg.supabase.co/functions/v1/subscribe';
+
+async function _postToNodux(noduxData, hp) {
+    try {
+        const response = await fetch(NODUX_SUBSCRIBE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                tenant: 'kulttia',
+                page: location.pathname,
+                hp: hp,
+                ...noduxData
+            })
+        });
+        const result = await response.json().catch(() => ({}));
+        return response.ok && result.ok === true;
+    } catch (error) {
+        console.error('Nodux no respondió:', error);
+        return false;
+    }
+}
+
+/** WordPress headless: reenvía el formulario por correo al dueño. */
+async function _postToWordPress(data) {
+    try {
+        // En un entorno Headless puro, la mejor forma de conectar WPForms es creando
+        // un pequeño endpoint REST en WordPress. Nosotros enviaremos a ese endpoint.
+        const baseUrl = KULTTIA_CONFIG.WP_API_URL.replace('/wp/v2', '');
+        const response = await fetch(`${baseUrl}/kulttia/v1/submit-form`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) return false;
+        const result = await response.json();
+        return !!result.success;
+    } catch (error) {
+        console.error('WordPress no respondió:', error);
+        return false;
     }
 }
 
