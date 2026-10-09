@@ -4,6 +4,22 @@ on:
   push:
     branches:
       - main
+  # Kulttia Studio lo dispara al publicar o programar-que-sale un artículo (workflow_dispatch con el token
+  # KULTTIA_SITE_DISPATCH_TOKEN, fine-grained solo para este repo, Actions: Read and write).
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Motivo (p. ej. blog:<slug>)'
+        required: false
+        default: 'manual'
+  # Alternativa con repository_dispatch (event_type wp-post-published), por si se usa un token con Contents: write.
+  repository_dispatch:
+    types: [wp-post-published]
+
+# Un despliegue a la vez; si llegan varios seguidos, gana el último (lee el CMS en ese momento).
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -14,6 +30,16 @@ jobs:
     steps:
       - name: ✅ Checkout código
         uses: actions/checkout@v4
+
+      - name: 🟢 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Páginas estáticas de los artículos (blog/<slug>/index.html) y sitemap.xml desde el API del CMS.
+      # No usa dependencias (solo fetch de Node). Si el CMS no responde, el despliegue sigue con las páginas del repo.
+      - name: 📰 Generar artículos desde el CMS
+        run: node build-articles.mjs || echo "::warning::No se pudieron regenerar los artículos; se despliegan los del repositorio."
 
       - name: 📤 Deploy a Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
