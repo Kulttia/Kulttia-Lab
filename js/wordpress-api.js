@@ -528,7 +528,7 @@ async function sendSubscribeForm(event) {
 }
 
 /**
- * Lógica base compartida para enviar datos al backend Headless de WordPress
+ * Lógica base compartida para enviar los formularios a Nodux
  */
 async function _submitForm(form, btn, data, successMsg, noduxData) {
     const originalBtnText = btn.innerHTML;
@@ -548,18 +548,15 @@ async function _submitForm(form, btn, data, successMsg, noduxData) {
     }
 
     try {
-        // Dos destinos en paralelo: Nodux guarda al suscriptor/mensaje (principal)
-        // y WordPress le avisa por correo al dueño. Basta con que uno funcione.
-        const [noduxOk, wpOk] = await Promise.all([
-            noduxData ? _postToNodux(noduxData, hp) : Promise.resolve(false),
-            _postToWordPress(data)
-        ]);
+        // Nodux guarda al suscriptor/mensaje, envía la bienvenida de marca
+        // y avisa al dueño por correo.
+        const noduxOk = noduxData ? await _postToNodux(noduxData, hp) : false;
 
-        if (noduxOk || wpOk) {
+        if (noduxOk) {
             showFormMessage(form, 'success', successMsg);
             form.reset();
         } else {
-            throw new Error('Ni Nodux ni WordPress aceptaron el envío');
+            throw new Error('Nodux no aceptó el envío');
         }
 
     } catch (error) {
@@ -571,7 +568,7 @@ async function _submitForm(form, btn, data, successMsg, noduxData) {
     }
 }
 
-/** Nodux: guarda suscriptores y mensajes de contacto (función pública, sin token). */
+/** Nodux: guarda suscriptores y mensajes, envía la bienvenida y avisa al dueño (función pública, sin token). */
 const NODUX_SUBSCRIBE_URL = 'https://omhrqewzxdftglpvuqfg.supabase.co/functions/v1/subscribe';
 
 async function _postToNodux(noduxData, hp) {
@@ -590,26 +587,6 @@ async function _postToNodux(noduxData, hp) {
         return response.ok && result.ok === true;
     } catch (error) {
         console.error('Nodux no respondió:', error);
-        return false;
-    }
-}
-
-/** WordPress headless: reenvía el formulario por correo al dueño. */
-async function _postToWordPress(data) {
-    try {
-        // En un entorno Headless puro, la mejor forma de conectar WPForms es creando
-        // un pequeño endpoint REST en WordPress. Nosotros enviaremos a ese endpoint.
-        const baseUrl = KULTTIA_CONFIG.WP_API_URL.replace('/wp/v2', '');
-        const response = await fetch(`${baseUrl}/kulttia/v1/submit-form`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) return false;
-        const result = await response.json();
-        return !!result.success;
-    } catch (error) {
-        console.error('WordPress no respondió:', error);
         return false;
     }
 }
