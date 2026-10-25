@@ -37,6 +37,13 @@
                 continue;
             }
             if (/^```/.test(line)) { flush(); code = []; continue; }
+            // GIF o clip: en bucle, sin sonido, como un GIF.
+            const vid = line.match(/^!video\[([^\]]*)\]\((https:\/\/[^\s)]+)\)$/);
+            if (vid) {
+                flush();
+                out.push(`<figure><video src="${vid[2]}" autoplay muted loop playsinline preload="metadata" aria-label="${vid[1]}"></video>${vid[1] ? `<figcaption>${vid[1]}</figcaption>` : ''}</figure>`);
+                continue;
+            }
             const img = line.match(/^!\[([^\]]*)\]\((https:\/\/[^\s)]+)\)$/);
             if (img) {
                 flush();
