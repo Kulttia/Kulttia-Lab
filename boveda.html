@@ -773,8 +773,6 @@
             }
         }
         /* ---------- Recursos: guías de Kulttia (js/boveda-recursos.js) ---------- */
-        .vault-recursos { margin-bottom: 3rem; }
-        .vault-recursos-title { font-size: 1.4rem; margin-bottom: 1.2rem; }
         .guia-texto { color: var(--text-main); line-height: 1.7; margin: 1.5rem 0 2rem; overflow-wrap: anywhere; }
         .guia-texto h3, .guia-texto h4 { margin: 1.8rem 0 .6rem; line-height: 1.3; }
         .guia-texto p { margin: 0 0 1rem; }
@@ -791,8 +789,19 @@
         .guia-texto img, .guia-texto video { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border-color-strong); }
         .guia-texto figcaption { color: var(--text-muted); font-size: .85rem; margin-top: .5rem; text-align: center; }
         .guia-pdf { display: inline-flex; align-items: center; gap: .6rem; }
-        /* Guardar como PDF: solo la guía, en blanco y negro legible. */
+        .guia-print-head, .guia-print-foot { display: none; }
+        /* Guardar como PDF: solo la guía, con encabezado de marca (sin la fecha ni el título que agrega el navegador). */
+        @page { size: A4; margin: 0; }
         @media print {
+            body.print-guia .ficha-content { padding: 16mm 18mm !important; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+            body.print-guia .guia-print-head { display: flex; justify-content: space-between; font-family: monospace; font-size: 9pt; letter-spacing: .12em; color: #555; border-bottom: 1.5px solid #111; padding-bottom: 3mm; margin-bottom: 8mm; text-transform: uppercase; }
+            body.print-guia .ficha-head { display: none; }
+            body.print-guia .ficha-title { font-size: 24pt; line-height: 1.15; margin: 0 0 4mm; }
+            body.print-guia .ficha-gancho { font-size: 12.5pt; font-weight: 500; color: #333 !important; border-left: 3px solid #0965e1; padding-left: 4mm; margin: 0 0 8mm; }
+            body.print-guia .guia-texto { font-size: 11pt; line-height: 1.6; }
+            body.print-guia .guia-texto h3 { font-size: 15pt; break-after: avoid; margin-top: 8mm; }
+            body.print-guia .guia-texto figure { break-inside: avoid; }
+            body.print-guia .guia-print-foot { display: block; margin-top: 10mm; padding-top: 3mm; border-top: 1px solid #ccc; font-family: monospace; font-size: 9pt; color: #555; }
             body.print-guia > *:not(#guia-modal) { display: none !important; }
             body.print-guia #guia-modal { position: static; display: block; background: none; backdrop-filter: none; padding: 0; overflow: visible; }
             body.print-guia .ficha-content { max-width: none; max-height: none; overflow: visible; border: none; box-shadow: none; padding: 0; background: #fff; color: #111; }
@@ -875,14 +884,10 @@
             <button class="filter-btn" data-cat="aprende">Aprende</button>
             <button class="filter-btn" data-cat="datos">Datos</button>
             <button class="filter-btn" data-cat="negocio">Negocio</button>
+            <button class="filter-btn" data-cat="guias">Guías</button>
         </div>
 
         <p class="vault-count container" id="vault-count"></p>
-
-        <section class="container vault-recursos" id="vault-recursos" hidden>
-            <h2 class="vault-recursos-title">Guías de Kulttia</h2>
-            <div class="vault-grid" id="vault-recursos-grid"></div>
-        </section>
 
         <section class="container" style="margin-bottom: 5rem;">
             <button class="vault-back" id="vault-back">
@@ -956,8 +961,8 @@
     </div>
 
     <script src="/js/boveda-data.js?v=5" defer></script>
-    <script src="/js/boveda.js?v=6" defer></script>
-    <script src="/js/boveda-recursos.js?v=3" defer></script>
+    <script src="/js/boveda.js?v=7" defer></script>
+    <script src="/js/boveda-recursos.js?v=4" defer></script>
     <script src="/js/main.js" defer></script>
     <script src="/js/animaciones.js?v=1" defer></script>
 

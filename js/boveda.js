@@ -8,7 +8,8 @@
         creatividad: '// CREATIVIDAD',
         aprende: '// APRENDE',
         datos: '// DATOS',
-        negocio: '// NEGOCIO'
+        negocio: '// NEGOCIO',
+        guias: '// GUÍA KULTTIA'
     };
 
     const CAT_NAMES = {
@@ -19,7 +20,8 @@
         creatividad: 'Creatividad',
         aprende: 'Aprende',
         datos: 'Datos',
-        negocio: 'Negocio'
+        negocio: 'Negocio',
+        guias: 'Guías'
     };
 
     const LEVEL_ORDER = ['principiante', 'intermedio', 'avanzado'];
@@ -39,6 +41,17 @@
     }
 
     function cardHTML(r, idx) {
+        // Guías de Kulttia (js/boveda-recursos.js): se leen en la página, sin estrellas ni repo.
+        if (r.guide) return `
+        <article class="vault-card" data-idx="${idx}" tabindex="0" role="button" aria-label="Leer ${escapeHtml(r.name)}">
+            <div class="vault-card-top">
+                <span class="vault-cat">${CAT_LABELS.guias}</span>
+                <span class="vault-level ${r.level}">${r.level}</span>
+            </div>
+            <h3>${escapeHtml(r.name)}</h3>
+            <p class="vault-desc">${escapeHtml(r.desc)}</p>
+            <div class="vault-meta"><span class="repo-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span></div>
+        </article>`;
         return `
         <article class="vault-card" data-idx="${idx}" tabindex="0" role="button"
                  aria-label="Abrir ficha de ${escapeHtml(r.name)}">
@@ -156,7 +169,7 @@
                 count: items.length,
                 stars: items.reduce((s, r) => s + (r.stars || 0), 0)
             };
-        }).sort((a, b) => b.stars - a.stars);
+        }).sort((a, b) => (b.cat === 'guias') - (a.cat === 'guias') || b.stars - a.stars);
     }
 
     function levelFolderHTML(level, temas, maxCount) {
@@ -319,14 +332,15 @@
 
         // ficha: abrir desde card (click o Enter)
         const grid = document.getElementById('vault-grid');
+        const open = r => (r.guide ? window.openGuia(r.guide) : openFicha(r));
         grid.addEventListener('click', e => {
             const card = e.target.closest('.vault-card');
-            if (card) openFicha(BOVEDA_RESOURCES[+card.dataset.idx]);
+            if (card) open(BOVEDA_RESOURCES[+card.dataset.idx]);
         });
         grid.addEventListener('keydown', e => {
             if (e.key !== 'Enter' && e.key !== ' ') return;
             const card = e.target.closest('.vault-card');
-            if (card) { e.preventDefault(); openFicha(BOVEDA_RESOURCES[+card.dataset.idx]); }
+            if (card) { e.preventDefault(); open(BOVEDA_RESOURCES[+card.dataset.idx]); }
         });
 
         // ficha: cerrar (X, fondo, Escape) y copiar comandos
@@ -365,6 +379,8 @@
         }
 
         render();
+        // Las guías llegan después (js/boveda-recursos.js) y vuelven a dibujar.
+        window.bovedaRender = render;
 
         // deep-link a una ficha: /boveda?repo=owner/name
         const repoParam = params.get('repo');

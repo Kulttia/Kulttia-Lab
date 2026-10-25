@@ -70,17 +70,6 @@
         return out.join('\n');
     }
 
-    function cardHTML(r) {
-        return `
-        <article class="vault-card guia-card" data-slug="${escapeHtml(r.slug)}" tabindex="0" role="button"
-                 aria-label="Leer ${escapeHtml(r.title)}">
-            <div class="vault-card-top"><span class="vault-cat">// GUÍA KULTTIA</span></div>
-            <h3>${escapeHtml(r.title)}</h3>
-            <p class="vault-desc">${escapeHtml(r.summary || '')}</p>
-            <div class="vault-meta"><span class="repo-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span></div>
-        </article>`;
-    }
-
     const overlay = () => document.getElementById('guia-modal');
 
     async function openGuia(slug) {
@@ -95,11 +84,20 @@
             if (!res.ok) throw new Error(String(res.status));
             const { resource: r } = await res.json();
             document.title = `${r.title} | La Bóveda · Kulttia Lab`;
+            const level = ['principiante', 'intermedio', 'avanzado'].includes(r.level) ? r.level : '';
             body.innerHTML = `
-            <div class="ficha-head"><span class="vault-cat">// GUÍA KULTTIA</span></div>
+            <div class="guia-print-head">
+                <span>KULTTIA LAB · LA BÓVEDA</span>
+                <span>Guía${level ? ` · ${level}` : ''}</span>
+            </div>
+            <div class="ficha-head">
+                <span class="vault-cat">// GUÍA KULTTIA</span>
+                ${level ? `<span class="vault-level ${level}">${level}</span>` : ''}
+            </div>
             <h2 class="ficha-title">${escapeHtml(r.title)}</h2>
             ${r.summary ? `<p class="ficha-gancho">${escapeHtml(r.summary)}</p>` : ''}
             <div class="guia-texto">${md(r.body_md || '')}</div>
+            <p class="guia-print-foot">kulttia.com/boveda/${escapeHtml(r.slug)}</p>
             <button class="btn btn-primary guia-pdf" type="button">Guardar como PDF <i class="fa-solid fa-file-arrow-down"></i></button>`;
             o.querySelector('.ficha-content').scrollTop = 0;
         } catch {
@@ -114,31 +112,33 @@
         history.replaceState(null, '', '/boveda' + location.hash);
     }
 
+    // Las guías visibles entran a La Bóveda como el tema «Guías» de la carpeta de su nivel.
     async function loadList() {
-        const wrap = document.getElementById('vault-recursos');
         try {
             const res = await fetch(API);
             if (!res.ok) return;
             const { resources } = await res.json();
-            if (!resources || !resources.length) return;
-            document.getElementById('vault-recursos-grid').innerHTML = resources.map(cardHTML).join('');
-            wrap.hidden = false;
+            if (!resources || !resources.length || typeof BOVEDA_RESOURCES === 'undefined') return;
+            for (const r of resources) {
+                BOVEDA_RESOURCES.push({
+                    repo: 'guia/' + r.slug,
+                    name: r.title,
+                    desc: r.summary || '',
+                    level: ['principiante', 'intermedio', 'avanzado'].includes(r.level) ? r.level : 'principiante',
+                    cat: 'guias',
+                    stars: 0,
+                    guide: r.slug
+                });
+            }
+            if (window.bovedaRender) window.bovedaRender();
         } catch {
-            // Sin guías visibles: la sección queda oculta.
+            // Sin guías visibles: La Bóveda queda con sus repos.
         }
     }
 
+    window.openGuia = openGuia;
+
     document.addEventListener('DOMContentLoaded', () => {
-        const grid = document.getElementById('vault-recursos-grid');
-        const open = e => {
-            const card = e.target.closest('.guia-card');
-            if (card && (e.type === 'click' || e.key === 'Enter' || e.key === ' ')) {
-                e.preventDefault();
-                openGuia(card.dataset.slug);
-            }
-        };
-        grid.addEventListener('click', open);
-        grid.addEventListener('keydown', open);
         const o = overlay();
         o.addEventListener('click', e => {
             if (e.target === o || e.target.closest('.ficha-close')) closeGuia();
