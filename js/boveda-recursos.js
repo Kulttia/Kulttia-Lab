@@ -1,4 +1,5 @@
-// La Bóveda · Recursos: guías que Kulttia publica desde Studio (las entrega el DM de una pieza con ?r=slug).
+// La Bóveda · Recursos: guías que Kulttia publica desde Studio (las entrega el DM de una pieza: /boveda/slug; los
+// enlaces viejos ?r=slug siguen abriendo).
 // Se leen de studio-boveda en cada visita (sin volver a desplegar el sitio). Abrir una guía cuenta la visita.
 (function () {
     const API = 'https://omhrqewzxdftglpvuqfg.supabase.co/functions/v1/studio-boveda?brand=kulttia';
@@ -8,7 +9,7 @@
     }
 
     // Markdown simple y seguro: todo se escapa primero; solo se rearman títulos, listas, párrafos, negrita, cursiva,
-    // código y enlaces http(s).
+    // código, imágenes y enlaces http(s).
     function inline(s) {
         return s
             .replace(/`([^`]+)`/g, '<code>$1</code>')
@@ -36,6 +37,12 @@
                 continue;
             }
             if (/^```/.test(line)) { flush(); code = []; continue; }
+            const img = line.match(/^!\[([^\]]*)\]\((https:\/\/[^\s)]+)\)$/);
+            if (img) {
+                flush();
+                out.push(`<figure><img src="${img[2]}" alt="${img[1]}" loading="lazy">${img[1] ? `<figcaption>${img[1]}</figcaption>` : ''}</figure>`);
+                continue;
+            }
             const h = line.match(/^(#{1,4})\s+(.*)$/);
             if (h) { flush(); const n = Math.min(4, h[1].length + 1); out.push(`<h${n}>${inline(h[2])}</h${n}>`); continue; }
             const ul = line.match(/^\s*[-*]\s+(.*)$/);
@@ -75,7 +82,7 @@
         body.innerHTML = '<p class="guia-loading">Abriendo la guía…</p>';
         o.classList.add('open');
         document.body.style.overflow = 'hidden';
-        history.replaceState(null, '', '?r=' + encodeURIComponent(slug) + location.hash);
+        history.replaceState(null, '', '/boveda/' + encodeURIComponent(slug) + location.hash);
         try {
             const res = await fetch(`${API}&r=${encodeURIComponent(slug)}`);
             if (!res.ok) throw new Error(String(res.status));
@@ -97,7 +104,7 @@
         overlay().classList.remove('open');
         document.body.style.overflow = '';
         document.title = 'La Bóveda | Kulttia Lab';
-        history.replaceState(null, '', location.pathname + location.hash);
+        history.replaceState(null, '', '/boveda' + location.hash);
     }
 
     async function loadList() {
@@ -138,7 +145,7 @@
             if (e.key === 'Escape' && o.classList.contains('open')) closeGuia();
         });
         loadList();
-        const slug = new URLSearchParams(location.search).get('r');
+        const slug = (location.pathname.match(/^\/boveda\/([a-z0-9-]+)\/?$/) || [])[1] || new URLSearchParams(location.search).get('r');
         if (slug && /^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) openGuia(slug);
     });
 })();

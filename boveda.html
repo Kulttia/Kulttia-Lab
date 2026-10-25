@@ -24,8 +24,8 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-    <link rel="stylesheet" href="css/estilos.css?v=3">
-    <link rel="stylesheet" href="css/animaciones.css?v=1">
+    <link rel="stylesheet" href="/css/estilos.css?v=3">
+    <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
     <style>
         .vault-header {
@@ -787,12 +787,17 @@
         .guia-texto pre code { background: none; padding: 0; }
         .guia-texto a { color: var(--acid-blue); }
         .guia-loading { color: var(--text-muted); padding: 2rem 0; }
+        .guia-texto figure { margin: 1.5rem 0; }
+        .guia-texto img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border-color-strong); }
+        .guia-texto figcaption { color: var(--text-muted); font-size: .85rem; margin-top: .5rem; text-align: center; }
+        .guia-pdf { display: inline-flex; align-items: center; gap: .6rem; }
         /* Guardar como PDF: solo la guía, en blanco y negro legible. */
         @media print {
             body.print-guia > *:not(#guia-modal) { display: none !important; }
             body.print-guia #guia-modal { position: static; display: block; background: none; backdrop-filter: none; padding: 0; overflow: visible; }
             body.print-guia .ficha-content { max-width: none; max-height: none; overflow: visible; border: none; box-shadow: none; padding: 0; background: #fff; color: #111; }
             body.print-guia .guia-texto, body.print-guia .ficha-title, body.print-guia .ficha-gancho { color: #111; }
+            body.print-guia .guia-texto img { break-inside: avoid; max-height: 18cm; width: auto; max-width: 100%; margin: 0 auto; }
             body.print-guia .ficha-close, body.print-guia .guia-pdf { display: none !important; }
         }
     </style>
@@ -950,11 +955,11 @@
         </div>
     </div>
 
-    <script src="js/boveda-data.js?v=5" defer></script>
-    <script src="js/boveda.js?v=6" defer></script>
-    <script src="js/boveda-recursos.js?v=1" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/animaciones.js?v=1" defer></script>
+    <script src="/js/boveda-data.js?v=5" defer></script>
+    <script src="/js/boveda.js?v=6" defer></script>
+    <script src="/js/boveda-recursos.js?v=2" defer></script>
+    <script src="/js/main.js" defer></script>
+    <script src="/js/animaciones.js?v=1" defer></script>
 
     <!-- WhatsApp Chat Bubble -->
     <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">

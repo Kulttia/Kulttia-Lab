@@ -71,6 +71,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$  articulo.html?slug=$1 [L,QSA]
 
+# Guías de La Bóveda: /boveda/slug → boveda.html (el JS lee el slug de la URL)
+RewriteRule ^boveda/([a-z0-9-]+)/?$  boveda.html [L,QSA]
+
 # ============================================
 # Remover extensiones .html de las URLs
 # ============================================
