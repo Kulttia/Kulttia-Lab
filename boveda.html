@@ -789,6 +789,24 @@
         .guia-texto img, .guia-texto video { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border-color-strong); }
         .guia-texto figcaption { color: var(--text-muted); font-size: .85rem; margin-top: .5rem; text-align: center; }
         .guia-pdf { display: inline-flex; align-items: center; gap: .6rem; }
+        /* Diagramas de las guías (```diagrama): flujo, ciclo y centro. */
+        .dg { margin: 1.8rem 0; }
+        .dg-n { display: inline-flex; align-items: center; justify-content: center; text-align: center; padding: .55rem .8rem; border-radius: 12px; background: rgba(9, 101, 225, .12); border: 1px solid rgba(9, 101, 225, .55); color: var(--text-main); font-weight: 600; font-size: .9rem; line-height: 1.25; }
+        .dg-flujo { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem; }
+        .dg-a { color: var(--acid-blue); font-size: 1.2rem; font-weight: 700; }
+        .dg-wheel { position: relative; width: 100%; max-width: 440px; aspect-ratio: 1; margin: 0 auto; }
+        .dg-wheel svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+        .dg-ring { fill: none; stroke: rgba(9, 101, 225, .45); stroke-width: .6; stroke-dasharray: 2 1.6; }
+        .dg-ray { stroke: rgba(9, 101, 225, .45); stroke-width: .5; }
+        .dg-head { fill: none; stroke: var(--acid-blue); stroke-width: .8; stroke-linecap: round; stroke-linejoin: round; }
+        .dg-p { position: absolute; transform: translate(-50%, -50%); max-width: 36%; font-size: .82rem; background: var(--bg-card); }
+        .dg-c { max-width: 40%; background: var(--acid-blue); color: #fff; border-color: var(--acid-blue); font-size: .9rem; }
+        .dg-loop { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 2.6rem; color: rgba(9, 101, 225, .6); }
+        @media (max-width: 560px) {
+            .dg-flujo { flex-direction: column; }
+            .dg-flujo .dg-a { transform: rotate(90deg); }
+            .dg-p { font-size: .72rem; padding: .4rem .5rem; max-width: 40%; }
+        }
         .guia-print-head, .guia-print-foot { display: none; }
         /* Guardar como PDF: solo la guía, con encabezado de marca (sin la fecha ni el título que agrega el navegador). */
         @page { size: A4; margin: 0; }
@@ -801,6 +819,8 @@
             body.print-guia .guia-texto { font-size: 11pt; line-height: 1.6; }
             body.print-guia .guia-texto h3 { font-size: 15pt; break-after: avoid; margin-top: 8mm; }
             body.print-guia .guia-texto figure { break-inside: avoid; }
+            body.print-guia .dg-n { color: #111; background: #eef4fd; }
+            body.print-guia .dg-c { color: #fff; background: #0965e1; }
             body.print-guia .guia-print-foot { display: block; margin-top: 10mm; padding-top: 3mm; border-top: 1px solid #ccc; font-family: monospace; font-size: 9pt; color: #555; }
             body.print-guia > *:not(#guia-modal) { display: none !important; }
             body.print-guia #guia-modal { position: static; display: block; background: none; backdrop-filter: none; padding: 0; overflow: visible; }
@@ -962,7 +982,7 @@
 
     <script src="/js/boveda-data.js?v=5" defer></script>
     <script src="/js/boveda.js?v=7" defer></script>
-    <script src="/js/boveda-recursos.js?v=4" defer></script>
+    <script src="/js/boveda-recursos.js?v=5" defer></script>
     <script src="/js/main.js" defer></script>
     <script src="/js/animaciones.js?v=1" defer></script>
 

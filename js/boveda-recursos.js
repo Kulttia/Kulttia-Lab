@@ -18,12 +18,60 @@
             .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
     }
 
+    // Diagramas (bloque ```diagrama, texto ya escapado): una línea con su tipo.
+    //   flujo: A → B → C              pasos en orden (en el celular, uno bajo otro)
+    //   ciclo: A → B → C → D          pasos que vuelven al inicio (en círculo)
+    //   centro: X | A, B, C, D        una idea con sus partes alrededor
+    function diagram(lines) {
+        const src = lines.join(' ').replace(/\s+/g, ' ').trim();
+        const m = src.match(/^(flujo|ciclo|centro)\s*:\s*(.+)$/i);
+        if (!m) return `<pre><code>${lines.join('\n')}</code></pre>`;
+        const kind = m[1].toLowerCase();
+        const steps = s => s.split(/\s*(?:→|-&gt;)\s*/).map(x => x.trim()).filter(Boolean).slice(0, 8);
+        const chip = (t, cls = '') => `<span class="dg-n${cls}">${inline(t)}</span>`;
+        if (kind === 'flujo') {
+            const items = steps(m[2]);
+            return `<figure class="dg dg-flujo">${items.map(t => chip(t)).join('<span class="dg-a" aria-hidden="true">→</span>')}</figure>`;
+        }
+        // Ciclo y centro: puntos alrededor de un círculo (posiciones en %, se adaptan al ancho).
+        let center = '';
+        let items;
+        if (kind === 'centro') {
+            const [c, rest = ''] = m[2].split('|');
+            center = c.trim();
+            items = rest.split(',').map(x => x.trim()).filter(Boolean).slice(0, 8);
+        } else items = steps(m[2]);
+        if (!items.length) return '';
+        const pos = items.map((_, i) => {
+            const a = -Math.PI / 2 + (i * 2 * Math.PI) / items.length;
+            return { x: 50 + 36 * Math.cos(a), y: 50 + 36 * Math.sin(a), a };
+        });
+        let svg = '';
+        if (kind === 'ciclo') {
+            // Flechas sobre el círculo, a mitad de camino entre un paso y el siguiente.
+            const arrows = pos.map((p, i) => {
+                const a = p.a + Math.PI / items.length;
+                const x = 50 + 36 * Math.cos(a), y = 50 + 36 * Math.sin(a);
+                const deg = (a * 180) / Math.PI + 90;
+                return `<path d="M -2.2 -1.6 L 2.2 0 L -2.2 1.6" transform="translate(${x} ${y}) rotate(${deg})" class="dg-head"/>`;
+            }).join('');
+            svg = `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="36" class="dg-ring"/>${arrows}</svg>`;
+        } else {
+            svg = `<svg viewBox="0 0 100 100" aria-hidden="true">${pos.map(p => `<line x1="50" y1="50" x2="${p.x}" y2="${p.y}" class="dg-ray"/>`).join('')}</svg>`;
+        }
+        const nodes = pos.map((p, i) => `<span class="dg-n dg-p" style="left:${p.x}%;top:${p.y}%">${inline(items[i])}</span>`).join('');
+        const mid = center ? `<span class="dg-n dg-p dg-c" style="left:50%;top:50%">${inline(center)}</span>` : (kind === 'ciclo' ? '<span class="dg-loop" aria-hidden="true">↻</span>' : '');
+        return `<figure class="dg dg-${kind}" aria-label="${kind}: ${items.join(', ')}"><div class="dg-wheel">${svg}${mid}${nodes}</div></figure>`;
+    }
+
     function md(text) {
         const lines = escapeHtml(text).split(/\r?\n/);
         const out = [];
         let list = null;
         let para = [];
         let code = null;
+        let codeLang = '';
+        const closeCode = () => out.push(codeLang === 'diagrama' ? diagram(code) : `<pre><code>${code.join('\n')}</code></pre>`);
         const flush = () => {
             if (para.length) out.push(`<p>${inline(para.join(' '))}</p>`);
             para = [];
@@ -33,10 +81,11 @@
         for (const raw of lines) {
             const line = raw.trimEnd();
             if (code !== null) {
-                if (/^```/.test(line)) { out.push(`<pre><code>${code.join('\n')}</code></pre>`); code = null; } else code.push(raw);
+                if (/^```/.test(line)) { closeCode(); code = null; } else code.push(raw);
                 continue;
             }
-            if (/^```/.test(line)) { flush(); code = []; continue; }
+            const fence = line.match(/^```\s*([a-z]*)/);
+            if (fence) { flush(); code = []; codeLang = fence[1]; continue; }
             // GIF o clip: en bucle, sin sonido, como un GIF.
             const vid = line.match(/^!video\[([^\]]*)\]\((https:\/\/[^\s)]+)\)$/);
             if (vid) {
@@ -65,7 +114,7 @@
             if (list) { out.push(`</${list}>`); list = null; }
             para.push(line.trim());
         }
-        if (code !== null) out.push(`<pre><code>${code.join('\n')}</code></pre>`);
+        if (code !== null) closeCode();
         flush();
         return out.join('\n');
     }
