@@ -33,7 +33,9 @@
             const items = steps(m[2]);
             return `<figure class="dg dg-flujo">${items.map(t => chip(t)).join('<span class="dg-a" aria-hidden="true">→</span>')}</figure>`;
         }
-        // Ciclo y centro: puntos alrededor de un círculo (posiciones en %, se adaptan al ancho).
+        // Ciclo y centro: puntos alrededor de un óvalo (posiciones en %, se adaptan al ancho; más angosto que alto para
+        // que los de los lados no se salgan ni toquen el centro).
+        const RX = 31, RY = 37;
         let center = '';
         let items;
         if (kind === 'centro') {
@@ -44,18 +46,19 @@
         if (!items.length) return '';
         const pos = items.map((_, i) => {
             const a = -Math.PI / 2 + (i * 2 * Math.PI) / items.length;
-            return { x: 50 + 36 * Math.cos(a), y: 50 + 36 * Math.sin(a), a };
+            return { x: 50 + RX * Math.cos(a), y: 50 + RY * Math.sin(a), a };
         });
         let svg = '';
         if (kind === 'ciclo') {
             // Flechas sobre el círculo, a mitad de camino entre un paso y el siguiente.
             const arrows = pos.map((p, i) => {
                 const a = p.a + Math.PI / items.length;
-                const x = 50 + 36 * Math.cos(a), y = 50 + 36 * Math.sin(a);
-                const deg = (a * 180) / Math.PI + 90;
+                const x = 50 + RX * Math.cos(a), y = 50 + RY * Math.sin(a);
+                // Tangente del óvalo en ese punto.
+                const deg = (Math.atan2(RY * Math.cos(a), -RX * Math.sin(a)) * 180) / Math.PI;
                 return `<path d="M -2.2 -1.6 L 2.2 0 L -2.2 1.6" transform="translate(${x} ${y}) rotate(${deg})" class="dg-head"/>`;
             }).join('');
-            svg = `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="36" class="dg-ring"/>${arrows}</svg>`;
+            svg = `<svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="50" rx="${RX}" ry="${RY}" class="dg-ring"/>${arrows}</svg>`;
         } else {
             svg = `<svg viewBox="0 0 100 100" aria-hidden="true">${pos.map(p => `<line x1="50" y1="50" x2="${p.x}" y2="${p.y}" class="dg-ray"/>`).join('')}</svg>`;
         }

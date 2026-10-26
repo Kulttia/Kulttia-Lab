@@ -791,7 +791,7 @@
         .guia-pdf { display: inline-flex; align-items: center; gap: .6rem; }
         /* Diagramas de las guías (```diagrama): flujo, ciclo y centro. */
         .dg { margin: 1.8rem 0; }
-        .dg-n { display: inline-flex; align-items: center; justify-content: center; text-align: center; padding: .55rem .8rem; border-radius: 12px; background: rgba(9, 101, 225, .12); border: 1px solid rgba(9, 101, 225, .55); color: var(--text-main); font-weight: 600; font-size: .9rem; line-height: 1.25; }
+        .dg-n { overflow-wrap: normal; word-break: normal; hyphens: none; display: inline-flex; align-items: center; justify-content: center; text-align: center; padding: .55rem .8rem; border-radius: 12px; background: rgba(9, 101, 225, .12); border: 1px solid rgba(9, 101, 225, .55); color: var(--text-main); font-weight: 600; font-size: .9rem; line-height: 1.25; }
         .dg-flujo { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem; }
         .dg-a { color: var(--acid-blue); font-size: 1.2rem; font-weight: 700; }
         .dg-wheel { position: relative; width: 100%; max-width: 440px; aspect-ratio: 1; margin: 0 auto; }
@@ -799,13 +799,14 @@
         .dg-ring { fill: none; stroke: rgba(9, 101, 225, .45); stroke-width: .6; stroke-dasharray: 2 1.6; }
         .dg-ray { stroke: rgba(9, 101, 225, .45); stroke-width: .5; }
         .dg-head { fill: none; stroke: var(--acid-blue); stroke-width: .8; stroke-linecap: round; stroke-linejoin: round; }
-        .dg-p { position: absolute; transform: translate(-50%, -50%); max-width: 36%; font-size: .82rem; background: var(--bg-card); }
-        .dg-c { max-width: 40%; background: var(--acid-blue); color: #fff; border-color: var(--acid-blue); font-size: .9rem; }
+        .dg-p { position: absolute; transform: translate(-50%, -50%); max-width: 32%; font-size: .82rem; background: var(--bg-card); }
+        .dg-c { max-width: 30%; background: var(--acid-blue); color: #fff; border-color: var(--acid-blue); font-size: .9rem; }
         .dg-loop { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 2.6rem; color: rgba(9, 101, 225, .6); }
         @media (max-width: 560px) {
             .dg-flujo { flex-direction: column; }
             .dg-flujo .dg-a { transform: rotate(90deg); }
-            .dg-p { font-size: .72rem; padding: .4rem .5rem; max-width: 40%; }
+            .dg-p { font-size: .7rem; padding: .35rem .45rem; max-width: 33%; }
+            .dg-c { max-width: 30%; }
         }
         .guia-print-head, .guia-print-foot { display: none; }
         /* Guardar como PDF: solo la guía, con encabezado de marca (sin la fecha ni el título que agrega el navegador). */
@@ -982,7 +983,7 @@
 
     <script src="/js/boveda-data.js?v=5" defer></script>
     <script src="/js/boveda.js?v=7" defer></script>
-    <script src="/js/boveda-recursos.js?v=5" defer></script>
+    <script src="/js/boveda-recursos.js?v=6" defer></script>
     <script src="/js/main.js" defer></script>
     <script src="/js/animaciones.js?v=1" defer></script>
 
