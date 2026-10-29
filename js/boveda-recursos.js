@@ -74,7 +74,10 @@
         let para = [];
         let code = null;
         let codeLang = '';
-        const closeCode = () => out.push(codeLang === 'diagrama' ? diagram(code) : `<pre><code>${code.join('\n')}</code></pre>`);
+        // Prompts y comandos: bloque con botón de copiar (el texto ya viene escapado).
+        const closeCode = () => out.push(codeLang === 'diagrama'
+            ? diagram(code)
+            : `<div class="copiable"><pre><code>${code.join('\n')}</code></pre><button class="copiar" type="button">Copiar <i class="fa-regular fa-copy"></i></button></div>`);
         const flush = () => {
             if (para.length) out.push(`<p>${inline(para.join(' '))}</p>`);
             para = [];
@@ -194,6 +197,25 @@
         const o = overlay();
         o.addEventListener('click', e => {
             if (e.target === o || e.target.closest('.ficha-close')) closeGuia();
+            const copiar = e.target.closest('.copiar');
+            if (copiar) {
+                const text = copiar.parentElement.querySelector('code').textContent;
+                const done = () => {
+                    copiar.classList.add('ok');
+                    copiar.innerHTML = 'Copiado <i class="fa-solid fa-check"></i>';
+                    setTimeout(() => { copiar.classList.remove('ok'); copiar.innerHTML = 'Copiar <i class="fa-regular fa-copy"></i>'; }, 1800);
+                };
+                if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => {});
+                else {
+                    const t = document.createElement('textarea');
+                    t.value = text;
+                    document.body.appendChild(t);
+                    t.select();
+                    document.execCommand('copy');
+                    t.remove();
+                    done();
+                }
+            }
             if (e.target.closest('.guia-pdf')) {
                 document.body.classList.add('print-guia');
                 window.print();

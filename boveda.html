@@ -783,6 +783,10 @@
         .guia-texto code { background: var(--bg-element); padding: .1rem .35rem; border-radius: 4px; font-size: .9em; }
         .guia-texto pre { background: var(--bg-element); padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 0 0 1rem; }
         .guia-texto pre code { background: none; padding: 0; }
+        .guia-texto .copiable { position: relative; margin: 0 0 1.2rem; }
+        .guia-texto .copiable pre { margin: 0; padding: 1rem 1rem 3.2rem; white-space: pre-wrap; overflow-wrap: anywhere; border: 1px solid var(--border-color-strong); }
+        .guia-texto .copiar { position: absolute; right: .6rem; bottom: .6rem; display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .85rem; border: 0; border-radius: 999px; background: var(--acid-blue); color: #fff; font: inherit; font-size: .85rem; font-weight: 600; cursor: pointer; }
+        .guia-texto .copiar.ok { background: #1f8a4c; }
         .guia-texto a { color: var(--acid-blue); }
         .guia-loading { color: var(--text-muted); padding: 2rem 0; }
         .guia-texto figure { margin: 1.5rem 0; }
@@ -820,6 +824,8 @@
             body.print-guia .guia-texto { font-size: 11pt; line-height: 1.6; }
             body.print-guia .guia-texto h3 { font-size: 15pt; break-after: avoid; margin-top: 8mm; }
             body.print-guia .guia-texto figure { break-inside: avoid; }
+            body.print-guia .guia-texto .copiar { display: none; }
+            body.print-guia .guia-texto .copiable pre { padding-bottom: 1rem; break-inside: avoid; }
             body.print-guia .dg-n { color: #111; background: #eef4fd; }
             body.print-guia .dg-c { color: #fff; background: #0965e1; }
             body.print-guia .guia-print-foot { display: block; margin-top: 10mm; padding-top: 3mm; border-top: 1px solid #ccc; font-family: monospace; font-size: 9pt; color: #555; }
