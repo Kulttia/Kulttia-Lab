@@ -92,8 +92,9 @@ RewriteRule ^([^/]+)/?$ $1.html [L,QSA]
 # ============================================
 DirectoryIndex index.html
 
-# Errors: 404 muestra el home para que el JS maneje la ruta
-ErrorDocument 404 /index.html
+# Errores: página 404 propia (noindex). Las rutas con JS (/blog/<slug>, /boveda/<slug>)
+# se resuelven arriba con RewriteRule, así que no dependen de este documento.
+ErrorDocument 404 /404.html
 
 # ============================================
 # Cache del navegador (rendimiento)
