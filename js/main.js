@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 
             // Hamburger animation
-            spans[0].style.transform = open ? 'rotate(45deg) translate(5px, 5px)' : 'none';
+            spans[0].style.transform = open ? 'translateY(7px) rotate(45deg)' : 'none';
             spans[1].style.opacity = open ? '0' : '1';
-            spans[2].style.transform = open ? 'rotate(-45deg) translate(7px, -6px)' : 'none';
+            spans[2].style.transform = open ? 'translateY(-7px) rotate(-45deg)' : 'none';
         };
 
         mobileToggle.addEventListener('click', () => {
