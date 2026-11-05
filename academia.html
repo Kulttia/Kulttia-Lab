@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Academia Kulttia: cursos cortos en video sobre pensamiento sistémico, organizaciones y liderazgo. Gratis, a tu ritmo, con examen final y certificado verificable.">
+    <title>Academia | Kulttia Lab</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Academia Kulttia — Aprende a ver el sistema completo">
+    <meta property="og:description" content="Cursos cortos en video sobre organizaciones y liderazgo. Gratis, a tu ritmo, con certificado verificable.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kulttia.com/academia">
+    <meta property="og:image" content="https://kulttia.com/og-default.png">
+    <meta property="og:site_name" content="Kulttia Lab">
+    <meta property="og:locale" content="es_CO">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Academia Kulttia — Aprende a ver el sistema completo">
+    <meta name="twitter:description" content="Cursos cortos en video sobre organizaciones y liderazgo. Gratis, a tu ritmo, con certificado verificable.">
+    <meta name="twitter:image" content="https://kulttia.com/og-default.png">
+    <link rel="canonical" href="https://kulttia.com/academia">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="css/estilos.css?v=4">
+    <link rel="stylesheet" href="css/animaciones.css?v=1">
+
+    <style>
+        /* Academia — mobile-first */
+        .acd-hero {
+            padding-top: 9rem;
+            padding-bottom: 4rem;
+            position: relative;
+        }
+        .acd-hero::before {
+            content: '';
+            position: absolute;
+            top: 30%;
+            right: 0;
+            width: min(70vw, 560px);
+            height: min(70vw, 560px);
+            background: radial-gradient(circle, var(--acid-blue-glow) 0%, transparent 65%);
+            filter: blur(40px);
+            opacity: 0.45;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .acd-hero h1 {
+            font-size: clamp(2.3rem, 7vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.25rem;
+            max-width: 860px;
+        }
+        .acd-hero h1 span,
+        .acd-accent {
+            color: var(--acid-blue);
+            text-shadow: 0 0 18px var(--acid-blue-glow);
+        }
+        .acd-lead {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+        .acd-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .acd-actions .btn i { margin-left: 0.5rem; font-size: 0.85em; }
+        .acd-note {
+            margin-top: 1.25rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .acd-note strong { color: var(--text-main); }
+
+        .acd-section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .acd-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--acid-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .acd-label::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--acid-blue);
+            flex-shrink: 0;
+        }
+        .acd-section h2 {
+            font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+            line-height: 1.15;
+            margin-bottom: 2rem;
+            max-width: 720px;
+        }
+
+        .acd-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+        }
+        .acd-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .acd-card:hover {
+            border-color: var(--border-blue-subtle);
+            box-shadow: 0 0 18px var(--acid-blue-light);
+        }
+        .acd-card.is-soon { opacity: 0.75; }
+        .acd-card.is-soon:hover { border-color: var(--border-color); box-shadow: none; }
+        .acd-card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .acd-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: var(--acid-blue-light);
+            color: var(--acid-blue);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .acd-card h3 {
+            font-size: 1.2rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .acd-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+        .acd-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--border-radius-pill);
+            border: 1px solid var(--border-color-strong);
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .acd-badge.is-free {
+            border-color: var(--border-blue-subtle);
+            background: var(--bg-element);
+            color: var(--acid-blue);
+        }
+
+        /* Cursos */
+        .acd-course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .acd-course-meta i { color: var(--acid-blue); margin-right: 0.35rem; }
+        .acd-course .acd-req {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+        .acd-course .acd-req strong { color: var(--text-main); font-weight: 600; }
+        .acd-course .article-link { margin-top: 1.5rem; }
+
+        /* Cómo funciona */
+        .acd-steps {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+            counter-reset: paso;
+        }
+        .acd-step {
+            padding: 1.25rem 1.25rem 1.25rem 3.75rem;
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            min-width: 0;
+        }
+        .acd-step::before {
+            counter-increment: paso;
+            content: counter(paso, decimal-leading-zero);
+            position: absolute;
+            left: 1.25rem;
+            top: 1.2rem;
+            font-weight: 700;
+            color: var(--acid-blue);
+        }
+        .acd-step strong { display: block; margin-bottom: 0.3rem; }
+        .acd-step p {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+            line-height: 1.65;
+        }
+
+        /* Empresas + cierre */
+        .acd-business {
+            background: linear-gradient(to right, var(--bg-card), var(--bg-element));
+            border: 1px solid var(--border-blue-subtle);
+            border-radius: var(--border-radius);
+            padding: 2rem 1.5rem;
+        }
+        .acd-business h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.2; margin-bottom: 0.75rem; }
+        .acd-business p {
+            color: var(--text-muted);
+            max-width: 560px;
+            margin-bottom: 1.5rem;
+        }
+        .acd-business-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem 1.25rem;
+        }
+        .acd-disabled {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: default;
+            flex-wrap: wrap;
+        }
+        .acd-final {
+            text-align: center;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        .acd-final h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); line-height: 1.15; margin: 0 auto 1rem; max-width: 720px; }
+        .acd-final p { color: var(--text-muted); margin-bottom: 2rem; }
+
+        @media (min-width: 700px) {
+            .acd-grid { grid-template-columns: repeat(3, 1fr); }
+            .acd-grid.is-two { grid-template-columns: repeat(2, 1fr); }
+            .acd-steps { grid-template-columns: repeat(2, 1fr); }
+            .acd-business { padding: 3rem; }
+        }
+        @media (min-width: 1000px) {
+            .acd-hero { padding-top: 12rem; padding-bottom: 5rem; }
+            .acd-section { padding-top: 6rem; padding-bottom: 6rem; }
+            .acd-steps { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Cursos de la Academia Kulttia",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Course",
+            "name": "Introducción al pensamiento sistémico",
+            "description": "Curso básico de 5 clases en video basado en La quinta disciplina, de Peter Senge.",
+            "inLanguage": "es",
+            "isAccessibleForFree": true,
+            "educationalLevel": "Básico",
+            "url": "https://academia.kulttia.com/",
+            "provider": { "@type": "Organization", "name": "Kulttia Lab", "url": "https://kulttia.com" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Course",
+            "name": "Teoría U",
+            "description": "Curso intermedio de 9 clases en video. Requisito: Introducción al pensamiento sistémico.",
+            "inLanguage": "es",
+            "isAccessibleForFree": true,
+            "educationalLevel": "Intermedio",
+            "url": "https://academia.kulttia.com/",
+            "provider": { "@type": "Organization", "name": "Kulttia Lab", "url": "https://kulttia.com" }
+          }
+        }
+      ]
+    }
+    </script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CTPF3Q4SL"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1CTPF3Q4SL');</script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="/" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="/">Inicio</a>
+                <a href="/blog">Artículos</a>
+                <a href="/boveda">Bóveda</a>
+                <a href="/academia" class="active">Academia</a>
+                <a href="/nosotros">Nosotros</a>
+                <a href="/servicios">Servicios</a>
+                <a href="/contacto">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Alternar modo claro y oscuro">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+    <!-- Hero -->
+    <section class="acd-hero container">
+        <span class="tag-pill">Academia Kulttia</span>
+        <h1>Aprende a ver el <span>sistema</span> completo.</h1>
+        <p class="acd-lead">
+            Cursos cortos en video para entender cómo funcionan las organizaciones y cómo liderarlas mejor.
+            A tu ritmo, con examen final y certificado verificable.
+        </p>
+        <div class="acd-actions">
+            <a href="https://academia.kulttia.com/" class="btn btn-primary">Entrar a la academia <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#cursos" class="btn btn-outline">Ver cursos</a>
+        </div>
+        <p class="acd-note"><strong>Los cursos actuales son gratis.</strong> Los cursos pagos llegan próximamente.</p>
+    </section>
+
+    <!-- Rutas -->
+    <section class="acd-section container" id="rutas">
+        <p class="acd-label">Qué enseñamos</p>
+        <h2>Tres rutas, un mismo enfoque: pensar antes de actuar.</h2>
+        <div class="acd-grid">
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                </div>
+                <h3>Organizacional</h3>
+                <p>Cómo se comportan los equipos y las empresas cuando los miras como sistemas, no como piezas sueltas.</p>
+            </article>
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-compass"></i></span>
+                </div>
+                <h3>Liderazgo</h3>
+                <p>Herramientas para conducir procesos de cambio con escucha, criterio y propósito.</p>
+            </article>
+            <article class="acd-card is-soon">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-microchip"></i></span>
+                    <span class="acd-badge">Próximamente</span>
+                </div>
+                <h3>Inteligencia Artificial</h3>
+                <p>Usar la IA con juicio dentro de tu trabajo y tu organización.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Cursos -->
+    <section class="acd-section container" id="cursos">
+        <p class="acd-label">Cursos disponibles</p>
+        <h2>Empieza por la base y sigue subiendo.</h2>
+        <div class="acd-grid is-two">
+            <article class="acd-card acd-course">
+                <div class="acd-card-head">
+                    <span class="article-category">Organizacional · Básico</span>
+                    <span class="acd-badge is-free">Gratis</span>
+                </div>
+                <h3>Introducción al pensamiento sistémico</h3>
+                <div class="acd-course-meta">
+                    <span><i class="fa-solid fa-play"></i>5 clases</span>
+                    <span><i class="fa-regular fa-clock"></i>21 min</span>
+                </div>
+                <p>Basado en <em>La quinta disciplina</em>, de Peter Senge. Para dejar de ver hechos aislados y empezar a ver los patrones que los conectan.</p>
+                <a href="https://academia.kulttia.com/" class="article-link">Empezar curso <i class="fa-solid fa-arrow-right"></i></a>
+            </article>
+            <article class="acd-card acd-course">
+                <div class="acd-card-head">
+                    <span class="article-category">Liderazgo · Intermedio</span>
+                    <span class="acd-badge is-free">Gratis</span>
+                </div>
+                <h3>Teoría U</h3>
+                <div class="acd-course-meta">
+                    <span><i class="fa-solid fa-play"></i>9 clases</span>
+                </div>
+                <p>Un camino para liderar el cambio: observar con atención, soltar lo que ya no sirve y dejar que surja lo nuevo.</p>
+                <p class="acd-req"><strong>Requisito:</strong> Introducción al pensamiento sistémico.</p>
+                <a href="https://academia.kulttia.com/" class="article-link">Ver curso <i class="fa-solid fa-arrow-right"></i></a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="acd-section container" id="como-funciona">
+        <p class="acd-label">Cómo funciona</p>
+        <h2>Aprendes, preguntas, demuestras y certificas.</h2>
+        <div class="acd-steps">
+            <div class="acd-step">
+                <strong>Clases en video</strong>
+                <p>Cortas y al grano. Las ves cuando quieras y retomas donde ibas.</p>
+            </div>
+            <div class="acd-step">
+                <strong>«Pregúntame tus dudas»</strong>
+                <p>Un asistente dentro de cada clase que responde sobre el contenido del curso.</p>
+            </div>
+            <div class="acd-step">
+                <strong>Examen final con vidas</strong>
+                <p>Si fallas, repasas y lo intentas de nuevo. Lo importante es que lo entiendas.</p>
+            </div>
+            <div class="acd-step">
+                <strong>Certificado verificable</strong>
+                <p>«Curso libre · Educación informal». Cualquiera puede comprobarlo y lo compartes en LinkedIn.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Para empresas -->
+    <section class="container" style="padding-bottom: 1rem;">
+        <div class="acd-business">
+            <p class="acd-label">Para empresas</p>
+            <h2>Las rutas de la academia, para tu equipo.</h2>
+            <p>Estamos preparando una versión para organizaciones que quieren formar a sus equipos con estas rutas.</p>
+            <div class="acd-business-links">
+                <span class="acd-disabled" aria-disabled="true">Kulttia para negocios <span class="acd-badge">Próximamente</span></span>
+                <a href="/servicios" class="article-link">Mientras tanto, mira nuestros servicios <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cierre -->
+    <section class="acd-final container">
+        <h2>Empieza con el primer curso. <span class="acd-accent">Es gratis.</span></h2>
+        <p>21 minutos para cambiar la forma en que miras tu trabajo.</p>
+        <a href="https://academia.kulttia.com/" class="btn btn-primary">Entrar a la academia</a>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" data-wpforms-id="2" action="#" method="POST" onsubmit="sendSubscribeForm(event)">
+                <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;"><label>No llenar este campo <input type="text" name="hp" tabindex="-1" autocomplete="off"></label></div>
+                <input type="email" name="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="/politica-privacidad">Política de Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/animaciones.js?v=1" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/wordpress-api.js?v=7" defer></script>
+
+    <!-- WhatsApp Chat Bubble -->
+    <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
+        <span class="wa-tooltip">💬 ¡Hablemos por WhatsApp!</span>
+        <a href="https://wa.me/573182057306" class="wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.5 3.5A12 12 0 0 0 3.5 20.5L2 22l1.5-1.5A12 12 0 1 0 20.5 3.5zm-8.5 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm5.2-7.8c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.4-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.6.1-.9.4c-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.2-1.3 0-.2-.2-.3-.5-.4z"/>
+            </svg>
+            <span class="wa-online"></span>
+        </a>
+    </div>
+
+</body>
+</html>
