@@ -81,7 +81,17 @@ function generateHTML(post) {
                        || featuredMedia?.source_url
                        || '';
   const heroImgAlt      = featuredMedia?.alt_text || title;
-  const ogImage         = heroImg || `${SITE_URL}/og-default.png`;
+  // Imagen al compartir: el banner del artículo (tamaño completo); si no tiene, la primera imagen del
+  // contenido; como último recurso, la imagen general del sitio.
+  const firstContentImg = (content.match(/<img[^>]+src=["']([^"']+)["']/i) || [])[1] || '';
+  const ogImage         = featuredMedia?.source_url || heroImg || firstContentImg || `${SITE_URL}/og-default.png`;
+  const ogImageW        = featuredMedia?.source_url ? featuredMedia?.media_details?.width : null;
+  const ogImageH        = featuredMedia?.source_url ? featuredMedia?.media_details?.height : null;
+  const ogImageMeta     = ogImageW && ogImageH
+    ? `
+  <meta property="og:image:width" content="${ogImageW}">
+  <meta property="og:image:height" content="${ogImageH}">`
+    : '';
 
   const categories      = embedded['wp:term']?.[0] || [];
   const categoryName    = localizeCategory(categories[0]?.name) || 'Artículo';
@@ -100,7 +110,7 @@ function generateHTML(post) {
     url: canonical,
     datePublished: dateISO,
     dateModified: modISO,
-    image: heroImg || ogImage,
+    image: ogImage,
     inLanguage: 'es',
     author: {
       '@type': 'Person',
@@ -137,7 +147,8 @@ function generateHTML(post) {
   <meta property="og:site_name" content="Kulttia Lab">
   <meta property="og:title" content="${title.replace(/"/g, '&quot;')}">
   <meta property="og:description" content="${excerpt.replace(/"/g, '&quot;')}">
-  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image" content="${ogImage}">${ogImageMeta}
+  <meta property="og:image:alt" content="${heroImgAlt.replace(/"/g, '&quot;')}">
   <meta property="og:url" content="${canonical}">
   <meta property="article:published_time" content="${dateISO}">
   <meta property="article:modified_time" content="${modISO}">
