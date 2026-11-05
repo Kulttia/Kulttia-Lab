@@ -246,7 +246,7 @@ function generateHTML(post) {
       <div class="article-body" id="article-body">${content}</div>
 
       <div class="author-box" id="author-box">
-        <img src="${authorAvatar}" alt="${authorName}" class="author-avatar" id="author-avatar">
+        <img src="${authorAvatar}" alt="${authorName}" class="author-avatar" id="author-avatar" width="100" height="100">
         <div class="author-info">
           <h4 id="author-name">${authorName}</h4>
           <p id="author-desc">${authorDesc}</p>
@@ -339,10 +339,10 @@ function generateHTML(post) {
     </div>
   </div>
 
-  <script src="/js/wordpress-api.js?v=9"></script>
+  <script src="/js/wordpress-api.js?v=9" defer></script>
   <script src="/js/main.js?v=2" defer></script>
   <script src="/js/animaciones.js?v=1" defer></script>
-  <script src="/js/search.js"></script>
+  <script src="/js/search.js?v=1" defer></script>
   <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
     <span class="wa-tooltip">💬 ¡Hablemos por WhatsApp!</span>
     <a href="https://wa.me/573182057306" class="wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
