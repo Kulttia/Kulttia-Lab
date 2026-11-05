@@ -478,7 +478,7 @@ ul {
 }
 
 .footer-grid {
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 1.6fr repeat(4, 1fr);
     margin-bottom: 3rem;
 }
 
@@ -552,10 +552,10 @@ ul {
     box-shadow: 0 0 15px var(--acid-blue-glow);
 }
 
-/* Pie en tablet: marca arriba y tres columnas de enlaces */
+/* Pie en tablet: marca arriba y cuatro columnas de enlaces */
 @media (min-width: 769px) and (max-width: 1023px) {
     .footer-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
     .footer-grid > :first-child {
         grid-column: 1 / -1;
@@ -1117,3 +1117,8 @@ ul {
     }
 }
 
+
+/* Nada se sale a lo ancho (animaciones de entrada y fotos inclinadas); clip no rompe position: sticky */
+html, body {
+    overflow-x: clip;
+}
