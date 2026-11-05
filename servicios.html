@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- v2 -->
 <html lang="es">
 
 <head>
@@ -26,355 +25,16 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="css/estilos.css?v=5">
-    <link rel="stylesheet" href="css/animaciones.css?v=1">
+    <link rel="stylesheet" href="/css/estilos.css?v=6">
+    <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
-    <style>
-        /* ── Hero ── */
-        .svc-hero {
-            padding: 12rem 0 5rem;
+    <link rel="stylesheet" href="/css/landing.css?v=2">
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            document.documentElement.classList.add('lx-on');
         }
-        .svc-hero .accent {
-            color: var(--acid-blue);
-            text-shadow: 0 0 15px var(--acid-blue-glow);
-        }
-        .svc-hero h1 {
-            font-size: clamp(3rem, 5.5vw, 5rem);
-            font-weight: 700;
-            line-height: 1.05;
-            margin: 1.2rem 0 1.5rem;
-            max-width: 820px;
-        }
-        .svc-hero-lead {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 640px;
-            line-height: 1.85;
-            margin-bottom: 1.2rem;
-        }
-        .svc-hero-statement {
-            font-size: 1.05rem;
-            color: var(--text-main);
-            font-weight: 500;
-            max-width: 640px;
-            line-height: 1.8;
-            padding: 1.25rem 1.5rem;
-            border-left: 3px solid var(--acid-blue);
-            background: var(--bg-element);
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            margin-top: 2rem;
-        }
+    </script>
 
-        /* ── Section label ── */
-        .sec-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--acid-blue);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 1.5rem;
-        }
-        .sec-label::before {
-            content: '';
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--acid-blue);
-            flex-shrink: 0;
-        }
-
-        /* ── Service blocks ── */
-        .svc-block {
-            padding: 6rem 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .svc-block-inner {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 5rem;
-            align-items: start;
-        }
-        .svc-left {
-            position: sticky;
-            top: 8rem;
-            min-width: 0;
-        }
-        .svc-num {
-            font-size: clamp(4rem, 8vw, 7rem);
-            font-weight: 700;
-            line-height: 1;
-            color: var(--border-color-strong);
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-        }
-        .svc-left h2 {
-            font-size: clamp(1.8rem, 3vw, 2.6rem);
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 1rem;
-        }
-        .svc-left p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-        .svc-right {
-            min-width: 0;
-        }
-        .svc-right > p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.85;
-            margin-bottom: 1.5rem;
-        }
-        .svc-right > p:last-of-type { margin-bottom: 2rem; }
-
-        /* Territory list */
-        .svc-territory {
-            margin: 2rem 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .territory-item {
-            padding: 1.2rem 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .territory-item:hover {
-            border-color: var(--border-blue-subtle);
-            box-shadow: 0 0 16px var(--acid-blue-light);
-        }
-        .territory-item strong {
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.3rem;
-        }
-        .territory-item p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.65;
-            margin: 0;
-        }
-
-        /* Formats */
-        .svc-formats {
-            margin: 2rem 0;
-        }
-        .svc-formats-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-        }
-        .formats-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-        .format-tag {
-            font-size: 0.82rem;
-            font-weight: 500;
-            padding: 0.4rem 1rem;
-            background: var(--bg-element);
-            border: 1px solid var(--border-blue-subtle);
-            border-radius: 100px;
-            color: var(--acid-blue);
-        }
-
-        /* Audience cards */
-        .audience-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .audience-card {
-            padding: 1.4rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .audience-card:hover {
-            border-color: var(--border-blue-subtle);
-            box-shadow: 0 0 16px var(--acid-blue-light);
-        }
-        .audience-card .aud-icon {
-            font-size: 1.4rem;
-            color: var(--acid-blue);
-            margin-bottom: 0.8rem;
-            text-shadow: 0 0 12px var(--acid-blue-glow);
-        }
-        .audience-card strong {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.4rem;
-        }
-        .audience-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Clients strip */
-        .svc-clients {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .svc-clients-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-        }
-        .clients-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .client-chip {
-            font-size: 0.78rem;
-            padding: 0.3rem 0.8rem;
-            background: var(--bg-element);
-            border: 1px solid var(--border-color);
-            border-radius: 100px;
-            color: var(--text-muted);
-        }
-
-        /* WA CTA button */
-        .btn-wa {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.85rem 1.8rem;
-            background: linear-gradient(135deg, var(--acid-blue), var(--acid-blue-secondary));
-            color: #fff;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-            text-decoration: none;
-        }
-        .btn-wa:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px var(--acid-blue-glow);
-            color: #fff;
-        }
-        .btn-wa svg {
-            width: 18px;
-            height: 18px;
-            fill: #fff;
-            flex-shrink: 0;
-        }
-
-        /* ── Final CTA ── */
-        .svc-final-cta {
-            padding: 8rem 0 6rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .svc-final-cta-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-        .svc-final-cta h2 {
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 1.2rem;
-        }
-        .svc-final-cta h2 em {
-            font-style: normal;
-            color: var(--acid-blue);
-        }
-        .svc-final-cta p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-        .cta-right {
-            background: var(--bg-card);
-            border: 1px solid var(--border-blue-subtle);
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: 0 0 40px var(--acid-blue-light);
-        }
-        .cta-right .author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .cta-right .author img {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--border-blue-subtle);
-        }
-        .cta-right .author-info strong {
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-        .cta-right .author-info span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-        .cta-right p {
-            font-size: 0.98rem;
-            color: var(--text-muted);
-            line-height: 1.75;
-            margin-bottom: 1.5rem;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 900px) {
-            .svc-block-inner {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-            .svc-left {
-                position: static;
-            }
-            .svc-num {
-                font-size: 4rem;
-            }
-            .svc-final-cta-inner {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-        }
-        @media (max-width: 600px) {
-            .svc-hero { padding: 10rem 0 4rem; }
-            .svc-block { padding: 4rem 0; }
-            .svc-final-cta { padding: 5rem 0 4rem; }
-            .audience-grid { grid-template-columns: 1fr; }
-        }
-    </style>
 
     <script>
         const savedTheme = localStorage.getItem('theme');
@@ -416,181 +76,159 @@
 
     <main>
 
-    <!-- ── HERO ── -->
-    <section class="svc-hero container">
-        <span class="tag-pill">Servicios</span>
-        <h1>Construimos <span class="accent">capacidad</span>.</h1>
-        <p class="svc-hero-lead">
-            La mayoría de la formación en IA enseña herramientas. Nosotros enseñamos a pensar con ellas.
-        </p>
-        <p class="svc-hero-lead">
-            Hay una diferencia enorme entre saber usar ChatGPT y entender cómo la inteligencia artificial transforma la cultura de una organización, el trabajo de un equipo o la dirección de un negocio.
-        </p>
-        <blockquote class="svc-hero-statement">
-            Eso es lo que hacemos en Kulttia.
-        </blockquote>
+    <!-- Hero -->
+    <section class="lx-hero container">
+        <div>
+            <span class="tag-pill" data-lx="up">Servicios</span>
+            <h1 data-lx="up" style="--lx-delay:.08s">Construimos <span>capacidad</span>.</h1>
+            <p class="lx-lead" data-lx="up" style="--lx-delay:.16s">
+                La mayoría de la formación en IA enseña herramientas. Nosotros enseñamos a pensar con ellas.
+            </p>
+            <p class="lx-lead" data-lx="up" style="--lx-delay:.2s">
+                Hay una diferencia enorme entre saber usar ChatGPT y entender cómo la inteligencia artificial transforma la cultura de una organización, el trabajo de un equipo o la dirección de un negocio.
+                <strong style="color:var(--text-main)">Eso es lo que hacemos en Kulttia.</strong>
+            </p>
+            <div class="lx-actions" data-lx="up" style="--lx-delay:.28s">
+                <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20Kulttia" target="_blank" rel="noopener" class="btn btn-primary">Escríbenos por WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#formacion" class="btn btn-outline">Ver servicios</a>
+            </div>
+        </div>
+        <div class="lx-stage is-photo" data-lx="right" style="--lx-delay:.2s">
+            <figure class="lx-photo">
+                <img src="/img/servicios/charla-2.webp" width="1600" height="1093" fetchpriority="high" decoding="async"
+                    alt="Pedro Bedoya explica cómo los motores de búsqueda con IA cambian la forma de aprender, frente a un grupo">
+            </figure>
+            <span class="lx-chip is-a" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i>Cursos y talleres</span>
+            <span class="lx-chip is-b" aria-hidden="true"><i class="fa-solid fa-microphone"></i>Conferencias</span>
+        </div>
     </section>
 
-    <!-- ── FORMACIÓN ── -->
-    <section class="svc-block container" id="formacion">
-        <div class="svc-block-inner">
-            <div class="svc-left">
-                <div class="svc-num">01</div>
-                <p class="sec-label">Formación</p>
-                <h2>Cursos y Talleres</h2>
+    <!-- Resumen -->
+    <section class="lx-section container" id="resumen">
+        <p class="lx-label" data-lx="up">Cómo trabajamos juntos</p>
+        <h2 class="lx-h2" data-lx="up">Tres formas de empezar.</h2>
+        <div class="lx-bento is-three" data-lx-group style="margin-top:2.5rem">
+            <a class="lx-tile" href="#formacion" data-lx="up">
+                <span class="lx-tile-num">01</span>
+                <h3>Cursos y talleres</h3>
                 <p>Para equipos que quieren aprender IA desde adentro.</p>
-            </div>
-            <div class="svc-right">
-                <p>Diseñamos procesos de formación estructurados y personalizados según el contexto de cada organización. No hay un curso genérico porque no existe una empresa genérica.</p>
-                <p>Trabajamos principalmente en tres territorios:</p>
-
-                <div class="svc-territory">
-                    <div class="territory-item">
-                        <strong>Inteligencia Artificial aplicada</strong>
-                        <p>Implementación real, no teoría. Herramientas, flujos de trabajo y casos concretos para tu industria.</p>
-                    </div>
-                    <div class="territory-item">
-                        <strong>Cultura de aprendizaje organizacional</strong>
-                        <p>Cómo construir equipos que aprenden, se adaptan y no le temen al cambio tecnológico.</p>
-                    </div>
-                    <div class="territory-item">
-                        <strong>Impacto cultural de la tecnología</strong>
-                        <p>Para organizaciones que quieren entender qué está cambiando en su sector y cómo posicionarse antes de que sea obvio para todos.</p>
-                    </div>
-                </div>
-
-                <div class="svc-formats">
-                    <p class="svc-formats-label">Formatos disponibles</p>
-                    <div class="formats-list">
-                        <span class="format-tag">Cursos de varias sesiones</span>
-                        <span class="format-tag">Taller medio día</span>
-                        <span class="format-tag">Taller día completo</span>
-                        <span class="format-tag">Formación continua</span>
-                    </div>
-                </div>
-
-                <div class="svc-clients">
-                    <p class="svc-clients-label">Han confiado en nosotros</p>
-                    <div class="clients-tags">
-                        <span class="client-chip">Comfama</span>
-                        <span class="client-chip">Argos</span>
-                        <span class="client-chip">Navitrans</span>
-                        <span class="client-chip">Gobernación de Antioquia</span>
-                        <span class="client-chip">Computadores para Educar</span>
-                        <span class="client-chip">EAFIT</span>
-                        <span class="client-chip">UPB</span>
-                        <span class="client-chip">Platzi</span>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2.5rem;">
-                    <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20los%20cursos%20y%20talleres%20de%20Kulttia" target="_blank" rel="noopener" class="btn-wa">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.5 3.5A12 12 0 0 0 3.5 20.5L2 22l1.5-1.5A12 12 0 1 0 20.5 3.5zm-8.5 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm5.2-7.8c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.4-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.6.1-.9.4c-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.2-1.3 0-.2-.2-.3-.5-.4z"/></svg>
-                        Escríbenos por WhatsApp
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── CONFERENCIAS ── -->
-    <section class="svc-block container" id="conferencias">
-        <div class="svc-block-inner">
-            <div class="svc-left">
-                <div class="svc-num">02</div>
-                <p class="sec-label">Conferencias</p>
-                <h2>Conferencias</h2>
+                <span class="article-link">Ver formación <i class="fa-solid fa-arrow-down"></i></span>
+            </a>
+            <a class="lx-tile" href="#conferencias" data-lx="up">
+                <span class="lx-tile-num">02</span>
+                <h3>Conferencias</h3>
                 <p>Para eventos, empresas y universidades que quieren una conversación que mueva algo.</p>
-            </div>
-            <div class="svc-right">
-                <p>No hablamos de IA como si fuera magia ni como si fuera una amenaza. Hablamos desde la práctica, con criterio y sin exageraciones.</p>
-
-                <div class="audience-grid">
-                    <div class="audience-card">
-                        <div class="aud-icon"><i class="fa-solid fa-building"></i></div>
-                        <strong>Para empresas</strong>
-                        <p>Cómo implementar IA sin destruir la cultura organizacional.</p>
-                    </div>
-                    <div class="audience-card">
-                        <div class="aud-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <strong>Para universidades</strong>
-                        <p>El futuro del trabajo y la creatividad en la era de la IA generativa.</p>
-                    </div>
-                    <div class="audience-card">
-                        <div class="aud-icon"><i class="fa-solid fa-palette"></i></div>
-                        <strong>Para eventos culturales</strong>
-                        <p>El impacto de la tecnología en los negocios culturales y las conversaciones que importan.</p>
-                    </div>
-                </div>
-
-                <div class="svc-formats">
-                    <p class="svc-formats-label">Formatos disponibles</p>
-                    <div class="formats-list">
-                        <span class="format-tag">45 minutos</span>
-                        <span class="format-tag">1 hora</span>
-                        <span class="format-tag">Media jornada + taller</span>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2.5rem;">
-                    <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20las%20conferencias%20de%20Kulttia" target="_blank" rel="noopener" class="btn-wa">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.5 3.5A12 12 0 0 0 3.5 20.5L2 22l1.5-1.5A12 12 0 1 0 20.5 3.5zm-8.5 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm5.2-7.8c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.4-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.6.1-.9.4c-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.2-1.3 0-.2-.2-.3-.5-.4z"/></svg>
-                        Escríbenos por WhatsApp
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── ACOMPAÑAMIENTO ── -->
-    <section class="svc-block container" id="acompanamiento">
-        <div class="svc-block-inner">
-            <div class="svc-left">
-                <div class="svc-num">03</div>
-                <p class="sec-label">Acompañamiento</p>
-                <h2>Acompañamiento</h2>
+                <span class="article-link">Ver conferencias <i class="fa-solid fa-arrow-down"></i></span>
+            </a>
+            <a class="lx-tile" href="#acompanamiento" data-lx="up">
+                <span class="lx-tile-num">03</span>
+                <h3>Acompañamiento</h3>
                 <p>Para empresas y emprendedores que están en medio de un cambio.</p>
-            </div>
-            <div class="svc-right">
-                <p>No es consultoría tradicional. Es caminar juntos un proceso de transformación tecnológica o cultural con criterio, contexto y sin rodeos.</p>
+                <span class="article-link">Ver acompañamiento <i class="fa-solid fa-arrow-down"></i></span>
+            </a>
+        </div>
+    </section>
 
-                <div class="svc-territory">
-                    <div class="territory-item">
-                        <strong>Empresas que quieren implementar IA</strong>
-                        <p>Para organizaciones que no saben por dónde empezar. Priorizamos, estructuramos y acompañamos el proceso.</p>
-                    </div>
-                    <div class="territory-item">
-                        <strong>Emprendedores en cultura y tecnología</strong>
-                        <p>Para quienes construyen en la intersección entre cultura y tecnología y necesitan perspectiva estratégica.</p>
-                    </div>
-                    <div class="territory-item">
-                        <strong>Organizaciones culturales</strong>
-                        <p>Librerías, cafés, espacios creativos — que quieren potenciarse con tecnología sin perder su identidad.</p>
-                    </div>
+    <!-- Formación -->
+    <section class="lx-section container" id="formacion">
+        <div class="lx-split">
+            <figure class="lx-photo" data-lx="left">
+                <img src="/img/servicios/charla-1.webp" width="1600" height="1066" loading="lazy" decoding="async"
+                    alt="Pedro Bedoya en un taller sobre los efectos de la IA, con la presentación proyectada y el grupo atento">
+            </figure>
+            <div class="lx-split-copy" data-lx-group>
+                <span class="lx-num" data-lx="up">01</span>
+                <p class="lx-label" data-lx="up">Formación</p>
+                <h2 class="lx-h2" data-lx="up">Cursos y talleres</h2>
+                <p class="lx-kicker" data-lx="up">Para equipos que quieren aprender IA desde adentro.</p>
+                <p data-lx="up">Diseñamos procesos de formación estructurados y personalizados según el contexto de cada organización. No hay un curso genérico porque no existe una empresa genérica.</p>
+                <ul class="lx-list">
+                    <li data-lx="up"><i class="fa-solid fa-microchip"></i><div><strong>Inteligencia artificial aplicada</strong><span>Implementación real, no teoría. Herramientas, flujos de trabajo y casos concretos para tu industria.</span></div></li>
+                    <li data-lx="up"><i class="fa-solid fa-people-group"></i><div><strong>Cultura de aprendizaje organizacional</strong><span>Cómo construir equipos que aprenden, se adaptan y no le temen al cambio tecnológico.</span></div></li>
+                    <li data-lx="up"><i class="fa-solid fa-landmark"></i><div><strong>Impacto cultural de la tecnología</strong><span>Qué está cambiando en tu sector y cómo posicionarte antes de que sea obvio para todos.</span></div></li>
+                </ul>
+                <p class="lx-tags-label" data-lx="up">Formatos</p>
+                <div class="lx-tags is-blue" data-lx="up">
+                    <span>Cursos de varias sesiones</span><span>Taller medio día</span><span>Taller día completo</span><span>Formación continua</span>
                 </div>
-
-                <div style="margin-top: 2.5rem;">
-                    <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20el%20acompa%C3%B1amiento%20de%20Kulttia" target="_blank" rel="noopener" class="btn-wa">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.5 3.5A12 12 0 0 0 3.5 20.5L2 22l1.5-1.5A12 12 0 1 0 20.5 3.5zm-8.5 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm5.2-7.8c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.4-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.6.1-.9.4c-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.2-1.3 0-.2-.2-.3-.5-.4z"/></svg>
-                        Escríbenos por WhatsApp
-                    </a>
+                <p class="lx-tags-label" data-lx="up">Han confiado en nosotros</p>
+                <div class="lx-tags" data-lx="up">
+                    <span>Comfama</span><span>Argos</span><span>Navitrans</span><span>Gobernación de Antioquia</span>
+                    <span>Computadores para Educar</span><span>EAFIT</span><span>UPB</span><span>Platzi</span>
+                </div>
+                <div class="lx-actions" data-lx="up">
+                    <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20los%20cursos%20y%20talleres%20de%20Kulttia" target="_blank" rel="noopener" class="btn btn-primary">Cotizar formación <i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── FINAL CTA ── -->
-    <section class="container svc-final-cta">
-        <div class="svc-final-cta-inner">
-            <div>
-                <p class="sec-label">¿Por dónde empezamos?</p>
-                <h2>Cuéntanos qué estás <em>construyendo</em>.</h2>
-                <p>No necesitas tener todo claro para escribirnos. Solo necesitas saber que algo tiene que cambiar.</p>
-                <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20contarles%20qu%C3%A9%20estoy%20construyendo" target="_blank" rel="noopener" class="btn-wa">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.5 3.5A12 12 0 0 0 3.5 20.5L2 22l1.5-1.5A12 12 0 1 0 20.5 3.5zm-8.5 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm5.2-7.8c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.4-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.6.1-.9.4c-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.2-1.3 0-.2-.2-.3-.5-.4z"/></svg>
-                    Escribir a Pedro
-                </a>
+    <!-- Conferencias -->
+    <section class="lx-section container" id="conferencias">
+        <div class="lx-split is-reverse">
+            <figure class="lx-photo" data-lx="right">
+                <img src="/img/pedro-bedoya.webp" srcset="/img/pedro-bedoya-960.webp 960w, /img/pedro-bedoya.webp 1600w"
+                    sizes="(min-width: 1000px) 640px, 100vw" width="1600" height="1069" loading="lazy" decoding="async"
+                    alt="Pedro Bedoya en el escenario durante una conferencia sobre el auge de la IA generativa">
+            </figure>
+            <div class="lx-split-copy" data-lx-group>
+                <span class="lx-num" data-lx="up">02</span>
+                <p class="lx-label" data-lx="up">Conferencias</p>
+                <h2 class="lx-h2" data-lx="up">Una conversación que mueva algo.</h2>
+                <p class="lx-kicker" data-lx="up">Para eventos, empresas y universidades.</p>
+                <p data-lx="up">No hablamos de IA como si fuera magia ni como si fuera una amenaza. Hablamos desde la práctica, con criterio y sin exageraciones.</p>
+                <ul class="lx-list">
+                    <li data-lx="up"><i class="fa-solid fa-building"></i><div><strong>Para empresas</strong><span>Cómo implementar IA sin destruir la cultura organizacional.</span></div></li>
+                    <li data-lx="up"><i class="fa-solid fa-graduation-cap"></i><div><strong>Para universidades</strong><span>El futuro del trabajo y la creatividad en la era de la IA generativa.</span></div></li>
+                    <li data-lx="up"><i class="fa-solid fa-palette"></i><div><strong>Para eventos culturales</strong><span>El impacto de la tecnología en los negocios culturales y las conversaciones que importan.</span></div></li>
+                </ul>
+                <p class="lx-tags-label" data-lx="up">Formatos</p>
+                <div class="lx-tags is-blue" data-lx="up">
+                    <span>45 minutos</span><span>1 hora</span><span>Media jornada + taller</span>
+                </div>
+                <div class="lx-actions" data-lx="up">
+                    <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20las%20conferencias%20de%20Kulttia" target="_blank" rel="noopener" class="btn btn-primary">Agendar una conferencia <i class="fa-brands fa-whatsapp"></i></a>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Acompañamiento -->
+    <section class="lx-section container" id="acompanamiento">
+        <span class="lx-num" data-lx="up">03</span>
+        <p class="lx-label" data-lx="up">Acompañamiento</p>
+        <h2 class="lx-h2" data-lx="up">Para quienes están en medio de un cambio.</h2>
+        <p class="lx-sub" data-lx="up">No es consultoría tradicional. Es caminar juntos un proceso de transformación tecnológica o cultural con criterio, contexto y sin rodeos.</p>
+        <div class="lx-bento is-three" data-lx-group>
+            <article class="lx-tile is-accent" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                <h3>Empresas que quieren implementar IA</h3>
+                <p>Para organizaciones que no saben por dónde empezar. Priorizamos, estructuramos y acompañamos el proceso.</p>
+            </article>
+            <article class="lx-tile" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-lightbulb"></i></span>
+                <h3>Emprendedores en cultura y tecnología</h3>
+                <p>Para quienes construyen en esa intersección y necesitan perspectiva estratégica.</p>
+            </article>
+            <article class="lx-tile" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-mug-hot"></i></span>
+                <h3>Organizaciones culturales</h3>
+                <p>Librerías, cafés y espacios creativos que quieren potenciarse con tecnología sin perder su identidad.</p>
+            </article>
+        </div>
+        <div class="lx-actions" data-lx="up" style="margin-top:2rem">
+            <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20el%20acompa%C3%B1amiento%20de%20Kulttia" target="_blank" rel="noopener" class="btn btn-primary">Hablar del acompañamiento <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </section>
+
+    <!-- Cierre -->
+    <section class="lx-final container">
+        <p class="lx-label" data-lx="up" style="justify-content:center">¿Por dónde empezamos?</p>
+        <h2 data-lx="up">Cuéntanos qué estás <span class="lx-accent">construyendo</span>.</h2>
+        <p data-lx="up">No necesitas tener todo claro para escribirnos. Solo necesitas saber que algo tiene que cambiar.</p>
+        <div class="lx-actions" data-lx="up">
+            <a href="https://wa.me/573182057306?text=Hola%2C%20quiero%20contarles%20qu%C3%A9%20estoy%20construyendo" target="_blank" rel="noopener" class="btn btn-primary">Escribir a Pedro <i class="fa-brands fa-whatsapp"></i></a>
+            <a href="/contacto" class="btn btn-outline">Ir a contacto</a>
         </div>
     </section>
 
@@ -599,14 +237,62 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="grid footer-grid">
+                <!-- Branding -->
+                <div>
+                    <h4 class="footer-logo">Kulttia Lab<span>.</span></h4>
+                    <p class="footer-desc">Explorando las fronteras entre la tecnología moderna, el diseño y la cultura
+                        emergente.</p>
+                </div>
+
+                <!-- Explorar Links -->
+                <div>
+                    <h4 class="footer-title">Explorar</h4>
+                    <div class="footer-links">
+                        <a href="/nosotros" aria-label="Sobre Nosotros — pie de página">Nosotros</a>
+                        <a href="/servicios" aria-label="Servicios — pie de página">Servicios</a>
+                        <a href="/academia" aria-label="Academia — pie de página">Academia</a>
+                        <a href="/negocios" aria-label="Kulttia Negocios — pie de página">Negocios</a>
+                        <a href="/blog" aria-label="Artículos — pie de página">Artículos</a>
+                        <a href="/boveda" aria-label="Bóveda de recursos — pie de página">Bóveda</a>
+                        <a href="/contacto" aria-label="Contacto — pie de página">Contacto</a>
+                    </div>
+                </div>
+
+                <!-- Categorías Links -->
+                <div>
+                    <h4 class="footer-title">Categorías</h4>
+                    <div class="footer-links">
+                        <a href="/blog?category=arte">Arte</a>
+                        <a href="/blog?category=ia%20y%20machine%20learning">IA y aprendizaje automático</a>
+                        <a href="/blog?category=cybercultura">Cybercultura</a>
+                        <a href="/blog?category=web">Web</a>
+                    </div>
+                </div>
+
+                <!-- Data & Legal -->
+                <div>
+                    <h4 class="footer-title">Legal</h4>
+                    <div class="footer-links">
+                        <a href="/politica-privacidad">Política de Privacidad</a>
+                        <a href="/terminos-servicio">Términos de Servicio</a>
+                        <a href="/politica-cookies">Política de Cookies</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Line -->
             <div class="footer-bottom">
                 <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
-                <nav class="footer-mini" aria-label="Más de Kulttia"><a href="/boveda">Bóveda</a><a href="/negocios">Negocios</a></nav>
                 <div class="social-links">
-                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -629,10 +315,11 @@
         </div>
     </div>
 
-    <script src="js/main.js" defer></script>
-    <script src="js/animaciones.js?v=1" defer></script>
-    <script src="js/search.js" defer></script>
-    <script src="js/wordpress-api.js?v=7" defer></script>
+    <script src="/js/main.js" defer></script>
+    <script src="/js/animaciones.js?v=1" defer></script>
+    <script src="/js/landing.js?v=1" defer></script>
+    <script src="/js/search.js" defer></script>
+    <script src="/js/wordpress-api.js?v=7" defer></script>
 
     <!-- WhatsApp Chat Bubble -->
     <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">

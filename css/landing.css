@@ -669,6 +669,199 @@
     .lx-band .lx-frame { border-right: 0; border-radius: 14px 0 0 0; }
 }
 
+/* =============================================
+   Páginas institucionales (Nosotros, Servicios)
+   Fotos, bloques alternos, etiquetas y cifras.
+   ============================================= */
+
+/* --- Foto con marco --- */
+.lx-photo {
+    position: relative;
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background: radial-gradient(circle at 70% 30%, var(--acid-blue-glow), transparent 60%), linear-gradient(140deg, var(--bg-card), var(--bg-main));
+    border: 1px solid var(--border-color-strong);
+    box-shadow: 0 30px 80px -25px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(35, 61, 255, 0.08);
+    min-width: 0;
+}
+:root[data-theme="light"] .lx-photo {
+    box-shadow: 0 30px 70px -25px rgba(17, 24, 64, 0.35), 0 0 0 1px rgba(35, 61, 255, 0.08);
+}
+.lx-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.lx-photo.is-portrait { aspect-ratio: 4 / 3; }
+.lx-photo.is-portrait img { object-position: 50% 20%; }
+.lx-photo figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2.5rem 1.25rem 1.1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.78));
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+}
+.lx-photo figcaption strong { font-size: 1.05rem; }
+.lx-photo figcaption span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c9d1ff;
+}
+.lx-stage.is-photo { padding-bottom: 1.5rem; }
+.lx-stage.is-photo .lx-chip.is-b { left: auto; right: 6%; bottom: 0; }
+
+/* --- Bloques alternos imagen / texto --- */
+.lx-split {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+}
+.lx-split > * { min-width: 0; }
+.lx-split .lx-h2 { margin-bottom: 0.75rem; }
+.lx-split-copy > p {
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    max-width: 560px;
+}
+.lx-split-copy > p.lx-kicker {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.lx-split-copy .lx-list { margin: 1.75rem 0; }
+.lx-split-copy .lx-actions { margin-top: 2rem; }
+.lx-num {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--acid-blue);
+    margin-bottom: 0.5rem;
+}
+
+/* --- Etiquetas (formatos, clientes) --- */
+.lx-tags-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 1.75rem 0 0.8rem;
+}
+.lx-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.lx-tags span {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--border-radius-pill);
+    border: 1px solid var(--border-color-strong);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+.lx-tags.is-blue span {
+    border-color: var(--border-blue-subtle);
+    background: var(--bg-element);
+    color: var(--text-main);
+}
+
+/* --- Cifras --- */
+.lx-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.25rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border-color);
+    max-width: 560px;
+}
+.lx-stats strong {
+    display: block;
+    font-size: 1.7rem;
+    line-height: 1;
+    color: var(--acid-blue);
+}
+.lx-stats span {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* --- Cita --- */
+.lx-quote {
+    margin: 0;
+    padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+    border-left: 3px solid var(--acid-blue);
+    background: var(--bg-element);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* --- Bento: número en lugar de icono --- */
+.lx-tile-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--acid-blue);
+    margin-bottom: 0.9rem;
+}
+.lx-tile p strong { color: var(--text-main); font-weight: 600; }
+.lx-tile .article-link { margin-top: auto; padding-top: 1.25rem; }
+
+@media (min-width: 560px) {
+    .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 700px) {
+    .lx-bento.is-three .lx-tile:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+@media (min-width: 1000px) {
+    .lx-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4.5rem; }
+    .lx-split.is-reverse > :first-child { order: 2; }
+    .lx-photo.is-portrait { aspect-ratio: 3 / 4; }
+    .lx-split.is-narrow-img { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+    .lx-split.is-reverse.is-narrow-img { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); }
+    .lx-split.is-narrow-img .lx-photo.is-portrait { max-width: 440px; justify-self: end; width: 100%; }
+    .lx-bento.is-three { grid-template-columns: repeat(3, 1fr); }
+    .lx-bento.is-three .lx-tile:last-child:nth-child(odd) { grid-column: auto; }
+}
+
+/* --- Ajustes de páginas institucionales --- */
+.lx-hero.is-long h1 { font-size: clamp(2.1rem, 5.6vw, 3.5rem); }
+.lx-hero .lx-lead + .lx-lead { margin-top: -1rem; }
+.lx-beliefs { margin-top: 2.5rem; }
+.lx-beliefs p { font-size: 1rem; color: var(--text-muted); }
+.lx-beliefs b { color: var(--text-main); font-weight: 600; }
+a.lx-tile { color: inherit; text-decoration: none; }
+a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3px; }
+.lx-tile .lx-tile-link { margin-top: 0; padding-top: 1rem; }
+.lx-tile.is-wide .lx-tile-media { margin-top: auto; }
+.lx-tile.is-wide .lx-tile-link { margin-bottom: 1.5rem; }
+
+@media (min-width: 700px) and (max-width: 999px) {
+    .lx-tile.is-wide { grid-column: 1 / -1; }
+}
+
 @media (max-width: 420px) {
     .lx-chip { font-size: 0.74rem; padding: 0.45rem 0.75rem; }
     .lx-chip.is-a { top: 8%; }

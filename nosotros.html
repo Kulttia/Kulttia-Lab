@@ -23,353 +23,16 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="css/estilos.css?v=5">
-    <link rel="stylesheet" href="css/animaciones.css?v=1">
+    <link rel="stylesheet" href="/css/estilos.css?v=6">
+    <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
-    <style>
-        /* ── Hero ── */
-        .about-hero {
-            padding: 12rem 0 5rem;
+    <link rel="stylesheet" href="/css/landing.css?v=2">
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            document.documentElement.classList.add('lx-on');
         }
-        .about-hero .title-accent {
-            color: var(--acid-blue);
-            text-shadow: 0 0 15px var(--acid-blue-glow);
-        }
-        .about-hero-meta {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            flex-wrap: wrap;
-        }
-        .about-hero-meta .stat {
-            display: flex;
-            flex-direction: column;
-        }
-        .about-hero-meta .stat strong {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--acid-blue);
-            line-height: 1;
-        }
-        .about-hero-meta .stat span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-top: 0.3rem;
-        }
-        .about-hero-meta .stat-divider {
-            width: 1px;
-            height: 40px;
-            background: var(--border-color);
-        }
+    </script>
 
-        /* ── Origin section ── */
-        .origin-section {
-            padding: 6rem 0;
-            display: grid;
-            grid-template-columns: 1fr 1.4fr;
-            gap: 5rem;
-            align-items: start;
-        }
-        .origin-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--acid-blue);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .origin-label::before {
-            content: '';
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--acid-blue);
-        }
-        .origin-sticky {
-            position: sticky;
-            top: 8rem;
-            min-width: 0;
-        }
-        .origin-sticky h2 {
-            font-size: clamp(2rem, 3.5vw, 2.8rem);
-            line-height: 1.2;
-            font-weight: 700;
-        }
-        .origin-quote {
-            margin: 2rem 0;
-            padding: 1.5rem 1.5rem 1.5rem 2rem;
-            border-left: 3px solid var(--acid-blue);
-            background: var(--bg-element);
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: var(--text-main);
-            font-style: italic;
-        }
-        .origin-body {
-            min-width: 0;
-        }
-        .origin-body p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.85;
-            margin-bottom: 1.4rem;
-        }
-        .origin-body p:last-child { margin-bottom: 0; }
-
-        /* ── Beliefs ── */
-        .beliefs-section {
-            padding: 6rem 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .beliefs-header {
-            display: flex;
-            align-items: baseline;
-            gap: 2rem;
-            margin-bottom: 3.5rem;
-            flex-wrap: wrap;
-        }
-        .beliefs-header h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; }
-        .beliefs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .belief-item {
-            padding: 1.8rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            display: flex;
-            gap: 1.2rem;
-            align-items: flex-start;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .belief-item:hover {
-            border-color: var(--border-blue-subtle);
-            box-shadow: 0 0 20px var(--acid-blue-light);
-        }
-        .belief-num {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--acid-blue);
-            background: var(--bg-element);
-            border: 1px solid var(--border-blue-subtle);
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            letter-spacing: 0;
-        }
-        .belief-item p {
-            color: var(--text-muted);
-            font-size: 0.98rem;
-            line-height: 1.7;
-            margin: 0;
-        }
-        .belief-item p strong { color: var(--text-main); font-weight: 600; }
-
-        /* ── Pillars ── */
-        .pillars-section {
-            padding: 6rem 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .pillars-intro {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 3.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .pillars-intro h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; }
-        .pillar-card {
-            background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-main) 100%);
-            padding: 2.5rem 2rem;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            border-top: 3px solid var(--acid-blue);
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .pillar-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover), inset 0 0 24px var(--acid-blue-light);
-            border-color: var(--border-blue-subtle);
-        }
-        .pillar-number {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--acid-blue);
-            margin-bottom: 1.2rem;
-        }
-        .pillar-icon {
-            font-size: 2rem;
-            color: var(--acid-blue);
-            margin-bottom: 1.2rem;
-            text-shadow: 0 0 16px var(--acid-blue-glow);
-        }
-        .pillar-card h3 { font-size: 1.35rem; margin-bottom: 0.8rem; font-weight: 700; }
-        .pillar-card p { color: var(--text-muted); line-height: 1.75; font-size: 0.97rem; margin: 0; }
-
-        /* ── Human Factor ── */
-        .human-section {
-            padding: 7rem 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .human-section-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--acid-blue);
-            margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .human-section-label::before {
-            content: '';
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--acid-blue);
-        }
-        .human-layout {
-            display: grid;
-            grid-template-columns: 420px 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-        .human-photo-wrap {
-            position: sticky;
-            top: 8rem;
-        }
-        .human-photo {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            object-position: center top;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-blue-subtle);
-            box-shadow: 0 0 60px var(--acid-blue-light), 0 20px 60px rgba(0,0,0,0.4);
-            display: block;
-        }
-        .human-photo-caption {
-            margin-top: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .human-photo-caption .name {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-        .human-photo-caption .role {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--acid-blue);
-        }
-        .human-bio h2 {
-            font-size: clamp(2rem, 3.5vw, 3rem);
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 2rem;
-        }
-        .human-bio h2 em {
-            font-style: normal;
-            color: var(--acid-blue);
-        }
-        .human-bio p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.85;
-            margin-bottom: 1.4rem;
-        }
-        .human-bio p:last-of-type { margin-bottom: 2.5rem; }
-        .clients-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-        .clients-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-        .client-tag {
-            font-size: 0.78rem;
-            font-weight: 500;
-            padding: 0.35rem 0.85rem;
-            background: var(--bg-element);
-            border: 1px solid var(--border-color);
-            border-radius: 100px;
-            color: var(--text-muted);
-            transition: border-color 0.2s, color 0.2s;
-        }
-        .client-tag:hover {
-            border-color: var(--border-blue-subtle);
-            color: var(--text-main);
-        }
-
-        /* ── CTA strip ── */
-        .about-cta {
-            padding: 6rem 0;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .about-cta h2 {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 700;
-            max-width: 600px;
-        }
-        .about-cta h2 span { color: var(--acid-blue); }
-
-        /* ── Responsive ── */
-        @media (max-width: 1024px) {
-            .human-layout {
-                grid-template-columns: 340px 1fr;
-                gap: 3.5rem;
-            }
-        }
-        @media (max-width: 860px) {
-            .origin-section { grid-template-columns: 1fr; gap: 2.5rem; }
-            .origin-sticky { position: static; }
-            .human-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .human-photo-wrap { position: static; }
-            .human-photo { aspect-ratio: 4/3; object-position: center 20%; max-height: 420px; }
-        }
-        @media (max-width: 600px) {
-            .about-hero-meta { gap: 1.2rem; }
-            .about-hero-meta .stat strong { font-size: 1.4rem; }
-            .about-cta { flex-direction: column; align-items: flex-start; }
-            .pillars-intro { flex-direction: column; }
-        }
-    </style>
 
     <script>
         const savedTheme = localStorage.getItem('theme');
@@ -411,167 +74,130 @@
 
     <main>
 
-    <!-- ── HERO ── -->
-    <section class="about-hero container">
-        <span class="tag-pill">Manifiesto</span>
-        <h1 style="font-size: clamp(2.8rem, 5vw, 4.5rem); margin-top: 1.5rem; margin-bottom: 1.5rem; max-width: 900px; line-height: 1.1;">
-            No reportamos tecnología.<br>
-            La <span class="title-accent">observamos</span>, enseñamos<br>y pensamos desde la cultura.
-        </h1>
-        <p style="font-size: 1.15rem; color: var(--text-muted); max-width: 640px; line-height: 1.8;">
-            Kulttia Lab nació en 2023 en la intersección entre inteligencia artificial y cultura.
-            Críticos, accesibles y profundamente educativos.
-        </p>
-        <div class="about-hero-meta">
-            <div class="stat">
-                <strong>2023</strong>
-                <span>Fundación</span>
+    <!-- Hero -->
+    <section class="lx-hero is-long container">
+        <div>
+            <span class="tag-pill" data-lx="up">Manifiesto</span>
+            <h1 data-lx="up" style="--lx-delay:.08s">No reportamos tecnología. La <span>observamos</span>, enseñamos y pensamos desde la cultura.</h1>
+            <p class="lx-lead" data-lx="up" style="--lx-delay:.16s">
+                Kulttia Lab nació en 2023 en la intersección entre inteligencia artificial y cultura.
+                Críticos, accesibles y profundamente educativos.
+            </p>
+            <div class="lx-actions" data-lx="up" style="--lx-delay:.24s">
+                <a href="/contacto" class="btn btn-primary">Hablemos <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/servicios" class="btn btn-outline">Ver servicios</a>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <strong>4+</strong>
-                <span>Años enseñando IA</span>
+            <div class="lx-stats" data-lx="up" style="--lx-delay:.32s">
+                <div><strong>2023</strong><span>Fundación</span></div>
+                <div><strong>4+</strong><span>Años enseñando IA</span></div>
+                <div><strong>10+</strong><span>Empresas e instituciones</span></div>
+                <div><strong>100%</strong><span>Enfoque cultural</span></div>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <strong>10+</strong>
-                <span>Empresas e instituciones</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <strong>100%</strong>
-                <span>Enfoque cultural</span>
+        </div>
+        <div class="lx-stage is-photo" data-lx="right" style="--lx-delay:.2s">
+            <figure class="lx-photo">
+                <img src="/img/servicios/charla-1.webp" width="1600" height="1066" fetchpriority="high" decoding="async"
+                    alt="Pedro Bedoya en un taller sobre los efectos de la IA, con la presentación proyectada y el grupo atento">
+            </figure>
+            <span class="lx-chip is-a" aria-hidden="true"><i class="fa-solid fa-microchip"></i>Tecnología</span>
+            <span class="lx-chip is-b" aria-hidden="true"><i class="fa-solid fa-book-open"></i>Cultura</span>
+        </div>
+    </section>
+
+    <!-- Por qué existimos -->
+    <section class="lx-section container" id="origen">
+        <div class="lx-split">
+            <figure class="lx-photo" data-lx="left">
+                <img src="/img/pedro-bedoya.webp" srcset="/img/pedro-bedoya-960.webp 960w, /img/pedro-bedoya.webp 1600w"
+                    sizes="(min-width: 1000px) 640px, 100vw" width="1600" height="1069" loading="lazy" decoding="async"
+                    alt="Pedro Bedoya en el escenario durante una conferencia sobre el auge de la IA generativa">
+            </figure>
+            <div class="lx-split-copy" data-lx-group>
+                <p class="lx-label" data-lx="up">Por qué existimos</p>
+                <h2 class="lx-h2" data-lx="up">Hay un problema que nadie estaba resolviendo.</h2>
+                <p data-lx="up">Todo el mundo habla de IA para marketing, para ventas, para negocios comercialmente atractivos. Pero casi nadie piensa en lo que la tecnología le hace a la cultura: a las librerías, los cafés, los museos, los espacios creativos, los negocios que no miden su valor en clics sino en conversaciones.</p>
+                <p data-lx="up">En un mundo saturado de información, filtramos el ruido y exploramos cómo la inteligencia artificial y las nuevas herramientas digitales están moldeando nuestro futuro humano.</p>
+                <blockquote class="lx-quote" data-lx="up">
+                    «No reportamos tecnología. La observamos desde adentro, la enseñamos desde la práctica y la pensamos desde la cultura.»
+                </blockquote>
             </div>
         </div>
     </section>
 
-    <!-- ── ORIGIN ── -->
-    <section class="container origin-section">
-        <div class="origin-sticky">
-            <p class="origin-label">Por qué existimos</p>
-            <h2>Hay un problema que nadie estaba resolviendo.</h2>
-            <blockquote class="origin-quote">
-                "No reportamos tecnología. La observamos desde adentro, la enseñamos desde la práctica y la pensamos desde la cultura."
-            </blockquote>
-        </div>
-        <div class="origin-body">
-            <p>Todo el mundo habla de IA para marketing, para ventas, para negocios comercialmente atractivos. Pero casi nadie piensa en lo que la tecnología le hace a la cultura. A las librerías, los cafés, los museos, los espacios creativos, los negocios que no miden su valor en clics sino en conversaciones.</p>
-            <p>Kulttia Lab nació en 2023 como una respuesta a la necesidad urgente de entender la intersección entre tecnología y cultura.</p>
-            <p>En un mundo saturado de información, nos dedicamos a filtrar el ruido y explorar cómo la Inteligencia Artificial y las nuevas herramientas digitales están moldeando fundamentalmente nuestro futuro humano.</p>
-            <p>Nuestro enfoque es siempre crítico, accesible y profundamente educativo.</p>
+    <!-- Lo que creemos -->
+    <section class="lx-section container" id="principios">
+        <p class="lx-label" data-lx="up">Lo que creemos</p>
+        <h2 class="lx-h2" data-lx="up">Cuatro principios que guían cada artículo.</h2>
+        <div class="lx-flow is-four lx-beliefs" data-lx-group>
+            <div data-lx="up"><p>Aprender IA no tiene sentido sin entender su <b>impacto cultural</b>.</p></div>
+            <div data-lx="up"><p>Los <b>negocios culturales</b> merecen las mismas herramientas que las grandes corporaciones.</p></div>
+            <div data-lx="up"><p>El conocimiento no debería ser un <b>privilegio</b>.</p></div>
+            <div data-lx="up"><p><b>Filtrar el ruido</b> es hoy más valioso que amplificarlo.</p></div>
         </div>
     </section>
 
-    <!-- ── BELIEFS ── -->
-    <section class="container beliefs-section">
-        <div class="beliefs-header">
-            <p class="origin-label" style="margin: 0;">Lo que creemos</p>
-            <h2>Cuatro principios que guían cada artículo.</h2>
-        </div>
-        <div class="beliefs-grid">
-            <div class="belief-item">
-                <span class="belief-num">01</span>
-                <p>Aprender IA no tiene sentido sin entender su <strong>impacto cultural</strong>.</p>
-            </div>
-            <div class="belief-item">
-                <span class="belief-num">02</span>
-                <p>Los <strong>negocios culturales</strong> merecen las mismas herramientas que las grandes corporaciones.</p>
-            </div>
-            <div class="belief-item">
-                <span class="belief-num">03</span>
-                <p>El conocimiento no debería ser un <strong>privilegio</strong>.</p>
-            </div>
-            <div class="belief-item">
-                <span class="belief-num">04</span>
-                <p><strong>Filtrar el ruido</strong> es hoy más valioso que amplificarlo.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── PILLARS ── -->
-    <section class="container pillars-section">
-        <div class="pillars-intro">
-            <div>
-                <p class="origin-label" style="margin-bottom: 0.8rem;">Tres pilares</p>
-                <h2>Cómo trabajamos.</h2>
-            </div>
-        </div>
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-            <div class="pillar-card">
-                <span class="pillar-number">01 / Investigación</span>
-                <i class="fa-solid fa-microchip pillar-icon"></i>
-                <h3>Investigación</h3>
-                <p>Analizamos las herramientas que cambiarán paradigmas. Desde IA generativa hasta infraestructuras descentralizadas, desmitificamos la complejidad.</p>
-            </div>
-            <div class="pillar-card">
-                <span class="pillar-number">02 / Educación</span>
-                <i class="fa-solid fa-graduation-cap pillar-icon"></i>
+    <!-- Cómo trabajamos -->
+    <section class="lx-section container" id="pilares">
+        <p class="lx-label" data-lx="up">Tres pilares</p>
+        <h2 class="lx-h2" data-lx="up">Cómo trabajamos.</h2>
+        <p class="lx-sub" data-lx="up">Investigar, enseñar y entender cómo cambia la sociedad con la tecnología.</p>
+        <div class="lx-bento" data-lx-group>
+            <article class="lx-tile span-4 row-2 is-wide is-accent" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-graduation-cap"></i></span>
                 <h3>Educación</h3>
                 <p>El aprendizaje es el verdadero cerrador de brechas. Compartimos lo que sabemos con análisis crítico, lenguaje accesible y perspectiva real sobre tecnología.</p>
-            </div>
-            <div class="pillar-card">
-                <span class="pillar-number">03 / Transformación</span>
-                <i class="fa-solid fa-arrows-rotate pillar-icon"></i>
+                <a href="/academia" class="article-link lx-tile-link">Conocer la academia <i class="fa-solid fa-arrow-right"></i></a>
+                <div class="lx-tile-media">
+                    <img src="/img/academia/app-inicio.webp" width="1200" height="750" loading="lazy" decoding="async"
+                        alt="Inicio de la Academia Kulttia con los cursos en progreso">
+                </div>
+            </article>
+            <article class="lx-tile span-2" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-microchip"></i></span>
+                <h3>Investigación</h3>
+                <p>Analizamos las herramientas que cambiarán paradigmas. Desde IA generativa hasta infraestructuras descentralizadas, desmitificamos la complejidad.</p>
+            </article>
+            <article class="lx-tile span-2" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
                 <h3>Transformación</h3>
                 <p>El software moldea a la sociedad y viceversa. Escribimos sobre cybercultura, hábitos digitales y el futuro del comportamiento conectado.</p>
-            </div>
+                <a href="/blog" class="article-link">Leer artículos <i class="fa-solid fa-arrow-right"></i></a>
+            </article>
         </div>
     </section>
 
-    <!-- ── HUMAN FACTOR ── -->
-    <section class="container human-section">
-        <p class="human-section-label">El factor humano en la era de la IA</p>
-        <div class="human-layout">
-
-            <!-- Foto — reemplaza img/pedro-bedoya.jpg con la ruta real de tu imagen -->
-            <div class="human-photo-wrap">
-                <img
-                    src="/img/pedro-bedoya.jpg"
-                    alt="Pedro Bedoya — Educador y emprendedor, fundador de Kulttia Lab"
-                    class="human-photo"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                >
-                <!-- Fallback si no existe la imagen -->
-                <div style="display:none; width:100%; aspect-ratio:3/4; background:var(--bg-element); border-radius:var(--border-radius); border:1px solid var(--border-blue-subtle); align-items:center; justify-content:center; flex-direction:column; gap:1rem; color:var(--text-muted);">
-                    <i class="fa-solid fa-user" style="font-size:3rem; opacity:0.3;"></i>
-                    <span style="font-size:0.8rem; opacity:0.5;">Agrega img/pedro-bedoya.jpg</span>
-                </div>
-                <div class="human-photo-caption">
-                    <span class="name">Pedro Bedoya</span>
-                    <span class="role">Educador · Emprendedor</span>
-                </div>
-            </div>
-
-            <!-- Bio -->
-            <div class="human-bio">
-                <h2>Me gusta estar donde algo <em>comienza</em>.</h2>
-                <p>Llevo más de 10 años emprendiendo, pero sobre todo aprendiendo. Fundé Refugios, la primera librería café de Itagüí, porque creo que la gente de mi ciudad merece acceso a los libros. Construí Kulttia porque creo que la educación puede ser diferente.</p>
-                <p>Hoy trabajo en la intersección entre inteligencia artificial, cultura y educación. Llevo 4 años enseñando IA a empresas e instituciones en Colombia y latinoamérica.</p>
-                <p>Antes de todo eso, fui parte de Mattelsa y Holss por más de 10 años, donde aprendí que el conocimiento sin aplicación es solo teoría bien guardada.</p>
-
-                <p class="clients-label">Ha trabajado con</p>
-                <div class="clients-list">
-                    <span class="client-tag">Comfama</span>
-                    <span class="client-tag">Argos</span>
-                    <span class="client-tag">Navitrans</span>
-                    <span class="client-tag">Gobernación de Antioquia</span>
-                    <span class="client-tag">Computadores para Educar</span>
-                    <span class="client-tag">EAFIT</span>
-                    <span class="client-tag">UPB</span>
-                    <span class="client-tag">Platzi</span>
-                    <span class="client-tag">Cosmo School</span>
-                    <span class="client-tag">En curso</span>
-                    <span class="client-tag">Mattelsa</span>
+    <!-- El factor humano -->
+    <section class="lx-section container" id="pedro">
+        <div class="lx-split is-reverse is-narrow-img">
+            <figure class="lx-photo is-portrait" data-lx="right">
+                <img src="/img/pedro-bedoya-retrato.webp" width="600" height="800" loading="lazy" decoding="async"
+                    alt="Pedro Bedoya, educador y emprendedor, fundador de Kulttia Lab">
+                <figcaption><strong>Pedro Bedoya</strong><span>Educador · Emprendedor</span></figcaption>
+            </figure>
+            <div class="lx-split-copy" data-lx-group>
+                <p class="lx-label" data-lx="up">El factor humano en la era de la IA</p>
+                <h2 class="lx-h2" data-lx="up">Me gusta estar donde algo <span class="lx-accent">comienza</span>.</h2>
+                <p data-lx="up">Llevo más de 10 años emprendiendo, pero sobre todo aprendiendo. Fundé Refugios, la primera librería café de Itagüí, porque creo que la gente de mi ciudad merece acceso a los libros. Construí Kulttia porque creo que la educación puede ser diferente.</p>
+                <p data-lx="up">Hoy trabajo en la intersección entre inteligencia artificial, cultura y educación. Llevo 4 años enseñando IA a empresas e instituciones en Colombia y Latinoamérica.</p>
+                <p data-lx="up">Antes de todo eso, fui parte de Mattelsa y Holss por más de 10 años, donde aprendí que el conocimiento sin aplicación es solo teoría bien guardada.</p>
+                <p class="lx-tags-label" data-lx="up">Ha trabajado con</p>
+                <div class="lx-tags" data-lx="up">
+                    <span>Comfama</span><span>Argos</span><span>Navitrans</span><span>Gobernación de Antioquia</span>
+                    <span>Computadores para Educar</span><span>EAFIT</span><span>UPB</span><span>Platzi</span>
+                    <span>Cosmo School</span><span>En curso</span><span>Mattelsa</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── CTA ── -->
-    <section class="container about-cta">
-        <h2>¿Tienes un proyecto en la <span>intersección entre cultura y tecnología</span>?</h2>
-        <a href="/contacto" class="btn btn-primary" style="flex-shrink:0;">Hablemos <i class="fa-solid fa-arrow-right" style="margin-left:0.5rem;"></i></a>
+    <!-- Cierre -->
+    <section class="lx-final container">
+        <h2 data-lx="up">¿Tienes un proyecto en la <span class="lx-accent">intersección entre cultura y tecnología</span>?</h2>
+        <p data-lx="up">Cuéntanos qué tienes en mente.</p>
+        <div class="lx-actions" data-lx="up">
+            <a href="/contacto" class="btn btn-primary">Hablemos <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://wa.me/573182057306" target="_blank" rel="noopener" class="btn btn-outline">WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
     </section>
 
     </main>
@@ -579,9 +205,53 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="grid footer-grid">
+                <!-- Branding -->
+                <div>
+                    <h4 class="footer-logo">Kulttia Lab<span>.</span></h4>
+                    <p class="footer-desc">Explorando las fronteras entre la tecnología moderna, el diseño y la cultura
+                        emergente.</p>
+                </div>
+
+                <!-- Explorar Links -->
+                <div>
+                    <h4 class="footer-title">Explorar</h4>
+                    <div class="footer-links">
+                        <a href="/nosotros" aria-label="Sobre Nosotros — pie de página">Nosotros</a>
+                        <a href="/servicios" aria-label="Servicios — pie de página">Servicios</a>
+                        <a href="/academia" aria-label="Academia — pie de página">Academia</a>
+                        <a href="/negocios" aria-label="Kulttia Negocios — pie de página">Negocios</a>
+                        <a href="/blog" aria-label="Artículos — pie de página">Artículos</a>
+                        <a href="/boveda" aria-label="Bóveda de recursos — pie de página">Bóveda</a>
+                        <a href="/contacto" aria-label="Contacto — pie de página">Contacto</a>
+                    </div>
+                </div>
+
+                <!-- Categorías Links -->
+                <div>
+                    <h4 class="footer-title">Categorías</h4>
+                    <div class="footer-links">
+                        <a href="/blog?category=arte">Arte</a>
+                        <a href="/blog?category=ia%20y%20machine%20learning">IA y aprendizaje automático</a>
+                        <a href="/blog?category=cybercultura">Cybercultura</a>
+                        <a href="/blog?category=web">Web</a>
+                    </div>
+                </div>
+
+                <!-- Data & Legal -->
+                <div>
+                    <h4 class="footer-title">Legal</h4>
+                    <div class="footer-links">
+                        <a href="/politica-privacidad">Política de Privacidad</a>
+                        <a href="/terminos-servicio">Términos de Servicio</a>
+                        <a href="/politica-cookies">Política de Cookies</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Line -->
             <div class="footer-bottom">
                 <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
-                <nav class="footer-mini" aria-label="Más de Kulttia"><a href="/boveda">Bóveda</a><a href="/negocios">Negocios</a></nav>
                 <div class="social-links">
                     <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
                             class="fa-brands fa-tiktok"></i></a>
@@ -610,14 +280,15 @@
                     style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
             </form>
-            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="politica-privacidad.html">Política de
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="/politica-privacidad">Política de
                     Privacidad</a> y confirmas que no eres un bot🤖.</p>
         </div>
     </div>
 
-    <script src="js/main.js" defer></script>
-    <script src="js/animaciones.js?v=1" defer></script>
-    <script src="js/search.js" defer></script>
+    <script src="/js/main.js" defer></script>
+    <script src="/js/animaciones.js?v=1" defer></script>
+    <script src="/js/landing.js?v=1" defer></script>
+    <script src="/js/search.js" defer></script>
     <!-- WhatsApp Chat Bubble -->
     <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
         <span class="wa-tooltip">💬 ¡Hablemos por WhatsApp!</span>
