@@ -190,6 +190,17 @@ ul {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+}
+
+.mobile-toggle:focus-visible {
+    outline: 2px solid var(--acid-blue);
+    outline-offset: 6px;
+    border-radius: 2px;
 }
 
 .mobile-toggle span {

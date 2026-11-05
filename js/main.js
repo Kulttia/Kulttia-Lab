@@ -4,19 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.getElementById('main-nav');
 
     if (mobileToggle && navLinks) {
-        mobileToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        const spans = mobileToggle.querySelectorAll('span');
+
+        const setMenu = (open) => {
+            navLinks.classList.toggle('active', open);
+            mobileToggle.setAttribute('aria-expanded', String(open));
+            mobileToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 
             // Hamburger animation
-            const spans = mobileToggle.querySelectorAll('span');
-            if (navLinks.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+            spans[0].style.transform = open ? 'rotate(45deg) translate(5px, 5px)' : 'none';
+            spans[1].style.opacity = open ? '0' : '1';
+            spans[2].style.transform = open ? 'rotate(-45deg) translate(7px, -6px)' : 'none';
+        };
+
+        mobileToggle.addEventListener('click', () => {
+            setMenu(!navLinks.classList.contains('active'));
+        });
+
+        // Escape cierra el menú y devuelve el foco al botón
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                setMenu(false);
+                mobileToggle.focus();
             }
         });
     }
