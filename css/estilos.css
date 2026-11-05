@@ -1099,3 +1099,19 @@ ul {
         font-size: 0.9rem;
     }
 }
+
+/* Pie compacto de las páginas internas: enlaces que no están en el menú */
+.footer-mini {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-mini a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.footer-mini a:hover {
+    color: var(--acid-blue);
+}

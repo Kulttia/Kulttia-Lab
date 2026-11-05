@@ -155,7 +155,7 @@ function generateHTML(post) {
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="/css/estilos.css?v=4">
+  <link rel="stylesheet" href="/css/estilos.css?v=5">
   <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
   <style>
@@ -199,12 +199,10 @@ function generateHTML(post) {
     <div class="container flex-between">
       <a href="/" class="logo">Kulttia Lab<span>.</span></a>
       <nav class="nav-links" id="main-nav">
-        <a href="/">Inicio</a>
-        <a href="/blog" class="active">Artículos</a>
-        <a href="/boveda">Bóveda</a>
-        <a href="/academia">Academia</a>
         <a href="/nosotros">Nosotros</a>
         <a href="/servicios">Servicios</a>
+        <a href="/academia">Academia</a>
+        <a href="/blog" class="active">Artículos</a>
         <a href="/contacto">Contacto</a>
         <button class="btn btn-primary btn-subscribe" style="padding:.5rem 1.2rem;font-size:.85rem;margin-left:1rem;">Suscribirse</button>
         <button id="theme-toggle" class="btn" style="padding:.5rem;background:transparent;color:var(--text-main);font-size:1.2rem;margin-left:.5rem;" aria-label="Alternar modo claro y oscuro">
@@ -249,6 +247,7 @@ function generateHTML(post) {
     <div class="container">
       <div class="footer-bottom">
         <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+        <nav class="footer-mini" aria-label="Más de Kulttia"><a href="/boveda">Bóveda</a><a href="/negocios">Negocios</a></nav>
         <div class="social-links">
           <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
           <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
