@@ -1148,3 +1148,6 @@ a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3
         .lx-bento > .lx-tile.row-2 { grid-row: span 10; }
     }
 }
+
+/* Tarjeta de ancho completo en cualquier bento */
+.lx-tile.span-6 { grid-column: 1 / -1; }
