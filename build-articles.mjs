@@ -201,6 +201,8 @@ function generateHTML(post) {
       <nav class="nav-links" id="main-nav">
         <a href="/">Inicio</a>
         <a href="/blog" class="active">Artículos</a>
+        <a href="/boveda">Bóveda</a>
+        <a href="/academia">Academia</a>
         <a href="/nosotros">Nosotros</a>
         <a href="/servicios">Servicios</a>
         <a href="/contacto">Contacto</a>
@@ -292,6 +294,8 @@ function updateSitemap(posts) {
   const staticUrls = [
     { loc: `${SITE_URL}/`,          priority: '1.0', changefreq: 'weekly' },
     { loc: `${SITE_URL}/blog`,      priority: '0.9', changefreq: 'daily' },
+    { loc: `${SITE_URL}/boveda`,    priority: '0.9', changefreq: 'weekly' },
+    { loc: `${SITE_URL}/academia`,  priority: '0.9', changefreq: 'weekly' },
     { loc: `${SITE_URL}/nosotros`,  priority: '0.8', changefreq: 'monthly' },
     { loc: `${SITE_URL}/servicios`, priority: '0.8', changefreq: 'monthly' },
     { loc: `${SITE_URL}/contacto`,  priority: '0.6', changefreq: 'monthly' },
