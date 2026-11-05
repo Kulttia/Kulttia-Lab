@@ -910,3 +910,161 @@ a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3
     .lx-chip.is-a { top: 8%; }
     .lx-actions .btn { flex: 1 1 100%; text-align: center; }
 }
+
+/* =============================================
+   Cómo enseñamos: diagramas SVG animados (.lx-dg)
+   El trazo se dibuja al entrar en pantalla (.is-in,
+   lo pone el revelado de landing.js). Sin .lx-on o con
+   prefers-reduced-motion se ven completos y quietos.
+   ============================================= */
+.lx-method {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+}
+.lx-mcard {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    overflow: hidden;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.lx-mcard:hover {
+    border-color: var(--border-blue-subtle);
+    box-shadow: 0 0 22px var(--acid-blue-light);
+}
+.lx-dg {
+    margin: 0;
+    padding: 1.75rem 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-element);
+    background-image: radial-gradient(var(--border-color-strong) 1px, transparent 1.2px);
+    background-size: 18px 18px;
+}
+.lx-dg svg {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+}
+.lx-mcard-body { padding: 1.5rem; }
+.lx-mtag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--acid-blue);
+    margin-bottom: 0.6rem;
+}
+.lx-mcard h3 { font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.5rem; }
+.lx-mcard-body > p:not(.lx-mtag) { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
+.lx-dg-keys {
+    list-style: none;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+.lx-dg-keys.is-wide { grid-template-columns: minmax(0, 1fr); }
+.lx-dg-keys li {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--border-color-strong);
+    border-radius: 10px;
+}
+.lx-dg-keys b,
+.lx-dg-note b { display: block; color: var(--text-main); font-weight: 600; }
+.lx-dg-note { margin-top: 1rem; font-size: 0.9rem; }
+.lx-dg-note b { display: inline; }
+@media (min-width: 1000px) {
+    .lx-method { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+    .lx-dg { padding: 2.25rem 1.5rem 1.75rem; }
+    .lx-mcard-body { padding: 1.75rem 2rem 2rem; }
+}
+
+/* Piezas del dibujo */
+.lx-dg .dg-line { fill: none; stroke: var(--acid-blue); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.lx-dg .dg-thin { fill: none; stroke: var(--acid-blue); stroke-width: 1.6; stroke-linecap: round; opacity: 0.8; }
+.lx-dg .dg-head { fill: none; stroke: var(--acid-blue); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.lx-dg .dg-node { fill: var(--acid-blue); }
+.lx-dg .dg-ring-node { fill: var(--bg-card); stroke: var(--acid-blue); stroke-width: 3; }
+.lx-dg .dg-hub { fill: var(--acid-blue-light); stroke: var(--border-blue-subtle); stroke-width: 1.5; }
+.lx-dg .dg-pill { fill: var(--bg-card); stroke: var(--border-blue-subtle); stroke-width: 1.5; }
+.lx-dg .dg-pill.is-key { stroke: var(--acid-blue); stroke-width: 2; }
+.lx-dg .dg-circ { fill: var(--acid-blue-light); stroke: var(--acid-blue); stroke-width: 2; }
+.lx-dg .dg-flag { fill: var(--acid-blue); }
+.lx-dg .dg-stop-a { stop-color: var(--acid-blue); stop-opacity: 0.22; }
+.lx-dg .dg-stop-b { stop-color: var(--acid-blue); stop-opacity: 0.02; }
+.lx-dg .dg-dot,
+.lx-dg .dg-climb { fill: var(--text-main); stroke: var(--acid-blue); stroke-width: 3; }
+.lx-dg .dg-t { fill: var(--text-main); font-family: var(--font-primary); font-size: 19px; font-weight: 600; }
+.lx-dg .dg-t.dg-sm { font-size: 17px; }
+.lx-dg .dg-t.dg-xs { font-size: 15px; }
+.lx-dg .dg-tm { fill: var(--text-muted); font-family: var(--font-primary); font-size: 16px; font-weight: 500; }
+.lx-dg .dg-num { fill: var(--text-muted); font-family: var(--font-primary); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; }
+.lx-dg .dg-sign { fill: var(--acid-blue); font-family: var(--font-primary); font-size: 20px; font-weight: 700; }
+.lx-dg .dg-flow { fill: none; stroke: var(--text-main); stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 0.1 22; opacity: 0; }
+.lx-dg .dg-ping { fill: none; stroke: var(--acid-blue); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.lx-dg .dg-climb { opacity: 0; }
+.lx-dg .dg-pop,
+.lx-dg .dg-fade { transform-box: fill-box; transform-origin: center; }
+.lx-dg .dg-orbit,
+.lx-dg .dg-spin { transform-box: view-box; }
+
+/* Estado inicial (solo con animación activa) */
+.lx-on [data-lx="dg"] { opacity: 1; transform: none; transition: none; }
+.lx-on .lx-dg .dg-draw { stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset 1s cubic-bezier(0.6, 0, 0.2, 1), opacity 0.2s; transition-delay: var(--d, 0s); }
+.lx-on .lx-dg .dg-pop { opacity: 0; transform: scale(0.4); transition: opacity 0.4s, transform 0.6s cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: var(--d, 0s); }
+.lx-on .lx-dg .dg-fade { opacity: 0; transform: translateY(6px); transition: opacity 0.6s, transform 0.6s; transition-delay: var(--d, 0s); }
+.lx-on .lx-dg .dg-orbit,
+.lx-on .lx-dg .dg-spin { opacity: 0; transition: opacity 0.4s var(--d, 0s); }
+.lx-on .lx-dg.is-in .dg-draw { stroke-dashoffset: 0; opacity: 1; }
+.lx-on .lx-dg.is-in .dg-pop,
+.lx-on .lx-dg.is-in .dg-fade { opacity: 1; transform: none; }
+.lx-on .lx-dg.is-in .dg-orbit,
+.lx-on .lx-dg.is-in .dg-spin { opacity: 1; }
+
+/* Movimiento continuo después del dibujo */
+.lx-dg.is-in .dg-orbit { animation: dg-spin 8s linear var(--d, 0s) infinite; }
+.lx-dg.is-in .dg-spin { animation: dg-spin 6s linear var(--d, 0s) infinite; }
+.lx-dg.is-in .dg-ping { animation: dg-ping 8s ease-out var(--d, 0s) infinite both; }
+.lx-dg.is-in .dg-ping.is-soft { animation: dg-ping-soft 4s ease-out var(--d, 0s) infinite both; }
+.lx-dg.is-in .dg-flow { opacity: 0.85; transition: opacity 0.4s var(--d, 0s); animation: dg-march 1.4s linear infinite; }
+@supports (offset-path: path('M0 0')) {
+    .lx-dg .dg-climb { offset-path: path('M72 311 H96 V251 H186 V191 H276 V131 H366 V66 H402'); offset-rotate: 0deg; }
+    .lx-dg.is-in .dg-climb { animation: dg-climb 6s cubic-bezier(0.5, 0, 0.3, 1) var(--d, 0s) infinite both; }
+}
+@keyframes dg-spin { to { transform: rotate(360deg); } }
+@keyframes dg-ping {
+    0% { opacity: 0; transform: scale(1); }
+    2% { opacity: 0.9; }
+    16% { opacity: 0; transform: scale(2.6); }
+    100% { opacity: 0; transform: scale(2.6); }
+}
+@keyframes dg-ping-soft {
+    0% { opacity: 0; transform: scale(1); }
+    4% { opacity: 0.7; }
+    30% { opacity: 0; transform: scale(1.22); }
+    100% { opacity: 0; transform: scale(1.22); }
+}
+@keyframes dg-march { to { stroke-dashoffset: -22.1; } }
+@keyframes dg-climb {
+    0% { offset-distance: 0%; opacity: 0; }
+    6% { opacity: 1; }
+    70% { offset-distance: 100%; opacity: 1; }
+    88% { offset-distance: 100%; opacity: 1; }
+    100% { offset-distance: 100%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .lx-mcard { transition: none; }
+    .lx-dg *, .lx-dg.is-in * { animation: none !important; transition: none !important; }
+    .lx-dg .dg-flow, .lx-dg .dg-ping, .lx-dg .dg-climb { display: none; }
+}
