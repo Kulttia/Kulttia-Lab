@@ -1090,3 +1090,12 @@ ul {
         max-height: 50vh;
     }
 }
+/* Menú de escritorio en pantallas medianas: menos separación para que quepan todos los enlaces */
+@media (min-width: 769px) and (max-width: 1180px) {
+    .nav-links {
+        gap: 1.25rem;
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+}
