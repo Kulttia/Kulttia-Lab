@@ -261,15 +261,8 @@
     margin-bottom: 0.75rem;
 }
 .lx-course-meta i { color: var(--acid-blue); margin-right: 0.35rem; }
-.lx-course h3 {
-    font-size: 1.25rem;
-    line-height: 1.3;
-    margin-bottom: 0.5rem;
-}
 .lx-course p {
     color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.65;
 }
 .lx-course .lx-req {
     margin-top: 0.6rem;
@@ -315,12 +308,7 @@
 }
 .lx-steps { display: grid; gap: 2.5rem; }
 .lx-step { min-width: 0; }
-.lx-step-num {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--acid-blue);
-    letter-spacing: 0.1em;
-}
+.lx-step-num { display: block; }
 .lx-step h3 {
     font-size: clamp(1.3rem, 3vw, 1.7rem);
     line-height: 1.2;
@@ -356,15 +344,8 @@
     border-color: var(--border-blue-subtle);
     box-shadow: 0 0 22px var(--acid-blue-light);
 }
-.lx-tile h3 {
-    font-size: 1.2rem;
-    line-height: 1.3;
-    margin-bottom: 0.4rem;
-}
 .lx-tile p {
     color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
 }
 .lx-tile-icon {
     width: 44px;
@@ -449,24 +430,20 @@
     counter-reset: paso;
 }
 .lx-flow > div {
-    padding: 1.4rem 1.4rem 1.4rem 4rem;
-    position: relative;
+    padding: 1.5rem;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 .lx-flow > div::before {
     counter-increment: paso;
     content: counter(paso, decimal-leading-zero);
-    position: absolute;
-    left: 1.35rem;
-    top: 1.35rem;
-    font-weight: 700;
-    color: var(--acid-blue);
 }
-.lx-flow strong { display: block; margin-bottom: 0.3rem; }
-.lx-flow p { color: var(--text-muted); font-size: 0.93rem; line-height: 1.65; }
+.lx-flow strong { display: block; }
+.lx-flow p { color: var(--text-muted); }
 
 /* --- Bloque empresa / cierre --- */
 .lx-band {
@@ -603,7 +580,8 @@
     .lx-section { padding-top: 6.5rem; padding-bottom: 6.5rem; }
     .lx-courses.has-three { grid-template-columns: repeat(3, 1fr); }
     .lx-flow { grid-template-columns: repeat(3, 1fr); }
-    .lx-flow.is-four { grid-template-columns: repeat(4, 1fr); }
+    /* Cuatro tarjetas en 2×2: en cuatro columnas los textos quedan de 2 a 4 líneas */
+    .lx-flow.is-four { grid-template-columns: repeat(2, 1fr); }
 
     /* Showcase: pasos a la izquierda, captura fija a la derecha */
     .lx-show { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: 4rem; }
@@ -737,14 +715,7 @@
 }
 .lx-split-copy .lx-list { margin: 1.75rem 0; }
 .lx-split-copy .lx-actions { margin-top: 2rem; }
-.lx-num {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--acid-blue);
-    margin-bottom: 0.5rem;
-}
+.lx-num { display: block; margin-bottom: 0.5rem; }
 
 /* --- Etiquetas (formatos, clientes) --- */
 .lx-tags-label {
@@ -813,13 +784,7 @@
 }
 
 /* --- Bento: número en lugar de icono --- */
-.lx-tile-num {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--acid-blue);
-    margin-bottom: 0.9rem;
-}
+
 .lx-tile p strong { color: var(--text-main); font-weight: 600; }
 .lx-tile .article-link { margin-top: auto; padding-top: 1.25rem; }
 
@@ -843,8 +808,7 @@
 /* --- Ajustes de páginas institucionales --- */
 .lx-hero.is-long h1 { font-size: clamp(2.1rem, 5.6vw, 3.5rem); }
 .lx-hero .lx-lead + .lx-lead { margin-top: -1rem; }
-.lx-beliefs { margin-top: 2.5rem; }
-.lx-beliefs p { font-size: 1rem; color: var(--text-muted); }
+.lx-beliefs p { color: var(--text-muted); }
 .lx-beliefs b { color: var(--text-main); font-weight: 600; }
 a.lx-tile { color: inherit; text-decoration: none; }
 a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3px; }
@@ -947,16 +911,8 @@ a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3
     overflow: visible;
 }
 .lx-mcard-body { padding: 1.5rem; }
-.lx-mtag {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--acid-blue);
-    margin-bottom: 0.6rem;
-}
-.lx-mcard h3 { font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.5rem; }
-.lx-mcard-body > p:not(.lx-mtag) { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
+.lx-mtag { text-transform: uppercase; }
+.lx-mcard-body > p:not(.lx-mtag) { color: var(--text-muted); }
 .lx-dg-keys {
     list-style: none;
     margin: 1.1rem 0 0;
@@ -1061,4 +1017,132 @@ a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3
     .lx-mcard { transition: none; }
     .lx-dg *, .lx-dg.is-in * { animation: none !important; transition: none !important; }
     .lx-dg .dg-flow, .lx-dg .dg-ping, .lx-dg .dg-climb { display: none; }
+}
+
+/* =============================================
+   Tarjetas: un solo estilo por rol y filas parejas
+   (cursos, método, bento, pasos/principios).
+   ============================================= */
+/* Número o etiqueta de tarjeta (01, 02 · Tema…) */
+.lx-tile-num,
+.lx-mtag,
+.lx-num,
+.lx-step-num,
+.lx-flow > div::before {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    color: var(--acid-blue);
+}
+.lx-tile-num,
+.lx-mtag,
+.lx-flow > div::before { display: block; margin-bottom: 0.75rem; }
+
+/* Título de tarjeta */
+.lx-course h3,
+.lx-tile h3,
+.lx-mcard h3,
+.lx-flow strong {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    text-wrap: balance;
+}
+
+/* Párrafo de tarjeta */
+.lx-course-body > p,
+.lx-tile > p,
+.lx-mcard-body > p:not(.lx-mtag),
+.lx-flow p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    text-wrap: pretty;
+}
+
+/* Título de sección seguido directo de una fila de tarjetas: mismo aire que con subtítulo */
+.lx-h2 + :is(.lx-bento, .lx-flow, .lx-courses, .lx-method) { margin-top: 1.5rem; }
+
+/* El diagrama queda centrado en su área (que la fila iguala abajo) */
+.lx-dg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Filas alineadas: cada tarjeta comparte las pistas de su fila (subgrid),
+   así etiqueta, título, texto y enlace arrancan a la misma altura que en
+   las vecinas aunque falte una parte (p. ej. la tarjeta «Próximamente»). */
+@supports (grid-template-rows: subgrid) {
+    /* Cursos: portada · meta · título · texto · requisito · enlace */
+    .lx-courses > .lx-course {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 6;
+        row-gap: 0;
+    }
+    .lx-course > .lx-course-body {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: 2 / span 5;
+        row-gap: 0;
+    }
+    .lx-course-body > .lx-course-meta { grid-row: 1; }
+    .lx-course-body > h3 { grid-row: 2; }
+    .lx-course-body > p:not(.lx-req) { grid-row: 3; }
+    .lx-course-body > .lx-req { grid-row: 4; }
+    .lx-course-body > .article-link { grid-row: 5; justify-self: start; }
+
+    /* Método: diagrama · etiqueta · título · texto · claves */
+    .lx-method > .lx-mcard {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 5;
+        row-gap: 0;
+    }
+    .lx-mcard > .lx-dg { grid-row: 1; }
+    .lx-mcard > .lx-mcard-body {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: 2 / span 4;
+        row-gap: 0;
+    }
+    .lx-mcard-body > .lx-mtag { grid-row: 1; }
+    .lx-mcard-body > h3 { grid-row: 2; }
+    .lx-mcard-body > p:not(.lx-mtag):not(.lx-dg-note) { grid-row: 3; }
+    .lx-mcard-body > .lx-dg-keys,
+    .lx-mcard-body > .lx-dg-note { grid-row: 4; align-self: start; }
+
+    /* Bento: icono/número · título · texto · enlace · imagen */
+    .lx-bento > .lx-tile {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 5;
+        row-gap: 0;
+        align-content: start;
+    }
+    .lx-tile > .lx-tile-icon,
+    .lx-tile > .lx-tile-num { grid-row: 1; justify-self: start; }
+    .lx-tile > h3 { grid-row: 2; }
+    .lx-tile > p { grid-row: 3; }
+    .lx-tile > .article-link { grid-row: 4; justify-self: start; align-self: end; }
+    .lx-tile > .lx-tile-media { grid-row: 5 / -1; align-self: end; }
+    .lx-tile > .lx-phone { grid-row: 5; align-self: start; }
+
+    /* Pasos y principios: número · título · texto */
+    .lx-flow > div {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
+        row-gap: 0;
+    }
+    .lx-flow > div::before { grid-row: 1; }
+    .lx-flow > div > strong { grid-row: 2; }
+    .lx-flow > div > p { grid-row: 3; }
+    .lx-flow > div > p:only-child { grid-row: 2 / -1; }
+
+    @media (min-width: 1000px) {
+        .lx-bento { grid-auto-rows: auto; }
+        .lx-bento > .lx-tile.row-2 { grid-row: span 10; }
+    }
 }

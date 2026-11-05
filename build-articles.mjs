@@ -155,7 +155,7 @@ function generateHTML(post) {
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="/css/estilos.css?v=7">
+  <link rel="stylesheet" href="/css/estilos.css?v=8">
   <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
   <style>
@@ -328,7 +328,7 @@ function generateHTML(post) {
     </div>
   </div>
 
-  <script src="/js/wordpress-api.js?v=7"></script>
+  <script src="/js/wordpress-api.js?v=8"></script>
   <script src="/js/main.js"></script>
   <script src="/js/animaciones.js?v=1" defer></script>
   <script src="/js/search.js"></script>

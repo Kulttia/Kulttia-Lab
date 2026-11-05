@@ -199,12 +199,8 @@ function renderPostCard(post) {
 
     return `
         <article class="article-card">
-            <a href="${link}" class="article-img-wrapper" style="display:block; height: 200px; overflow: hidden; border-radius: var(--border-radius) var(--border-radius) 0 0; border-bottom: 1px solid var(--border-color);">
-                <img src="${imageUrl}" alt="${stripHTML(title)}" loading="lazy"
-                    width="800" height="450"
-                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-                    onmouseover="this.style.transform='scale(1.05)'"
-                    onmouseout="this.style.transform='scale(1)'">
+            <a href="${link}" class="article-img-wrapper">
+                <img src="${imageUrl}" alt="${stripHTML(title)}" loading="lazy" width="800" height="450">
             </a>
             <div class="article-content">
                 <div class="article-meta">
@@ -213,9 +209,9 @@ function renderPostCard(post) {
                 </div>
                 <h3 class="article-title"><a href="${link}">${title}</a></h3>
                 <p class="article-excerpt">${excerpt}</p>
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-top: auto;">
+                <div class="article-foot">
                     <a href="${link}" class="article-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
-                    <span style="font-size: 0.82rem; color: var(--text-muted);"><i class="fa-regular fa-clock" style="margin-right:4px;"></i>${readTime} min</span>
+                    <span class="article-time"><i class="fa-regular fa-clock"></i>${readTime} min</span>
                 </div>
             </div>
         </article>`;
