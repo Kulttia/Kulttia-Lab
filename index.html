@@ -28,8 +28,32 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/estilos.css?v=3">
+    <link rel="stylesheet" href="css/estilos.css?v=4">
     <link rel="stylesheet" href="css/animaciones.css?v=1">
+    <style>
+        .home-academia { margin-top: 1rem; }
+        .home-academia-card {
+            display: grid;
+            gap: 1.75rem;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(to right, var(--bg-card), var(--bg-element));
+            border: 1px solid var(--border-blue-subtle);
+            border-radius: var(--border-radius);
+        }
+        .home-academia-card .tag-pill { margin-bottom: 1rem; }
+        .home-academia-card h2 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+        .home-academia-card p { color: var(--text-muted); max-width: 620px; }
+        .home-academia-card p strong { color: var(--text-main); }
+        .home-academia-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        @media (min-width: 900px) {
+            .home-academia-card { grid-template-columns: 1.6fr 1fr; align-items: center; padding: 3rem; }
+            .home-academia-actions { justify-content: flex-end; }
+        }
+    </style>
 
     <script>
         // Inject theme variable before body renders to avoid Flash of Dark Theme
@@ -128,6 +152,21 @@
         </div>
     </section>
 
+    <!-- Academia -->
+    <section class="container home-academia" id="academia">
+        <div class="home-academia-card">
+            <div>
+                <span class="tag-pill">Nuevo · Academia Kulttia</span>
+                <h2>Cursos cortos para entender cómo funcionan las organizaciones.</h2>
+                <p>Clases en video, examen final y certificado verificable. Empieza con <strong>Introducción al pensamiento sistémico</strong>: 5 clases, 21 minutos, gratis.</p>
+            </div>
+            <div class="home-academia-actions">
+                <a href="/academia" class="btn btn-primary">Conocer la academia</a>
+                <a href="https://academia.kulttia.com/" class="btn btn-outline">Entrar a la academia</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Featured Articles (Cargados dinámicamente desde WordPress) -->
     <section class="container" id="destacados" style="margin-top: 4rem;">
         <h2 class="section-title">Destacados</h2>
@@ -176,6 +215,7 @@
                         <a href="/" aria-label="Inicio — pie de página">Inicio</a>
                         <a href="/blog" aria-label="Artículos — pie de página">Artículos</a>
                         <a href="/boveda" aria-label="Bóveda de recursos — pie de página">Bóveda</a>
+                        <a href="/academia" aria-label="Academia — pie de página">Academia</a>
                         <a href="/nosotros" aria-label="Sobre Nosotros — pie de página">Sobre Nosotros</a>
                         <a href="/contacto" aria-label="Contacto — pie de página">Contacto</a>
                     </div>
