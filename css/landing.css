@@ -1053,6 +1053,7 @@ a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3
 /* Párrafo de tarjeta */
 .lx-course-body > p,
 .lx-tile > p,
+.lx-tile-copy > p,
 .lx-mcard-body > p:not(.lx-mtag),
 .lx-flow p {
     font-size: 0.95rem;
@@ -1124,7 +1125,8 @@ a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3
     .lx-tile > .lx-tile-icon,
     .lx-tile > .lx-tile-num { grid-row: 1; justify-self: start; }
     .lx-tile > h3 { grid-row: 2; }
-    .lx-tile > p { grid-row: 3; }
+    .lx-tile > p,
+    .lx-tile > .lx-tile-copy { grid-row: 3; }
     .lx-tile > .article-link { grid-row: 4; justify-self: start; align-self: end; }
     .lx-tile > .lx-tile-media { grid-row: 5 / -1; align-self: end; }
     .lx-tile > .lx-phone { grid-row: 5; align-self: start; }
