@@ -1062,3 +1062,6 @@ a.lx-tile:focus-visible { outline: 2px solid var(--acid-blue); outline-offset: 3
     .lx-dg *, .lx-dg.is-in * { animation: none !important; transition: none !important; }
     .lx-dg .dg-flow, .lx-dg .dg-ping, .lx-dg .dg-climb { display: none; }
 }
+
+/* Tarjeta de ancho completo en cualquier bento */
+.lx-tile.span-6 { grid-column: 1 / -1; }
