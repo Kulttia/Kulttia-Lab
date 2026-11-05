@@ -21,6 +21,11 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://kulttia.com/negocios</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://kulttia.com/nosotros</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>

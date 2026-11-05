@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kulttia Negocios: plazas en la Academia Kulttia para tu equipo. Rutas propias, avance por persona, recordatorios y certificados verificables.">
+    <title>Negocios | Kulttia Lab</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kulttia Negocios — La Academia Kulttia para tu equipo">
+    <meta property="og:description" content="Rutas propias, avance por persona y certificados verificables para equipos de pequeñas y medianas empresas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kulttia.com/negocios">
+    <meta property="og:image" content="https://kulttia.com/og-default.png">
+    <meta property="og:site_name" content="Kulttia Lab">
+    <meta property="og:locale" content="es_CO">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kulttia Negocios — La Academia Kulttia para tu equipo">
+    <meta name="twitter:description" content="Rutas propias, avance por persona y certificados verificables para equipos de pequeñas y medianas empresas.">
+    <meta name="twitter:image" content="https://kulttia.com/og-default.png">
+    <link rel="canonical" href="https://kulttia.com/negocios">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="css/estilos.css?v=4">
+    <link rel="stylesheet" href="css/animaciones.css?v=1">
+
+    <style>
+        /* Academia — mobile-first */
+        .acd-hero {
+            padding-top: 9rem;
+            padding-bottom: 4rem;
+            position: relative;
+        }
+        .acd-hero::before {
+            content: '';
+            position: absolute;
+            top: 30%;
+            right: 0;
+            width: min(70vw, 560px);
+            height: min(70vw, 560px);
+            background: radial-gradient(circle, var(--acid-blue-glow) 0%, transparent 65%);
+            filter: blur(40px);
+            opacity: 0.45;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .acd-hero h1 {
+            font-size: clamp(2.3rem, 7vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.25rem;
+            max-width: 860px;
+        }
+        .acd-hero h1 span,
+        .acd-accent {
+            color: var(--acid-blue);
+            text-shadow: 0 0 18px var(--acid-blue-glow);
+        }
+        .acd-lead {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+        .acd-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .acd-actions .btn i { margin-left: 0.5rem; font-size: 0.85em; }
+        .acd-note {
+            margin-top: 1.25rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .acd-note strong { color: var(--text-main); }
+
+        .acd-section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .acd-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--acid-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .acd-label::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--acid-blue);
+            flex-shrink: 0;
+        }
+        .acd-section h2 {
+            font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+            line-height: 1.15;
+            margin-bottom: 2rem;
+            max-width: 720px;
+        }
+
+        .acd-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+        }
+        .acd-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .acd-card:hover {
+            border-color: var(--border-blue-subtle);
+            box-shadow: 0 0 18px var(--acid-blue-light);
+        }
+        .acd-card.is-soon { opacity: 0.75; }
+        .acd-card.is-soon:hover { border-color: var(--border-color); box-shadow: none; }
+        .acd-card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .acd-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: var(--acid-blue-light);
+            color: var(--acid-blue);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .acd-card h3 {
+            font-size: 1.2rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .acd-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+        .acd-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--border-radius-pill);
+            border: 1px solid var(--border-color-strong);
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .acd-badge.is-free {
+            border-color: var(--border-blue-subtle);
+            background: var(--bg-element);
+            color: var(--acid-blue);
+        }
+
+        /* Cursos */
+        .acd-course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .acd-course-meta i { color: var(--acid-blue); margin-right: 0.35rem; }
+        .acd-course .acd-req {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+        .acd-course .acd-req strong { color: var(--text-main); font-weight: 600; }
+        .acd-course .article-link { margin-top: 1.5rem; }
+
+        /* Cómo funciona */
+        .acd-steps {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+            counter-reset: paso;
+        }
+        .acd-step {
+            padding: 1.25rem 1.25rem 1.25rem 3.75rem;
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            min-width: 0;
+        }
+        .acd-step::before {
+            counter-increment: paso;
+            content: counter(paso, decimal-leading-zero);
+            position: absolute;
+            left: 1.25rem;
+            top: 1.2rem;
+            font-weight: 700;
+            color: var(--acid-blue);
+        }
+        .acd-step strong { display: block; margin-bottom: 0.3rem; }
+        .acd-step p {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+            line-height: 1.65;
+        }
+
+        /* Empresas + cierre */
+        .acd-business {
+            background: linear-gradient(to right, var(--bg-card), var(--bg-element));
+            border: 1px solid var(--border-blue-subtle);
+            border-radius: var(--border-radius);
+            padding: 2rem 1.5rem;
+        }
+        .acd-business h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.2; margin-bottom: 0.75rem; }
+        .acd-business p {
+            color: var(--text-muted);
+            max-width: 560px;
+            margin-bottom: 1.5rem;
+        }
+        .acd-business-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem 1.25rem;
+        }
+        .acd-disabled {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: default;
+            flex-wrap: wrap;
+        }
+        .acd-final {
+            text-align: center;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        .acd-final h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); line-height: 1.15; margin: 0 auto 1rem; max-width: 900px; }
+        .acd-final p { color: var(--text-muted); margin-bottom: 2rem; }
+
+        @media (min-width: 700px) {
+            .acd-grid { grid-template-columns: repeat(3, 1fr); }
+            .acd-grid.is-two { grid-template-columns: repeat(2, 1fr); }
+            .acd-steps { grid-template-columns: repeat(2, 1fr); }
+            .acd-business { padding: 3rem; }
+        }
+        @media (min-width: 1000px) {
+            .acd-hero { padding-top: 12rem; padding-bottom: 5rem; }
+            .acd-section { padding-top: 6rem; padding-bottom: 6rem; }
+            .acd-steps { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* Negocios */
+        .neg-grid-3 { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+        .neg-plans { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+        .neg-plan {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 0;
+        }
+        .neg-plan.is-featured { border-color: var(--border-blue-subtle); box-shadow: 0 0 18px var(--acid-blue-light); }
+        .neg-plan .neg-seats { font-weight: 700; font-size: 1.05rem; }
+        .neg-plan .neg-from { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.5rem; }
+        .neg-plan .neg-price { font-size: clamp(1.6rem, 6vw, 2rem); font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
+        .neg-plan .neg-price small { display: block; margin-top: 0.2rem; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+        .neg-plan .neg-month { font-size: 0.88rem; color: var(--text-muted); }
+        .neg-foot { margin-top: 1.25rem; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: center; }
+        @media (min-width: 700px) {
+            .neg-grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .neg-plans { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1000px) {
+            .neg-plans { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CTPF3Q4SL"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1CTPF3Q4SL');</script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container flex-between">
+            <a href="/" class="logo">Kulttia Lab<span>.</span></a>
+            <nav class="nav-links" id="main-nav">
+                <a href="/">Inicio</a>
+                <a href="/blog">Artículos</a>
+                <a href="/boveda">Bóveda</a>
+                <a href="/academia">Academia</a>
+                <a href="/nosotros">Nosotros</a>
+                <a href="/servicios">Servicios</a>
+                <a href="/contacto">Contacto</a>
+                <button class="btn btn-primary btn-subscribe"
+                    style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Suscribirse</button>
+                <button id="theme-toggle" class="btn"
+                    style="padding: 0.5rem; background: transparent; color: var(--text-main); font-size: 1.2rem; margin-left: 0.5rem;"
+                    aria-label="Alternar modo claro y oscuro">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+    <!-- Hero -->
+    <section class="acd-hero container">
+        <span class="tag-pill">Kulttia Negocios</span>
+        <h1>Tu equipo aprende. <span>Tú ves</span> cómo avanza.</h1>
+        <p class="acd-lead">
+            Plazas en la Academia Kulttia para pequeñas y medianas empresas. Diseña las rutas que necesita tu equipo,
+            asígnalas y sigue el avance de cada persona desde un solo panel.
+        </p>
+        <div class="acd-actions">
+            <a href="/contacto" class="btn btn-primary">Cotizar <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#como-funciona" class="btn btn-outline">Cómo funciona</a>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="acd-section container" id="beneficios">
+        <p class="acd-label">Qué recibe tu empresa</p>
+        <h2>Formación con dirección, no cursos sueltos.</h2>
+        <div class="neg-grid-3">
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-route"></i></span>
+                </div>
+                <h3>Rutas propias</h3>
+                <p>Arma rutas con los cursos que tu equipo necesita, en el orden que tiene sentido para tu empresa.</p>
+            </article>
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-list-check"></i></span>
+                </div>
+                <h3>Asigna y recomienda</h3>
+                <p>Pide una ruta o un curso a todo el equipo o a una persona, con fecha límite si la necesitas.</p>
+            </article>
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-chart-simple"></i></span>
+                </div>
+                <h3>Avance por persona</h3>
+                <p>Quién empezó, quién terminó, quién se certificó y cuándo fue su última clase.</p>
+            </article>
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-filter"></i></span>
+                </div>
+                <h3>Embudo del equipo</h3>
+                <p>De invitados a certificados: ves en qué paso se queda la gente y dónde conviene empujar.</p>
+            </article>
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+                </div>
+                <h3>Plazas que se reasignan</h3>
+                <p>Si alguien sale de la empresa, liberas su plaza y se la das a quien llega. El historial se conserva.</p>
+            </article>
+            <article class="acd-card">
+                <div class="acd-card-head">
+                    <span class="acd-icon"><i class="fa-solid fa-bell"></i></span>
+                </div>
+                <h3>Recordatorios</h3>
+                <p>Un recordatorio a quien va atrasado, por correo y dentro de la academia, sin perseguir a nadie por chat.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="acd-section container" id="como-funciona">
+        <p class="acd-label">Cómo funciona</p>
+        <h2>Tres pasos y tu equipo está aprendiendo.</h2>
+        <div class="neg-grid-3 acd-steps-3" style="counter-reset: paso;">
+            <div class="acd-step">
+                <strong>Cotizas tus plazas</strong>
+                <p>Nos cuentas cuántas personas quieres formar y activamos tu empresa con un administrador.</p>
+            </div>
+            <div class="acd-step">
+                <strong>Invitas a tu equipo</strong>
+                <p>Tu administrador invita por correo. Cada persona entra con su cuenta y queda unida a la empresa.</p>
+            </div>
+            <div class="acd-step">
+                <strong>Asignas y sigues el avance</strong>
+                <p>Creas rutas, las asignas y ves el progreso en tu panel. Al terminar, cada persona recibe su certificado verificable.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plazas -->
+    <section class="acd-section container" id="plazas">
+        <p class="acd-label">Plazas</p>
+        <h2>Pagas por persona, una vez al año.</h2>
+        <div class="neg-plans">
+            <div class="neg-plan">
+                <span class="neg-seats">1 a 5 personas</span>
+                <span class="neg-from">Desde</span>
+                <span class="neg-price">$360.000 <small>por persona al año</small></span>
+                <span class="neg-month">Equivale a $30.000 al mes</span>
+            </div>
+            <div class="neg-plan is-featured">
+                <span class="neg-seats">6 a 20 personas</span>
+                <span class="neg-from">Desde</span>
+                <span class="neg-price">$300.000 <small>por persona al año</small></span>
+                <span class="neg-month">Equivale a $25.000 al mes</span>
+            </div>
+            <div class="neg-plan">
+                <span class="neg-seats">21 a 50 personas</span>
+                <span class="neg-from">Desde</span>
+                <span class="neg-price">$240.000 <small>por persona al año</small></span>
+                <span class="neg-month">Equivale a $20.000 al mes</span>
+            </div>
+            <div class="neg-plan">
+                <span class="neg-seats">Más de 50</span>
+                <span class="neg-from">Precio</span>
+                <span class="neg-price">A la medida</span>
+                <span class="neg-month">Hablemos de tu equipo</span>
+            </div>
+        </div>
+        <div class="neg-foot">
+            <span class="acd-badge">Pago en línea próximamente</span>
+            <span>Pesos colombianos. Cada plaza incluye todo el catálogo, las rutas y el panel.</span>
+        </div>
+    </section>
+
+    <!-- Cierre -->
+    <section class="acd-final container">
+        <h2>Cuéntanos de tu equipo. <span class="acd-accent">Te respondemos con una propuesta.</span></h2>
+        <p>Sin compromiso. Empiezas con las plazas que necesitas hoy y sumas más cuando crezcas.</p>
+        <div class="acd-actions" style="justify-content: center;">
+            <a href="/contacto" class="btn btn-primary">Cotizar</a>
+            <a href="/academia" class="btn btn-outline">Conocer la academia</a>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid footer-grid">
+                <!-- Branding -->
+                <div>
+                    <h4 class="footer-logo">Kulttia Lab<span>.</span></h4>
+                    <p class="footer-desc">Explorando las fronteras entre la tecnología moderna, el diseño y la cultura
+                        emergente.</p>
+                </div>
+
+                <!-- Explorar Links -->
+                <div>
+                    <h4 class="footer-title">Explorar</h4>
+                    <div class="footer-links">
+                        <a href="/" aria-label="Inicio — pie de página">Inicio</a>
+                        <a href="/blog" aria-label="Artículos — pie de página">Artículos</a>
+                        <a href="/boveda" aria-label="Bóveda de recursos — pie de página">Bóveda</a>
+                        <a href="/academia" aria-label="Academia — pie de página">Academia</a>
+                        <a href="/negocios" aria-label="Kulttia Negocios — pie de página">Negocios</a>
+                        <a href="/nosotros" aria-label="Sobre Nosotros — pie de página">Sobre Nosotros</a>
+                        <a href="/contacto" aria-label="Contacto — pie de página">Contacto</a>
+                    </div>
+                </div>
+
+                <!-- Categorías Links -->
+                <div>
+                    <h4 class="footer-title">Categorías</h4>
+                    <div class="footer-links">
+                        <a href="/blog?category=arte">Arte</a>
+                        <a href="/blog?category=ia%20y%20machine%20learning">IA y aprendizaje automático</a>
+                        <a href="/blog?category=cybercultura">Cybercultura</a>
+                        <a href="/blog?category=web">Web</a>
+                    </div>
+                </div>
+
+                <!-- Data & Legal -->
+                <div>
+                    <h4 class="footer-title">Legal</h4>
+                    <div class="footer-links">
+                        <a href="/politica-privacidad">Política de Privacidad</a>
+                        <a href="/terminos-servicio">Términos de Servicio</a>
+                        <a href="/politica-cookies">Política de Cookies</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Line -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+            <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+            <h2>Descifra el Mañana. Hoy.</h2>
+            <p>Únete a nuestra comunidad selecta. Recibirás ensayos exclusivos sobre cómo la inteligencia artificial y la cultura moderna re-escriben las reglas del juego.</p>
+            <form class="modal-form" data-wpforms-id="2" action="#" method="POST" onsubmit="sendSubscribeForm(event)">
+                <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;"><label>No llenar este campo <input type="text" name="hp" tabindex="-1" autocomplete="off"></label></div>
+                <input type="email" name="email" class="form-control" placeholder="tu@email.com" required
+                    style="margin-bottom: 1.5rem; width: 100%; padding: 1rem; border-radius: 8px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Quiero acceso anticipado</button>
+            </form>
+            <p class="modal-disclaimer">Al suscribirte aceptas nuestra <a href="/politica-privacidad">Política de Privacidad</a> y confirmas que no eres un bot🤖.</p>
+        </div>
+    </div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/animaciones.js?v=1" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/wordpress-api.js?v=7" defer></script>
+
+    <!-- WhatsApp Chat Bubble -->
+    <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
+        <span class="wa-tooltip">💬 ¡Hablemos por WhatsApp!</span>
+        <a href="https://wa.me/573182057306" class="wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.5 3.5A12 12 0 0 0 3.5 20.5L2 22l1.5-1.5A12 12 0 1 0 20.5 3.5zm-8.5 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm5.2-7.8c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.4-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.6.1-.9.4c-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.2-1.3 0-.2-.2-.3-.5-.4z"/>
+            </svg>
+            <span class="wa-online"></span>
+        </a>
+    </div>
+
+</body>
+</html>
