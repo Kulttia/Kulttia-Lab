@@ -512,7 +512,7 @@
     <script src="/js/search.js?v=1" defer></script>
     <script>
         // Soporta /blog/mi-slug (fallback del .htaccess), ?slug=mi-slug o ?id=123
-        document.addEventListener('DOMContentLoaded', loadSinglePost);
+        document.addEventListener('DOMContentLoaded', () => loadSinglePost());
     </script>
     <!-- WhatsApp Chat Bubble -->
     <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
