@@ -362,9 +362,13 @@ function updateSitemap(posts) {
     { loc: `${SITE_URL}/blog`,      priority: '0.9', changefreq: 'daily' },
     { loc: `${SITE_URL}/boveda`,    priority: '0.9', changefreq: 'weekly' },
     { loc: `${SITE_URL}/academia`,  priority: '0.9', changefreq: 'weekly' },
+    { loc: `${SITE_URL}/negocios`,  priority: '0.8', changefreq: 'monthly' },
     { loc: `${SITE_URL}/nosotros`,  priority: '0.8', changefreq: 'monthly' },
     { loc: `${SITE_URL}/servicios`, priority: '0.8', changefreq: 'monthly' },
     { loc: `${SITE_URL}/contacto`,  priority: '0.6', changefreq: 'monthly' },
+    { loc: `${SITE_URL}/terminos-servicio`,   priority: '0.3', changefreq: 'yearly' },
+    { loc: `${SITE_URL}/politica-privacidad`, priority: '0.3', changefreq: 'yearly' },
+    { loc: `${SITE_URL}/politica-cookies`,    priority: '0.3', changefreq: 'yearly' },
   ];
   const articleUrls = posts.map(p => ({
     loc: `${SITE_URL}/blog/${p.slug}`,

@@ -41,6 +41,21 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://kulttia.com/terminos-servicio</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://kulttia.com/politica-privacidad</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://kulttia.com/politica-cookies</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://kulttia.com/blog/el-impacto-de-los-algoritmos-de-ia-sobre-la-cultura-y-nuestras-decisiones</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
