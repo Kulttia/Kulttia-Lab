@@ -238,7 +238,8 @@ ul {
 
 /* Hero Section */
 .hero {
-    padding: 12rem 0 6rem;
+    padding-top: 12rem;
+    padding-bottom: 6rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -301,7 +302,7 @@ ul {
 
 /* Main Grid & Cards */
 .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
     margin-bottom: 3rem;
     display: flex;
     align-items: center;
@@ -310,6 +311,7 @@ ul {
 
 .section-title::before {
     content: '';
+    flex-shrink: 0;
     width: 40px;
     height: 2px;
     background: var(--acid-blue);
@@ -317,7 +319,7 @@ ul {
 }
 
 .articles-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
 }
 
 .article-card {
@@ -550,6 +552,16 @@ ul {
     box-shadow: 0 0 15px var(--acid-blue-glow);
 }
 
+/* Pie en tablet: marca arriba y tres columnas de enlaces */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .footer-grid > :first-child {
+        grid-column: 1 / -1;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav-links {
@@ -574,12 +586,17 @@ ul {
     }
 
     .hero {
-        padding: 8rem 0 4rem;
+        padding-top: 8rem;
+        padding-bottom: 4rem;
     }
 
     .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem 1.5rem;
+    }
+
+    .footer-grid > :first-child {
+        grid-column: 1 / -1;
     }
 
     .newsletter-form {
@@ -1100,18 +1117,3 @@ ul {
     }
 }
 
-/* Pie compacto de las páginas internas: enlaces que no están en el menú */
-.footer-mini {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.footer-mini a {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    transition: color 0.2s;
-}
-
-.footer-mini a:hover {
-    color: var(--acid-blue);
-}

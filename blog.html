@@ -24,12 +24,13 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-    <link rel="stylesheet" href="css/estilos.css?v=5">
-    <link rel="stylesheet" href="css/animaciones.css?v=1">
+    <link rel="stylesheet" href="/css/estilos.css?v=6">
+    <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
     <style>
         .archive-header {
-            padding: 10rem 0 3rem;
+            padding-top: 10rem;
+            padding-bottom: 3rem;
             text-align: center;
         }
 
@@ -132,9 +133,53 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="grid footer-grid">
+                <!-- Branding -->
+                <div>
+                    <h4 class="footer-logo">Kulttia Lab<span>.</span></h4>
+                    <p class="footer-desc">Explorando las fronteras entre la tecnología moderna, el diseño y la cultura
+                        emergente.</p>
+                </div>
+
+                <!-- Explorar Links -->
+                <div>
+                    <h4 class="footer-title">Explorar</h4>
+                    <div class="footer-links">
+                        <a href="/nosotros" aria-label="Sobre Nosotros — pie de página">Nosotros</a>
+                        <a href="/servicios" aria-label="Servicios — pie de página">Servicios</a>
+                        <a href="/academia" aria-label="Academia — pie de página">Academia</a>
+                        <a href="/negocios" aria-label="Kulttia Negocios — pie de página">Negocios</a>
+                        <a href="/blog" aria-label="Artículos — pie de página">Artículos</a>
+                        <a href="/boveda" aria-label="Bóveda de recursos — pie de página">Bóveda</a>
+                        <a href="/contacto" aria-label="Contacto — pie de página">Contacto</a>
+                    </div>
+                </div>
+
+                <!-- Categorías Links -->
+                <div>
+                    <h4 class="footer-title">Categorías</h4>
+                    <div class="footer-links">
+                        <a href="/blog?category=arte">Arte</a>
+                        <a href="/blog?category=ia%20y%20machine%20learning">IA y aprendizaje automático</a>
+                        <a href="/blog?category=cybercultura">Cybercultura</a>
+                        <a href="/blog?category=web">Web</a>
+                    </div>
+                </div>
+
+                <!-- Data & Legal -->
+                <div>
+                    <h4 class="footer-title">Legal</h4>
+                    <div class="footer-links">
+                        <a href="/politica-privacidad">Política de Privacidad</a>
+                        <a href="/terminos-servicio">Términos de Servicio</a>
+                        <a href="/politica-cookies">Política de Cookies</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Line -->
             <div class="footer-bottom">
                 <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
-                <nav class="footer-mini" aria-label="Más de Kulttia"><a href="/boveda">Bóveda</a><a href="/negocios">Negocios</a></nav>
                 <div class="social-links">
                     <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
                             class="fa-brands fa-tiktok"></i></a>
@@ -168,10 +213,10 @@
         </div>
     </div>
 
-    <script src="js/wordpress-api.js?v=7" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/animaciones.js?v=1" defer></script>
-    <script src="js/search.js" defer></script>
+    <script src="/js/wordpress-api.js?v=7" defer></script>
+    <script src="/js/main.js" defer></script>
+    <script src="/js/animaciones.js?v=1" defer></script>
+    <script src="/js/search.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             setupCategoryFilters();

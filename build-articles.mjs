@@ -155,14 +155,14 @@ function generateHTML(post) {
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="/css/estilos.css?v=5">
+  <link rel="stylesheet" href="/css/estilos.css?v=6">
   <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
   <style>
     .single-article { padding-top: 10rem; padding-bottom: 5rem; }
     .article-header-meta { display:flex; align-items:center; justify-content:center; gap:1.5rem; margin-bottom:2rem; color:var(--text-muted); font-size:.95rem; flex-wrap:wrap; }
     .article-header-meta .tag-pill { margin-bottom:0; }
-    .article-main-title { font-size:clamp(2.5rem,5vw,4rem); text-align:center; line-height:1.2; margin-bottom:3rem; max-width:900px; margin-left:auto; margin-right:auto; letter-spacing:-1px; }
+    .article-main-title { font-size:clamp(1.9rem,6vw,4rem); text-align:center; line-height:1.2; margin-bottom:3rem; max-width:900px; margin-left:auto; margin-right:auto; letter-spacing:-1px; }
     .article-hero-img { width:100%; height:60vh; min-height:400px; object-fit:cover; border-radius:var(--border-radius); margin-bottom:4rem; border:1px solid var(--border-color); display:block; }
     .article-body { max-width:760px; margin:0 auto; font-size:1.15rem; line-height:1.8; color:var(--text-muted); }
     .article-body p { margin-bottom:1.8rem; }
@@ -180,6 +180,7 @@ function generateHTML(post) {
     .back-to-blog { display:inline-flex; align-items:center; gap:.5rem; color:var(--text-muted); margin-bottom:2rem; font-size:.95rem; font-weight:600; transition:color .2s ease; }
     .back-to-blog:hover { color:var(--acid-blue); }
     @media (max-width:768px) { .author-box { flex-direction:column; text-align:center; gap:1.5rem; } .article-hero-img { height:40vh; min-height:280px; } }
+      @media (max-width: 600px) { .single-article { padding-top: 8rem; } .article-main-title { margin-bottom: 2rem; } .article-hero-img { height: auto; min-height: 0; aspect-ratio: 1200 / 630; margin-bottom: 2.5rem; } }
   </style>
   <script>
     const savedTheme = localStorage.getItem('theme');
@@ -244,19 +245,67 @@ function generateHTML(post) {
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
-        <nav class="footer-mini" aria-label="Más de Kulttia"><a href="/boveda">Bóveda</a><a href="/negocios">Negocios</a></nav>
-        <div class="social-links">
-          <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <div class="container">
+            <div class="grid footer-grid">
+                <!-- Branding -->
+                <div>
+                    <h4 class="footer-logo">Kulttia Lab<span>.</span></h4>
+                    <p class="footer-desc">Explorando las fronteras entre la tecnología moderna, el diseño y la cultura
+                        emergente.</p>
+                </div>
+
+                <!-- Explorar Links -->
+                <div>
+                    <h4 class="footer-title">Explorar</h4>
+                    <div class="footer-links">
+                        <a href="/nosotros" aria-label="Sobre Nosotros — pie de página">Nosotros</a>
+                        <a href="/servicios" aria-label="Servicios — pie de página">Servicios</a>
+                        <a href="/academia" aria-label="Academia — pie de página">Academia</a>
+                        <a href="/negocios" aria-label="Kulttia Negocios — pie de página">Negocios</a>
+                        <a href="/blog" aria-label="Artículos — pie de página">Artículos</a>
+                        <a href="/boveda" aria-label="Bóveda de recursos — pie de página">Bóveda</a>
+                        <a href="/contacto" aria-label="Contacto — pie de página">Contacto</a>
+                    </div>
+                </div>
+
+                <!-- Categorías Links -->
+                <div>
+                    <h4 class="footer-title">Categorías</h4>
+                    <div class="footer-links">
+                        <a href="/blog?category=arte">Arte</a>
+                        <a href="/blog?category=ia%20y%20machine%20learning">IA y aprendizaje automático</a>
+                        <a href="/blog?category=cybercultura">Cybercultura</a>
+                        <a href="/blog?category=web">Web</a>
+                    </div>
+                </div>
+
+                <!-- Data & Legal -->
+                <div>
+                    <h4 class="footer-title">Legal</h4>
+                    <div class="footer-links">
+                        <a href="/politica-privacidad">Política de Privacidad</a>
+                        <a href="/terminos-servicio">Términos de Servicio</a>
+                        <a href="/politica-cookies">Política de Cookies</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Line -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kulttia Lab. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@kulttia" target="_blank" rel="noopener" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/kulttialab/" target="_blank" rel="noopener"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Kulttia/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/kulttia/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
   <div id="subscribe-modal" class="modal-overlay">
     <div class="modal-content">
