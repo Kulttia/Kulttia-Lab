@@ -19,6 +19,11 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
+# Landing de la Academia: la carpeta academia/ es la raíz del subdominio academia.kulttia.com;
+# en kulttia.com/academia se sirve la landing (academia.html), no la app.
+RewriteCond %{HTTP_HOST} ^kulttia\.com$ [NC]
+RewriteRule ^academia/?$ academia.html [L]
+
 # ============================================
 # REDIRECTS 301 — Rutas del sitio anterior
 # Esto elimina rastros en Google y evita 404s
