@@ -29,280 +29,12 @@
     <link rel="stylesheet" href="css/estilos.css?v=5">
     <link rel="stylesheet" href="css/animaciones.css?v=1">
 
-    <style>
-        /* Academia — mobile-first */
-        .acd-hero {
-            padding-top: 9rem;
-            padding-bottom: 4rem;
-            position: relative;
+<link rel="stylesheet" href="/css/landing.css?v=1">
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            document.documentElement.classList.add('lx-on');
         }
-        .acd-hero::before {
-            content: '';
-            position: absolute;
-            top: 30%;
-            right: 0;
-            width: min(70vw, 560px);
-            height: min(70vw, 560px);
-            background: radial-gradient(circle, var(--acid-blue-glow) 0%, transparent 65%);
-            filter: blur(40px);
-            opacity: 0.45;
-            z-index: -1;
-            pointer-events: none;
-        }
-        .acd-hero h1 {
-            font-size: clamp(2.3rem, 7vw, 4.8rem);
-            font-weight: 700;
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-            margin-bottom: 1.25rem;
-            max-width: 860px;
-        }
-        .acd-hero h1 span,
-        .acd-accent {
-            color: var(--acid-blue);
-            text-shadow: 0 0 18px var(--acid-blue-glow);
-        }
-        .acd-lead {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 620px;
-            line-height: 1.75;
-            margin-bottom: 2rem;
-        }
-        .acd-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        .acd-actions .btn i { margin-left: 0.5rem; font-size: 0.85em; }
-        .acd-note {
-            margin-top: 1.25rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-        .acd-note strong { color: var(--text-main); }
-
-        .acd-section {
-            padding-top: 4rem;
-            padding-bottom: 4rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .acd-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--acid-blue);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 1rem;
-        }
-        .acd-label::before {
-            content: '';
-            width: 24px;
-            height: 2px;
-            background: var(--acid-blue);
-            flex-shrink: 0;
-        }
-        .acd-section h2 {
-            font-size: clamp(1.7rem, 4.5vw, 2.6rem);
-            line-height: 1.15;
-            margin-bottom: 2rem;
-            max-width: 720px;
-        }
-
-        .acd-grid {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: 1fr;
-        }
-        .acd-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .acd-card:hover {
-            border-color: var(--border-blue-subtle);
-            box-shadow: 0 0 18px var(--acid-blue-light);
-        }
-        .acd-card.is-soon { opacity: 0.75; }
-        .acd-card.is-soon:hover { border-color: var(--border-color); box-shadow: none; }
-        .acd-card-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-        .acd-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: grid;
-            place-items: center;
-            background: var(--acid-blue-light);
-            color: var(--acid-blue);
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        .acd-card h3 {
-            font-size: 1.2rem;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-        }
-        .acd-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.65;
-        }
-        .acd-badge {
-            display: inline-block;
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 0.25rem 0.7rem;
-            border-radius: var(--border-radius-pill);
-            border: 1px solid var(--border-color-strong);
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-        .acd-badge.is-free {
-            border-color: var(--border-blue-subtle);
-            background: var(--bg-element);
-            color: var(--acid-blue);
-        }
-
-        /* Cursos */
-        .acd-course-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem 1rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-        .acd-course-meta i { color: var(--acid-blue); margin-right: 0.35rem; }
-        .acd-course .acd-req {
-            margin-top: 0.75rem;
-            font-size: 0.85rem;
-        }
-        .acd-course .acd-req strong { color: var(--text-main); font-weight: 600; }
-        .acd-course .article-link { margin-top: 1.5rem; }
-
-        /* Cómo funciona */
-        .acd-steps {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: 1fr;
-            counter-reset: paso;
-        }
-        .acd-step {
-            padding: 1.25rem 1.25rem 1.25rem 3.75rem;
-            position: relative;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            min-width: 0;
-        }
-        .acd-step::before {
-            counter-increment: paso;
-            content: counter(paso, decimal-leading-zero);
-            position: absolute;
-            left: 1.25rem;
-            top: 1.2rem;
-            font-weight: 700;
-            color: var(--acid-blue);
-        }
-        .acd-step strong { display: block; margin-bottom: 0.3rem; }
-        .acd-step p {
-            color: var(--text-muted);
-            font-size: 0.93rem;
-            line-height: 1.65;
-        }
-
-        /* Empresas + cierre */
-        .acd-business {
-            background: linear-gradient(to right, var(--bg-card), var(--bg-element));
-            border: 1px solid var(--border-blue-subtle);
-            border-radius: var(--border-radius);
-            padding: 2rem 1.5rem;
-        }
-        .acd-business h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.2; margin-bottom: 0.75rem; }
-        .acd-business p {
-            color: var(--text-muted);
-            max-width: 560px;
-            margin-bottom: 1.5rem;
-        }
-        .acd-business-links {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem 1.25rem;
-        }
-        .acd-disabled {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            cursor: default;
-            flex-wrap: wrap;
-        }
-        .acd-final {
-            text-align: center;
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-        }
-        .acd-final h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); line-height: 1.15; margin: 0 auto 1rem; max-width: 900px; }
-        .acd-final p { color: var(--text-muted); margin-bottom: 2rem; }
-
-        @media (min-width: 700px) {
-            .acd-grid { grid-template-columns: repeat(3, 1fr); }
-            .acd-grid.is-two { grid-template-columns: repeat(2, 1fr); }
-            .acd-steps { grid-template-columns: repeat(2, 1fr); }
-            .acd-business { padding: 3rem; }
-        }
-        @media (min-width: 1000px) {
-            .acd-hero { padding-top: 12rem; padding-bottom: 5rem; }
-            .acd-section { padding-top: 6rem; padding-bottom: 6rem; }
-            .acd-steps { grid-template-columns: repeat(4, 1fr); }
-        }
-
-        /* Negocios */
-        .neg-grid-3 { display: grid; gap: 1rem; grid-template-columns: 1fr; }
-        .neg-plans { display: grid; gap: 1rem; grid-template-columns: 1fr; }
-        .neg-plan {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            min-width: 0;
-        }
-        .neg-plan.is-featured { border-color: var(--border-blue-subtle); box-shadow: 0 0 18px var(--acid-blue-light); }
-        .neg-plan .neg-seats { font-weight: 700; font-size: 1.05rem; }
-        .neg-plan .neg-from { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.5rem; }
-        .neg-plan .neg-price { font-size: clamp(1.6rem, 6vw, 2rem); font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
-        .neg-plan .neg-price small { display: block; margin-top: 0.2rem; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
-        .neg-plan .neg-month { font-size: 0.88rem; color: var(--text-muted); }
-        .neg-foot { margin-top: 1.25rem; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: center; }
-        @media (min-width: 700px) {
-            .neg-grid-3 { grid-template-columns: repeat(3, 1fr); }
-            .neg-plans { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1000px) {
-            .neg-plans { grid-template-columns: repeat(4, 1fr); }
-        }
-    </style>
+    </script>
 
     <script>
         const savedTheme = localStorage.getItem('theme');
@@ -345,132 +77,172 @@
     <main>
 
     <!-- Hero -->
-    <section class="acd-hero container">
-        <span class="tag-pill">Kulttia Negocios</span>
-        <h1>Tu equipo aprende. <span>Tú ves</span> cómo avanza.</h1>
-        <p class="acd-lead">
-            Plazas en la Academia Kulttia para pequeñas y medianas empresas. Diseña las rutas que necesita tu equipo,
-            asígnalas y sigue el avance de cada persona desde un solo panel.
-        </p>
-        <div class="acd-actions">
-            <a href="/contacto" class="btn btn-primary">Cotizar <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="#como-funciona" class="btn btn-outline">Cómo funciona</a>
+    <section class="lx-hero container">
+        <div>
+            <span class="tag-pill" data-lx="up">Kulttia Negocios</span>
+            <h1 data-lx="up" style="--lx-delay:.08s">Tu equipo aprende. <span>Tú ves</span> cómo avanza.</h1>
+            <p class="lx-lead" data-lx="up" style="--lx-delay:.16s">
+                Plazas en la Academia Kulttia para pequeñas y medianas empresas. Diseña las rutas que necesita tu equipo,
+                asígnalas y sigue el avance de cada persona desde un solo panel.
+            </p>
+            <div class="lx-actions" data-lx="up" style="--lx-delay:.24s">
+                <a href="/contacto" class="btn btn-primary">Cotizar <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#panel" class="btn btn-outline">Ver el panel</a>
+            </div>
+        </div>
+        <div class="lx-stage" data-lx="right" style="--lx-delay:.2s">
+            <div class="lx-frame">
+                <div class="lx-frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>academia.kulttia.com/empresa</span></div>
+                <img src="/img/academia/app-empresa.webp" width="1200" height="750" fetchpriority="high" decoding="async"
+                    alt="Panel de empresa con plazas libres, personas activas y embudo de aprendizaje">
+            </div>
+            <div class="lx-phone" data-parallax="0.12">
+                <img src="/img/academia/m-empresa.webp" width="480" height="1038" decoding="async"
+                    alt="Panel de empresa en el celular">
+            </div>
+            <span class="lx-chip is-a" aria-hidden="true"><i class="fa-solid fa-chair"></i>Plazas que se reasignan</span>
+            <span class="lx-chip is-b" aria-hidden="true"><i class="fa-solid fa-chart-simple"></i>Avance por persona</span>
         </div>
     </section>
 
-    <!-- Beneficios -->
-    <section class="acd-section container" id="beneficios">
-        <p class="acd-label">Qué recibe tu empresa</p>
-        <h2>Formación con dirección, no cursos sueltos.</h2>
-        <div class="neg-grid-3">
-            <article class="acd-card">
-                <div class="acd-card-head">
-                    <span class="acd-icon"><i class="fa-solid fa-route"></i></span>
+    <!-- Panel con pestañas -->
+    <section class="lx-section container" id="panel">
+        <p class="lx-label" data-lx="up">El panel de tu empresa</p>
+        <h2 class="lx-h2" data-lx="up">Formación con dirección, no cursos sueltos.</h2>
+        <p class="lx-sub" data-lx="up">Resumen del equipo, personas y rutas propias. Así lo ve el administrador.</p>
+        <div class="lx-panel" data-lx="scale">
+            <div class="lx-tabs" role="tablist" aria-label="Vistas del panel">
+                <button type="button" role="tab" id="tab-resumen" aria-controls="panel-shots" aria-selected="true"
+                    data-caption="Plazas libres, personas activas, certificados y el embudo de invitados a certificados.">Resumen</button>
+                <button type="button" role="tab" id="tab-personas" aria-controls="panel-shots" aria-selected="false" tabindex="-1"
+                    data-caption="Invita por correo, mira el avance de cada persona y envía un recordatorio a quien va atrasado.">Personas</button>
+                <button type="button" role="tab" id="tab-rutas" aria-controls="panel-shots" aria-selected="false" tabindex="-1"
+                    data-caption="Arma rutas con los cursos que necesitas y asígnalas a todo el equipo o a una persona, con fecha límite.">Rutas</button>
+            </div>
+            <div class="lx-panel-shots" id="panel-shots" role="tabpanel" aria-label="Captura del panel">
+                <div class="lx-frame">
+                    <div class="lx-frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>academia.kulttia.com/empresa</span></div>
+                    <div class="lx-frame-body">
+                        <img class="is-on" src="/img/academia/app-empresa.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Resumen del panel: plazas, activos, certificados y embudo de aprendizaje">
+                        <img src="/img/academia/app-empresa-personas.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Personas del equipo con su avance y botón de recordatorio">
+                        <img src="/img/academia/app-empresa-rutas.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Rutas propias de la empresa y asignaciones con fecha límite">
+                    </div>
                 </div>
+                <p class="lx-panel-caption" aria-live="polite">Plazas libres, personas activas, certificados y el embudo de invitados a certificados.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento de beneficios -->
+    <section class="lx-section container" id="beneficios">
+        <p class="lx-label" data-lx="up">Qué recibe tu empresa</p>
+        <h2 class="lx-h2" data-lx="up">Todo el equipo en un solo lugar.</h2>
+        <div class="lx-bento" data-lx-group style="margin-top:2.5rem">
+            <article class="lx-tile span-4" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-route"></i></span>
                 <h3>Rutas propias</h3>
-                <p>Arma rutas con los cursos que tu equipo necesita, en el orden que tiene sentido para tu empresa.</p>
-            </article>
-            <article class="acd-card">
-                <div class="acd-card-head">
-                    <span class="acd-icon"><i class="fa-solid fa-list-check"></i></span>
+                <p>Los cursos que tu equipo necesita, en el orden que tiene sentido para tu empresa.</p>
+                <div class="lx-tile-media">
+                    <img src="/img/academia/app-empresa-rutas.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Ruta de inducción armada con dos cursos de la academia">
                 </div>
-                <h3>Asigna y recomienda</h3>
-                <p>Pide una ruta o un curso a todo el equipo o a una persona, con fecha límite si la necesitas.</p>
             </article>
-            <article class="acd-card">
-                <div class="acd-card-head">
-                    <span class="acd-icon"><i class="fa-solid fa-chart-simple"></i></span>
+            <article class="lx-tile span-2 row-2 is-phone is-accent" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-mobile-screen"></i></span>
+                <h3>Tu equipo aprende desde el celular</h3>
+                <p>Cada persona entra con su cuenta y ve primero lo que le asignaste.</p>
+                <div class="lx-phone">
+                    <img src="/img/academia/m-inicio.webp" width="480" height="1038" loading="lazy" decoding="async" alt="Inicio de la academia en el celular con la ruta asignada por la empresa">
                 </div>
-                <h3>Avance por persona</h3>
-                <p>Quién empezó, quién terminó, quién se certificó y cuándo fue su última clase.</p>
             </article>
-            <article class="acd-card">
-                <div class="acd-card-head">
-                    <span class="acd-icon"><i class="fa-solid fa-filter"></i></span>
-                </div>
+            <article class="lx-tile span-2" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-filter"></i></span>
                 <h3>Embudo del equipo</h3>
-                <p>De invitados a certificados: ves en qué paso se queda la gente y dónde conviene empujar.</p>
+                <p>Ves en qué paso se queda la gente y dónde conviene empujar.</p>
             </article>
-            <article class="acd-card">
-                <div class="acd-card-head">
-                    <span class="acd-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
-                </div>
+            <article class="lx-tile span-2" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
                 <h3>Plazas que se reasignan</h3>
-                <p>Si alguien sale de la empresa, liberas su plaza y se la das a quien llega. El historial se conserva.</p>
+                <p>Si alguien sale, liberas su plaza para quien llega. El historial se conserva.</p>
             </article>
-            <article class="acd-card">
-                <div class="acd-card-head">
-                    <span class="acd-icon"><i class="fa-solid fa-bell"></i></span>
-                </div>
+            <article class="lx-tile span-3" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-bell"></i></span>
                 <h3>Recordatorios</h3>
-                <p>Un recordatorio a quien va atrasado, por correo y dentro de la academia, sin perseguir a nadie por chat.</p>
+                <p>A quien va atrasado, por correo y dentro de la academia, sin perseguir a nadie por chat.</p>
+            </article>
+            <article class="lx-tile span-3" data-lx="up">
+                <span class="lx-tile-icon"><i class="fa-solid fa-certificate"></i></span>
+                <h3>Certificados verificables</h3>
+                <p>Cada persona que aprueba recibe su certificado con código de verificación.</p>
             </article>
         </div>
     </section>
 
     <!-- Cómo funciona -->
-    <section class="acd-section container" id="como-funciona">
-        <p class="acd-label">Cómo funciona</p>
-        <h2>Tres pasos y tu equipo está aprendiendo.</h2>
-        <div class="neg-grid-3 acd-steps-3" style="counter-reset: paso;">
-            <div class="acd-step">
+    <section class="lx-section container" id="como-funciona">
+        <p class="lx-label" data-lx="up">Cómo funciona</p>
+        <h2 class="lx-h2" data-lx="up" style="margin-bottom:2.5rem">Tres pasos y tu equipo está aprendiendo.</h2>
+        <div class="lx-flow" data-lx-group>
+            <div data-lx="up">
                 <strong>Cotizas tus plazas</strong>
                 <p>Nos cuentas cuántas personas quieres formar y activamos tu empresa con un administrador.</p>
             </div>
-            <div class="acd-step">
+            <div data-lx="up">
                 <strong>Invitas a tu equipo</strong>
                 <p>Tu administrador invita por correo. Cada persona entra con su cuenta y queda unida a la empresa.</p>
             </div>
-            <div class="acd-step">
+            <div data-lx="up">
                 <strong>Asignas y sigues el avance</strong>
-                <p>Creas rutas, las asignas y ves el progreso en tu panel. Al terminar, cada persona recibe su certificado verificable.</p>
+                <p>Creas rutas, las asignas y ves el progreso en tu panel. Al terminar, cada persona recibe su certificado.</p>
             </div>
         </div>
     </section>
 
-    <!-- Plazas -->
-    <section class="acd-section container" id="plazas">
-        <p class="acd-label">Plazas</p>
-        <h2>Pagas por persona, una vez al año.</h2>
-        <div class="neg-plans">
-            <div class="neg-plan">
-                <span class="neg-seats">1 a 5 personas</span>
-                <span class="neg-from">Desde</span>
-                <span class="neg-price">$360.000 <small>por persona al año</small></span>
-                <span class="neg-month">Equivale a $30.000 al mes</span>
+    <!-- Catálogo incluido -->
+    <section class="lx-section container" id="catalogo">
+        <div class="lx-head-row">
+            <div>
+                <p class="lx-label" data-lx="up">Catálogo incluido</p>
+                <h2 class="lx-h2" data-lx="up">Cada plaza incluye todos los cursos.</h2>
             </div>
-            <div class="neg-plan is-featured">
-                <span class="neg-seats">6 a 20 personas</span>
-                <span class="neg-from">Desde</span>
-                <span class="neg-price">$300.000 <small>por persona al año</small></span>
-                <span class="neg-month">Equivale a $25.000 al mes</span>
-            </div>
-            <div class="neg-plan">
-                <span class="neg-seats">21 a 50 personas</span>
-                <span class="neg-from">Desde</span>
-                <span class="neg-price">$240.000 <small>por persona al año</small></span>
-                <span class="neg-month">Equivale a $20.000 al mes</span>
-            </div>
-            <div class="neg-plan">
-                <span class="neg-seats">Más de 50</span>
-                <span class="neg-from">Precio</span>
-                <span class="neg-price">A la medida</span>
-                <span class="neg-month">Hablemos de tu equipo</span>
-            </div>
+            <a href="/academia" class="article-link" data-lx="up">Conocer la academia <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="neg-foot">
-            <span class="acd-badge">Pago en línea próximamente</span>
-            <span>Pesos colombianos. Cada plaza incluye todo el catálogo, las rutas y el panel.</span>
+        <div class="lx-courses" data-lx-group>
+            <article class="lx-course" data-lx="up">
+                <div class="lx-course-cover">
+                    <img src="/img/academia/curso-pensamiento-sistemico.webp" width="960" height="540" loading="lazy" decoding="async" alt="Portada del curso Introducción al pensamiento sistémico">
+                </div>
+                <div class="lx-course-body">
+                    <div class="lx-course-meta">
+                        <span><i class="fa-solid fa-signal"></i>Básico</span>
+                        <span><i class="fa-solid fa-play"></i>5 clases</span>
+                        <span><i class="fa-regular fa-clock"></i>21 min</span>
+                    </div>
+                    <h3>Introducción al pensamiento sistémico</h3>
+                </div>
+            </article>
+            <article class="lx-course" data-lx="up">
+                <div class="lx-course-cover">
+                    <img src="/img/academia/curso-teoria-u.webp" width="960" height="540" loading="lazy" decoding="async" alt="Portada del curso Teoría U: liderar desde el futuro que emerge">
+                </div>
+                <div class="lx-course-body">
+                    <div class="lx-course-meta">
+                        <span><i class="fa-solid fa-signal"></i>Intermedio</span>
+                        <span><i class="fa-solid fa-play"></i>9 clases</span>
+                        <span><i class="fa-regular fa-clock"></i>53 min</span>
+                    </div>
+                    <h3>Teoría U: liderar desde el futuro que emerge</h3>
+                </div>
+            </article>
         </div>
     </section>
 
     <!-- Cierre -->
-    <section class="acd-final container">
-        <h2>Cuéntanos de tu equipo. <span class="acd-accent">Te respondemos con una propuesta.</span></h2>
-        <p>Sin compromiso. Empiezas con las plazas que necesitas hoy y sumas más cuando crezcas.</p>
-        <div class="acd-actions" style="justify-content: center;">
+    <section class="lx-final container">
+        <h2 data-lx="up">Cuéntanos de tu equipo. <span class="lx-accent">Te respondemos con una propuesta.</span></h2>
+        <p data-lx="up">Empiezas con las plazas que necesitas hoy y sumas más cuando crezcas. Pago en línea: próximamente.</p>
+        <div class="lx-actions" data-lx="up">
             <a href="/contacto" class="btn btn-primary">Cotizar</a>
-            <a href="/academia" class="btn btn-outline">Conocer la academia</a>
+            <a href="https://wa.me/573182057306" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="margin:0 .5rem 0 0"></i>Escribir por WhatsApp</a>
         </div>
     </section>
 
@@ -559,6 +331,7 @@
 
     <script src="js/main.js" defer></script>
     <script src="js/animaciones.js?v=1" defer></script>
+    <script src="/js/landing.js?v=1" defer></script>
     <script src="js/search.js" defer></script>
     <script src="js/wordpress-api.js?v=7" defer></script>
 
