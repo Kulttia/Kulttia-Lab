@@ -180,7 +180,7 @@ function renderPostCard(post) {
     const excerpt = plainExcerpt.length > 120 ? plainExcerpt.substring(0, 120) + '...' : plainExcerpt;
     const date = formatDate(post.date);
     const slug = post.slug;
-    const link = `/articulo?slug=${encodeURIComponent(slug)}`;
+    const link = `/blog/${encodeURIComponent(slug)}`;
 
     // Imagen destacada — prioriza medium_large para velocidad, fallback a source_url
     const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
@@ -274,11 +274,18 @@ async function loadSinglePost() {
             console.warn('Reintentando artículo...', netErr.message);
             response = await fetchWithTimeout(url);
         }
+        if (response.status === 404) {
+            _showArticleError('not-found');
+            return;
+        }
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         let post = await response.json();
         if (Array.isArray(post)) post = post[0]; // por slug devuelve array
-        if (!post || !post.id) throw new Error('Post vacío o no encontrado');
+        if (!post || !post.id) {
+            _showArticleError('not-found');
+            return;
+        }
 
         // Renderizar el artículo
         _renderSinglePost(post);
@@ -426,7 +433,8 @@ function _showArticleError(type) {
         robotsMeta.setAttribute('name', 'robots');
         document.head.appendChild(robotsMeta);
     }
-    robotsMeta.setAttribute('content', 'noindex, follow');
+    robotsMeta.setAttribute('content', 'noindex');
+    document.title = `${type === 'not-found' ? 'Artículo no encontrado' : 'Error al cargar'} | Kulttia Lab`;
 
     const skeleton = document.getElementById('article-skeleton');
     const articleMain = document.getElementById('article-main');

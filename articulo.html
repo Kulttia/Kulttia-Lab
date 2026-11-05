@@ -403,12 +403,12 @@
 
             <h1 class="article-main-title" id="article-title"></h1>
 
-            <img src="" alt="" class="article-hero-img" id="article-hero-img">
+            <img src="" alt="" class="article-hero-img" id="article-hero-img" width="1200" height="630">
 
             <div class="article-body" id="article-body"></div>
 
             <div class="author-box" id="author-box">
-                <img src="" alt="Autor" class="author-avatar" id="author-avatar">
+                <img src="" alt="Autor" class="author-avatar" id="author-avatar" width="100" height="100">
                 <div class="author-info">
                     <h4 id="author-name">Kulttia Lab</h4>
                     <p id="author-desc">Explorando la intersección entre tecnología, cultura e inteligencia artificial.
@@ -508,43 +508,13 @@
         </div>
     </div>
 
-    <script src="/js/wordpress-api.js?v=8" defer></script>
+    <script src="/js/wordpress-api.js?v=9" defer></script>
     <script src="/js/main.js" defer></script>
     <script src="/js/animaciones.js?v=1" defer></script>
     <script src="/js/search.js" defer></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Extraer slug de la URL: soporta /blog/mi-slug o ?slug=mi-slug o ?id=123
-            const params = new URLSearchParams(window.location.search);
-            const pathParts = window.location.pathname.replace(/\/$/, '').split('/');
-            const slugFromPath = pathParts[pathParts.length - 1];
-
-            const slug = params.get('slug') || (
-                slugFromPath && slugFromPath !== 'articulo.html' && slugFromPath !== 'articulo' && slugFromPath !== 'blog'
-                    ? slugFromPath : null
-            );
-            const postId = params.get('id');
-
-            if (slug || postId) {
-                loadSinglePost();
-            } else {
-                // Sin slug ni ID → mostrar error 404 amigable
-                showArticleNotFound();
-            }
-        });
-
-        function showArticleNotFound() {
-            const skeleton = document.getElementById('article-skeleton');
-            const articleMain = document.getElementById('article-main');
-            if (skeleton) skeleton.remove();
-            articleMain.innerHTML = `
-                <div class="article-not-found">
-                    <i class="fa-solid fa-file-circle-question"></i>
-                    <h2>Artículo no encontrado</h2>
-                    <p>Es posible que este artículo haya sido movido o eliminado. Explora el resto de nuestros artículos.</p>
-                    <a href="/blog" class="btn btn-primary">Ver todos los artículos</a>
-                </div>`;
-        }
+        // Soporta /blog/mi-slug (fallback del .htaccess), ?slug=mi-slug o ?id=123
+        document.addEventListener('DOMContentLoaded', loadSinglePost);
     </script>
     <!-- WhatsApp Chat Bubble -->
     <div class="wa-bubble" aria-label="Chatea con nosotros por WhatsApp">
