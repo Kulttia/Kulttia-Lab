@@ -1,6 +1,6 @@
 // Bóveda Kulttia — dataset curado y verificado (2026-07-10)
 // 116 repos de código abierto verificados vivos vía GitHub API. Comandos de instalación extraídos de cada README.
-// Curaduría y descripciones: Kulttia Lab. Inspirado en la bóveda comunitaria de tododeia.com.
+// Curaduría y descripciones: Kulttia Lab.
 const BOVEDA_RESOURCES = [
  {
   "repo": "obra/superpowers",
