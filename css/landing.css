@@ -277,13 +277,7 @@
 }
 .lx-course .lx-req strong { color: var(--text-main); font-weight: 600; }
 .lx-course .article-link { margin-top: auto; padding-top: 1.25rem; }
-.lx-course.is-soon {
-    justify-content: center;
-    align-items: flex-start;
-    padding: 1.75rem 1.5rem;
-    border-style: dashed;
-    background: transparent;
-}
+.lx-course.is-soon { cursor: default; }
 .lx-course.is-soon:hover { transform: none; box-shadow: none; border-color: var(--border-color-strong); }
 
 .lx-badge {
@@ -607,7 +601,7 @@
         gap: 3.5rem;
     }
     .lx-section { padding-top: 6.5rem; padding-bottom: 6.5rem; }
-    .lx-courses.has-three { grid-template-columns: 1fr 1fr 0.7fr; }
+    .lx-courses.has-three { grid-template-columns: repeat(3, 1fr); }
     .lx-flow { grid-template-columns: repeat(3, 1fr); }
     .lx-flow.is-four { grid-template-columns: repeat(4, 1fr); }
 
