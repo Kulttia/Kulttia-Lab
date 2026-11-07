@@ -24,7 +24,9 @@
         guias: 'Guías'
     };
 
-    const LEVEL_ORDER = ['principiante', 'intermedio', 'avanzado'];
+    const LEVEL_ORDER = ['basico', 'intermedio', 'avanzado'];
+    const LEVEL_LABELS = { basico: 'Básico', intermedio: 'Intermedio', avanzado: 'Avanzado' };
+    const levelLabel = (l) => LEVEL_LABELS[l] || l;
 
     let activeLevel = 'todos';
     let activeCat = 'todas';
@@ -46,7 +48,7 @@
         <article class="vault-card" data-idx="${idx}" tabindex="0" role="button" aria-label="Leer ${escapeHtml(r.name)}">
             <div class="vault-card-top">
                 <span class="vault-cat">${CAT_LABELS.guias}</span>
-                <span class="vault-level ${r.level}">${r.level}</span>
+                <span class="vault-level ${r.level}">${levelLabel(r.level)}</span>
             </div>
             <h3>${escapeHtml(r.name)}</h3>
             <p class="vault-desc">${escapeHtml(r.desc)}</p>
@@ -57,7 +59,7 @@
                  aria-label="Abrir ficha de ${escapeHtml(r.name)}">
             <div class="vault-card-top">
                 <span class="vault-cat">${CAT_LABELS[r.cat] || '// RECURSO'}</span>
-                <span class="vault-level ${r.level}">${r.level}</span>
+                <span class="vault-level ${r.level}">${levelLabel(r.level)}</span>
             </div>
             <h3>${escapeHtml(r.name)}</h3>
             <p class="vault-desc">${escapeHtml(r.desc)}</p>
@@ -92,7 +94,7 @@
         return `
         <div class="ficha-head">
             <span class="vault-cat">${CAT_LABELS[r.cat] || '// RECURSO'}</span>
-            <span class="vault-level ${r.level}">${r.level}</span>
+            <span class="vault-level ${r.level}">${levelLabel(r.level)}</span>
         </div>
         <h2 class="ficha-title">${escapeHtml(r.name)}</h2>
         ${narrativa}
@@ -198,7 +200,7 @@
 
         return `
         <article class="vault-folder" data-level="${level}" tabindex="0" role="button"
-                 aria-label="Abrir nivel ${level}, ${count} recursos en ${temas.length} temas">
+                 aria-label="Abrir nivel ${levelLabel(level)}, ${count} recursos en ${temas.length} temas">
             <div class="folder-stack">
                 ${more}
                 ${filesHTML}
@@ -206,9 +208,9 @@
             <div class="folder-body">
                 <div class="folder-meta">
                     <span><i class="fa-solid fa-layer-group"></i> Nivel</span>
-                    <span class="vault-level ${level}">${level}</span>
+                    <span class="vault-level ${level}">${levelLabel(level)}</span>
                 </div>
-                <h3>${level}</h3>
+                <h3>${levelLabel(level)}</h3>
                 <div class="folder-bar"><span style="width:${pct}%"></span></div>
                 <div class="folder-foot">
                     <span>${count} recursos \u00b7 ${temas.length} temas</span>
@@ -365,9 +367,9 @@
             render();
         });
 
-        // deep-links: /boveda?nivel=principiante&cat=skills
+        // deep-links: /boveda?nivel=basico&cat=skills («principiante» es el nombre viejo de «basico»)
         const params = new URLSearchParams(location.search);
-        const nivel = params.get('nivel');
+        const nivel = params.get('nivel') === 'principiante' ? 'basico' : params.get('nivel');
         const cat = params.get('cat');
         if (nivel) {
             const b = document.querySelector(`#vault-levels [data-level="${nivel}"]`);

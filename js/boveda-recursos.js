@@ -2,6 +2,9 @@
 // enlaces viejos ?r=slug siguen abriendo).
 // Se leen de studio-boveda en cada visita (sin volver a desplegar el sitio). Abrir una guía cuenta la visita.
 (function () {
+    // Niveles de las guías; «principiante» es el nombre viejo de «basico».
+    const LEVEL_LABELS = { basico: 'Básico', intermedio: 'Intermedio', avanzado: 'Avanzado' };
+    const levelOf = (l) => (l === 'principiante' ? 'basico' : LEVEL_LABELS[l] ? l : '');
     const API = 'https://omhrqewzxdftglpvuqfg.supabase.co/functions/v1/studio-boveda?brand=kulttia';
 
     function escapeHtml(s) {
@@ -139,15 +142,15 @@
             if (!res.ok) throw new Error(String(res.status));
             const { resource: r } = await res.json();
             document.title = `${r.title} | La Bóveda · Kulttia Lab`;
-            const level = ['principiante', 'intermedio', 'avanzado'].includes(r.level) ? r.level : '';
+            const level = levelOf(r.level);
             body.innerHTML = `
             <div class="guia-print-head">
                 <span>KULTTIA LAB · LA BÓVEDA</span>
-                <span>Guía${level ? ` · ${level}` : ''}</span>
+                <span>Guía${level ? ` · ${LEVEL_LABELS[level]}` : ''}</span>
             </div>
             <div class="ficha-head">
                 <span class="vault-cat">// GUÍA KULTTIA</span>
-                ${level ? `<span class="vault-level ${level}">${level}</span>` : ''}
+                ${level ? `<span class="vault-level ${level}">${LEVEL_LABELS[level]}</span>` : ''}
             </div>
             <h2 class="ficha-title">${escapeHtml(r.title)}</h2>
             ${r.summary ? `<p class="ficha-gancho">${escapeHtml(r.summary)}</p>` : ''}
@@ -179,7 +182,7 @@
                     repo: 'guia/' + r.slug,
                     name: r.title,
                     desc: r.summary || '',
-                    level: ['principiante', 'intermedio', 'avanzado'].includes(r.level) ? r.level : 'principiante',
+                    level: levelOf(r.level) || 'basico',
                     cat: 'guias',
                     stars: 0,
                     guide: r.slug
