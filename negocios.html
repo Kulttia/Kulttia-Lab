@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/css/estilos.css?v=9">
     <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
-<link rel="stylesheet" href="/css/landing.css?v=7">
+<link rel="stylesheet" href="/css/landing.css?v=8">
     <script>
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
             document.documentElement.classList.add('lx-on');
@@ -232,8 +232,8 @@
             </div>
             <a href="/academia" class="article-link" data-lx="up">Conocer la academia <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="lx-courses" data-lx-group>
-            <article class="lx-course" data-lx="up">
+        <div class="lx-courses has-three" data-lx-group data-academia-cursos="mini">
+            <article class="lx-course" data-lx="up" data-slug="pensamiento-sistemico">
                 <div class="lx-course-cover">
                     <img src="/img/academia/curso-pensamiento-sistemico.webp" width="960" height="540" loading="lazy" decoding="async" alt="Portada del curso Introducción al pensamiento sistémico">
                 </div>
@@ -246,7 +246,20 @@
                     <h3>Introducción al pensamiento sistémico</h3>
                 </div>
             </article>
-            <article class="lx-course" data-lx="up">
+            <article class="lx-course" data-lx="up" data-slug="fundamentos-ia">
+                <div class="lx-course-cover">
+                    <div class="lx-cover-alt" aria-hidden="true"><span class="lx-cover-lvl">Básico</span><span class="lx-cover-t">Introducción a la inteligencia artificial</span><span class="lx-cover-k">Kulttia<b>.</b></span></div>
+                </div>
+                <div class="lx-course-body">
+                    <div class="lx-course-meta">
+                        <span><i class="fa-solid fa-signal"></i>Básico</span>
+                        <span><i class="fa-solid fa-play"></i>8 clases</span>
+                        <span><i class="fa-regular fa-clock"></i>1 h 4 min</span>
+                    </div>
+                    <h3>Introducción a la inteligencia artificial</h3>
+                </div>
+            </article>
+            <article class="lx-course" data-lx="up" data-slug="teoria-u">
                 <div class="lx-course-cover">
                     <img src="/img/academia/curso-teoria-u.webp" width="960" height="540" loading="lazy" decoding="async" alt="Portada del curso Teoría U: liderar desde el futuro que emerge">
                 </div>
@@ -365,6 +378,7 @@
     <script src="/js/main.js?v=3" defer></script>
     <script src="/js/animaciones.js?v=1" defer></script>
     <script src="/js/landing.js?v=1" defer></script>
+    <script src="/js/academia-cursos.js?v=1" defer></script>
     <script src="/js/search.js?v=1" defer></script>
     <script src="/js/wordpress-api.js?v=9" defer></script>
 

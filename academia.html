@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Academia Kulttia: cursos cortos en video sobre pensamiento sistémico, organizaciones y liderazgo. Gratis, a tu ritmo, con examen final y certificado verificable.">
+    <meta name="description" content="Academia Kulttia: cursos cortos en video sobre pensamiento sistémico, organizaciones, liderazgo e inteligencia artificial. Gratis, a tu ritmo, con examen final y certificado verificable.">
     <title>Academia | Kulttia Lab</title>
 
     <!-- Open Graph -->
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="/css/estilos.css?v=9">
     <link rel="stylesheet" href="/css/animaciones.css?v=1">
 
-<link rel="stylesheet" href="/css/landing.css?v=7">
+<link rel="stylesheet" href="/css/landing.css?v=8">
     <script>
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
             document.documentElement.classList.add('lx-on');
@@ -61,7 +61,7 @@
             "inLanguage": "es",
             "isAccessibleForFree": true,
             "educationalLevel": "Básico",
-            "url": "https://academia.kulttia.com/",
+            "url": "https://academia.kulttia.com/cursos/pensamiento-sistemico/",
             "provider": { "@type": "Organization", "name": "Kulttia Lab", "url": "https://kulttia.com" }
           }
         },
@@ -70,12 +70,26 @@
           "position": 2,
           "item": {
             "@type": "Course",
-            "name": "Teoría U",
+            "name": "Introducción a la inteligencia artificial",
+            "description": "Curso básico de 8 clases en video: entiende la IA sin matemáticas y úsala con criterio.",
+            "inLanguage": "es",
+            "isAccessibleForFree": true,
+            "educationalLevel": "Básico",
+            "url": "https://academia.kulttia.com/cursos/fundamentos-ia/",
+            "provider": { "@type": "Organization", "name": "Kulttia Lab", "url": "https://kulttia.com" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Course",
+            "name": "Teoría U: liderar desde el futuro que emerge",
             "description": "Curso intermedio de 9 clases en video. Requisito: Introducción al pensamiento sistémico.",
             "inLanguage": "es",
             "isAccessibleForFree": true,
             "educationalLevel": "Intermedio",
-            "url": "https://academia.kulttia.com/",
+            "url": "https://academia.kulttia.com/cursos/teoria-u/",
             "provider": { "@type": "Organization", "name": "Kulttia Lab", "url": "https://kulttia.com" }
           }
         }
@@ -151,8 +165,8 @@
             </div>
             <a href="https://academia.kulttia.com/" class="article-link" data-lx="up">Ver todo en la academia <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="lx-courses has-three" data-lx-group>
-            <article class="lx-course" data-lx="up">
+        <div class="lx-courses has-three" data-lx-group data-academia-cursos="full">
+            <article class="lx-course" data-lx="up" data-slug="pensamiento-sistemico">
                 <div class="lx-course-cover">
                     <img src="/img/academia/curso-pensamiento-sistemico.webp" width="960" height="540" loading="lazy" decoding="async"
                         alt="Portada del curso Introducción al pensamiento sistémico">
@@ -166,10 +180,26 @@
                     </div>
                     <h3>Introducción al pensamiento sistémico</h3>
                     <p>Basado en <em>La quinta disciplina</em>, de Peter Senge. Deja de ver hechos aislados y empieza a ver los patrones que los conectan.</p>
-                    <a href="https://academia.kulttia.com/" class="article-link">Empezar curso <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="https://academia.kulttia.com/cursos/pensamiento-sistemico/" class="article-link">Ver curso <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </article>
-            <article class="lx-course" data-lx="up">
+            <article class="lx-course" data-lx="up" data-slug="fundamentos-ia">
+                <div class="lx-course-cover">
+                    <div class="lx-cover-alt" aria-hidden="true"><span class="lx-cover-lvl">Básico</span><span class="lx-cover-t">Introducción a la inteligencia artificial</span><span class="lx-cover-k">Kulttia<b>.</b></span></div>
+                    <span class="lx-badge">Gratis</span>
+                </div>
+                <div class="lx-course-body">
+                    <div class="lx-course-meta">
+                        <span><i class="fa-solid fa-signal"></i>Básico</span>
+                        <span><i class="fa-solid fa-play"></i>8 clases</span>
+                        <span><i class="fa-regular fa-clock"></i>1 h 4 min</span>
+                    </div>
+                    <h3>Introducción a la inteligencia artificial</h3>
+                    <p>Entiende la IA sin matemáticas y úsala con criterio dentro de tu trabajo y tu organización.</p>
+                    <a href="https://academia.kulttia.com/cursos/fundamentos-ia/" class="article-link">Ver curso <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+            <article class="lx-course" data-lx="up" data-slug="teoria-u">
                 <div class="lx-course-cover">
                     <img src="/img/academia/curso-teoria-u.webp" width="960" height="540" loading="lazy" decoding="async"
                         alt="Portada del curso Teoría U: liderar desde el futuro que emerge">
@@ -184,18 +214,7 @@
                     <h3>Teoría U: liderar desde el futuro que emerge</h3>
                     <p>La U de Otto Scharmer para escuchar, soltar lo que ya no sirve y dejar que surja lo nuevo en tu equipo.</p>
                     <p class="lx-req"><strong>Requisito:</strong> Introducción al pensamiento sistémico.</p>
-                    <a href="https://academia.kulttia.com/" class="article-link">Ver curso <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </article>
-            <article class="lx-course is-soon" data-lx="up">
-                <div class="lx-course-cover">
-                    <img src="/img/academia/proximamente.svg" width="1600" height="900" loading="lazy" decoding="async"
-                        alt="Curso de Inteligencia Artificial, próximamente">
-                    <span class="lx-badge">Próximamente</span>
-                </div>
-                <div class="lx-course-body">
-                    <h3>Inteligencia Artificial</h3>
-                    <p>Usar la IA con juicio dentro de tu trabajo y tu organización.</p>
+                    <a href="https://academia.kulttia.com/cursos/teoria-u/" class="article-link">Ver curso <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </article>
         </div>
@@ -606,6 +625,7 @@
     <script src="/js/main.js?v=3" defer></script>
     <script src="/js/animaciones.js?v=1" defer></script>
     <script src="/js/landing.js?v=1" defer></script>
+    <script src="/js/academia-cursos.js?v=1" defer></script>
     <script src="/js/search.js?v=1" defer></script>
     <script src="/js/wordpress-api.js?v=9" defer></script>
 

@@ -246,6 +246,49 @@
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .lx-course:hover .lx-course-cover img { transform: scale(1.04); }
+/* Portada diseñada (curso sin imagen subida): la misma de academia.kulttia.com — nivel, título y firma */
+.lx-course-cover:has(.lx-cover-alt) { container-type: inline-size; }
+.lx-cover-alt {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6cqw 6.5cqw;
+    background: radial-gradient(120% 120% at 0% 0%, #fff 0%, #eef0f5 45%, #dde1ea 100%);
+    color: #0e0f14;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lx-course:hover .lx-cover-alt { transform: scale(1.04); }
+.lx-cover-lvl {
+    width: fit-content;
+    padding: 0.35em 0.9em;
+    border-radius: 999px;
+    background: #233dff;
+    color: #fff;
+    font-size: max(7px, 3.4cqw);
+    font-weight: 600;
+    line-height: 1.2;
+}
+.lx-cover-t {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 72%;
+    font-size: max(10px, 8cqw);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+}
+.lx-cover-k {
+    align-self: flex-end;
+    font-size: max(7px, 3.6cqw);
+    font-weight: 700;
+}
+.lx-cover-k b { color: #233dff; }
+/* Con la portada diseñada, la insignia va arriba a la derecha para no tapar el nivel */
+.lx-course-cover .lx-cover-alt ~ .lx-badge { left: auto; right: 12px; }
 .lx-course-body {
     padding: 1.4rem 1.5rem 1.6rem;
     display: flex;
